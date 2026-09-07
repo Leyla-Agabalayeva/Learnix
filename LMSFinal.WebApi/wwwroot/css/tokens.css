@@ -1,0 +1,185 @@
+/* ============================================================================
+   Design tokens — единственный источник правды для цветов, отступов и шрифтов.
+
+   Правило проекта: ни в одном другом файле не должно быть «магических» значений
+   вроде #4f46e5 или padding: 13px. Всё берётся отсюда через var(--...).
+   Благодаря этому смена акцентного цвета или плотности интерфейса — это правка
+   в одном файле, а не поиск по всему проекту.
+
+   Раздел 21 ТЗ: Primary Indigo, Secondary Violet, фон #F8FAFC, карточки белые,
+   текст тёмно-сланцевый, плюс цвета состояний success / warning / danger.
+   ========================================================================= */
+
+:root {
+    /* --- Основная палитра: Indigo ---------------------------------------- */
+    --color-primary-50: #eef2ff;
+    --color-primary-100: #e0e7ff;
+    --color-primary-200: #c7d2fe;
+    --color-primary-300: #a5b4fc;
+    --color-primary-400: #818cf8;
+    --color-primary-500: #6366f1;
+    --color-primary-600: #4f46e5; /* базовый акцент */
+    --color-primary-700: #4338ca;
+    --color-primary-800: #3730a3;
+    --color-primary-900: #312e81;
+    /* --- Вторичная палитра: Violet --------------------------------------- */
+    --color-secondary-100: #f3e8ff;
+    --color-secondary-400: #c084fc;
+    --color-secondary-500: #a855f7;
+    --color-secondary-600: #9333ea;
+    /* --- Нейтральные: Slate ---------------------------------------------- */
+    --color-slate-50: #f8fafc;
+    --color-slate-100: #f1f5f9;
+    --color-slate-200: #e2e8f0;
+    --color-slate-300: #cbd5e1;
+    --color-slate-400: #94a3b8;
+    --color-slate-500: #64748b;
+    --color-slate-600: #475569;
+    --color-slate-700: #334155;
+    --color-slate-800: #1e293b;
+    --color-slate-900: #0f172a;
+    /* --- Семантические роли ----------------------------------------------
+       Компоненты используют именно эти переменные, а не палитру напрямую:
+       так перекрасить тему можно, не трогая ни один компонент.            */
+    --color-bg: var(--color-slate-50);
+    --color-surface: #ffffff;
+    --color-surface-alt: var(--color-slate-100);
+    --color-border: var(--color-slate-200);
+    --color-border-strong: var(--color-slate-300);
+    --color-text: var(--color-slate-800);
+    --color-text-muted: var(--color-slate-500);
+    --color-text-inverse: #ffffff;
+    --color-accent: var(--color-primary-600);
+    --color-accent-hover: var(--color-primary-700);
+    --color-accent-subtle: var(--color-primary-50);
+    /* --- Декоративные пятна на баннере (hero) ------------------------------
+       Отдельные токены, а не прямое обращение к палитре: в тёмной теме
+       нужны совсем другие значения (полупрозрачные, а не светлые). */
+    --color-hero-glow-1: var(--color-primary-100);
+    --color-hero-glow-2: var(--color-secondary-100);
+    /* --- Состояния -------------------------------------------------------- */
+    --color-success: #16a34a;
+    --color-success-subtle: #dcfce7;
+    --color-warning: #d97706;
+    --color-warning-subtle: #fef3c7;
+    --color-danger: #dc2626;
+    --color-danger-subtle: #fee2e2;
+    --color-info: var(--color-primary-600);
+    --color-info-subtle: var(--color-primary-50);
+    /* --- Рейтинг ---------------------------------------------------------- */
+    --color-star: #f59e0b;
+    --color-star-empty: var(--color-slate-300);
+    /* --- Типографика ------------------------------------------------------
+       Системный шрифт: грузится мгновенно и выглядит «родным» в любой ОС.
+       Внешние шрифты намеренно не подключаются — на защите может не быть
+       интернета, а подвисший CDN превращает страницу в белый экран.        */
+    --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "Cascadia Code", "Consolas", "SF Mono", monospace;
+    --text-xs: 0.75rem; /* 12px */
+    --text-sm: 0.875rem; /* 14px */
+    --text-base: 1rem; /* 16px */
+    --text-lg: 1.125rem; /* 18px */
+    --text-xl: 1.25rem; /* 20px */
+    --text-2xl: 1.5rem; /* 24px */
+    --text-3xl: 1.875rem; /* 30px */
+    --text-4xl: 2.25rem; /* 36px */
+    --text-5xl: 3rem; /* 48px */
+
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.7;
+    /* --- Отступы: шкала с шагом 4px --------------------------------------
+       Все расстояния берутся отсюда. Это то, что делает интерфейс «ровным»:
+       глаз замечает, когда отступы подобраны на глаз, а не по системе.    */
+    --space-1: 0.25rem; /* 4px  */
+    --space-2: 0.5rem; /* 8px  */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem; /* 16px */
+    --space-5: 1.25rem; /* 20px */
+    --space-6: 1.5rem; /* 24px */
+    --space-8: 2rem; /* 32px */
+    --space-10: 2.5rem; /* 40px */
+    --space-12: 3rem; /* 48px */
+    --space-16: 4rem; /* 64px */
+    --space-20: 5rem; /* 80px */
+    /* --- Скругления -------------------------------------------------------- */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
+    /* --- Тени -------------------------------------------------------------- */
+    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12);
+    --shadow-focus: 0 0 0 3px var(--color-primary-200);
+    /* --- Анимации ---------------------------------------------------------- */
+    --transition-fast: 120ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 320ms ease;
+    /* --- Размеры макета ---------------------------------------------------- */
+    --container-max: 1200px;
+    --container-narrow: 720px;
+    --navbar-height: 64px;
+    --sidebar-width: 260px;
+    /* --- Слои (z-index) ---------------------------------------------------
+       Собраны в одном месте, чтобы не было войны «а поставлю 9999».       */
+    --z-base: 1;
+    --z-sticky: 100;
+    --z-navbar: 200;
+    --z-dropdown: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 410;
+    --z-toast: 500;
+}
+
+/* Уважаем системную настройку «уменьшить движение»: людям с вестибулярными
+   нарушениями анимации могут быть физически неприятны. */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --transition-fast: 0ms;
+        --transition-base: 0ms;
+        --transition-slow: 0ms;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* --- Тёмная тема -----------------------------------------------------------
+   Меняем только семантические роли (--color-bg, --color-surface и т.д.) —
+   компоненты их не знают, что тема сменилась, они просто используют
+   переменные, как и раньше. */
+:root[data-theme="dark"] {
+    --color-bg: var(--color-slate-900);
+    --color-surface: var(--color-slate-800);
+    --color-surface-alt: var(--color-slate-700);
+    --color-border: var(--color-slate-700);
+    --color-border-strong: var(--color-slate-600);
+    --color-text: var(--color-slate-100);
+    --color-text-muted: var(--color-slate-400);
+    --color-text-inverse: var(--color-slate-900);
+    --color-accent-subtle: var(--color-primary-900);
+    --color-success-subtle: rgba(22, 163, 74, 0.15);
+    --color-warning-subtle: rgba(217, 119, 6, 0.15);
+    --color-danger-subtle: rgba(220, 38, 38, 0.15);
+    --color-info-subtle: var(--color-primary-900);
+    --color-hero-glow-1: rgba(99, 102, 241, 0.25);
+    --color-hero-glow-2: rgba(168, 85, 247, 0.2);
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.45);
+}

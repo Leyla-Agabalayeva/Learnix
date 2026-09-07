@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="lesson.title">Dərs — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/lesson.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/lesson.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#lesson-main" data-i18n="lesson.skipToLesson">Dərsə keç</a>
+    <div id="navbar"></div>
+
+    <div class="container page">
+        <!-- Полоса прогресса стоит НАД колонками, а не в боковой панели:
+             на телефоне панель уезжает под содержимое, и прогресс —
+             единственное, что студент хочет видеть сразу — уехал бы с ней. -->
+        <section class="lesson-topbar" aria-labelledby="course-link">
+            <div class="lesson-topbar-head">
+                <a class="lesson-course-link" id="course-link" href="#">
+                    <span aria-hidden="true">←</span>
+                    <span id="course-title">—</span>
+                </a>
+                <p class="lesson-progress-label" id="progress-label"></p>
+            </div>
+
+            <div class="progress" id="progress" role="progressbar"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </section>
+
+        <div class="lesson-layout">
+            <main id="lesson-main">
+                <!-- Всё содержимое урока собирается в lesson.js: при переходе
+                     к следующему уроку меняется только эта часть, страница
+                     целиком не перезагружается. -->
+                <div id="lesson-content"></div>
+            </main>
+
+            <!-- Программа курса. В DOM идёт ПОСЛЕ урока: при чтении с клавиатуры
+                 и скринридером сначала должно идти то, ради чего пришли,
+                 а список из полусотни уроков — потом. На широком экране CSS
+                 ставит её в правую колонку. -->
+            <aside class="lesson-outline" id="outline" aria-labelledby="outline-title">
+                <h2 class="lesson-outline-title" id="outline-title" data-i18n="details.curriculum">Kurs proqramı</h2>
+                <div id="outline-body"></div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>

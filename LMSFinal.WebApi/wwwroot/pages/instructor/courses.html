@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="nav.myCourses">My Courses — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/student.css">
+    <link rel="stylesheet" href="/css/pages/instructor.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/instructor/courses.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.dashboard">Panel</a>
+    <div id="navbar" data-active="my-courses"></div>
+
+    <div class="container page">
+        <div class="layout-with-sidebar">
+            <aside id="sidebar" data-active="my-courses"></aside>
+
+            <main id="main">
+                <header class="page-header">
+                    <div>
+                        <h1 class="page-title" data-i18n="instructor.myCoursesTitle">Mənim kurslarım</h1>
+                        <p class="page-subtitle" data-i18n="instructor.myCoursesSubtitle"></p>
+                    </div>
+                    <a class="btn btn-primary" href="/pages/instructor/create-course.html"
+                       data-i18n="nav.createCourse">Kurs yarat</a>
+                </header>
+
+                <div class="tabs" role="tablist" id="status-tabs">
+                    <button class="tab is-active" type="button" role="tab" data-status=""
+                            data-i18n="instructor.filterAll">Hamısı</button>
+                    <button class="tab" type="button" role="tab" data-status="Draft"
+                            data-i18n="instructor.filterDraft">Qaralamalar</button>
+                    <button class="tab" type="button" role="tab" data-status="Published"
+                            data-i18n="instructor.filterPublished">Dərc olunmuş</button>
+                    <button class="tab" type="button" role="tab" data-status="Archived"
+                            data-i18n="instructor.filterArchived">Arxiv</button>
+                </div>
+
+                <div class="grid-cards" id="course-grid"></div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

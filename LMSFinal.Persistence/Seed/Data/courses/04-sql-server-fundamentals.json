@@ -1,0 +1,510 @@
+﻿{
+  "categorySlug": "database",
+  "instructorEmail": "rashad.instructor@lms.com",
+  "level": "Beginner",
+  "status": "Published",
+  "price": 44.99,
+  "thumbnailUrl": "/assets/courses/sql-server-fundamentals.svg",
+  "createdDaysAgo": 140,
+  "title": {
+    "az": "SQL Server Əsasları",
+    "en": "SQL Server Fundamentals",
+    "ru": "Основы SQL Server"
+  },
+  "shortDescription": {
+    "az": "SELECT sorğularından indekslərə qədər: verilənlər bazası ilə praktik iş.",
+    "en": "From SELECT queries to indexes: practical work with a relational database.",
+    "ru": "От SELECT-запросов до индексов: практическая работа с реляционной базой."
+  },
+  "description": {
+    "az": "Kurs SQL Server ilə işləməyin praktik tərəfini öyrədir: sorğular, birləşdirmələr, aqreqasiya, cədvəl dizaynı, normallaşdırma və indekslər. Hər mövzu real nümunələr üzərində göstərilir — tələbə, kurs və qeydiyyat cədvəlləri ilə.",
+    "en": "The course teaches the practical side of working with SQL Server: queries, joins, aggregation, table design, normalisation and indexes. Every topic is shown on realistic examples — student, course and enrollment tables.",
+    "ru": "Курс учит практической работе с SQL Server: запросы, соединения, агрегация, проектирование таблиц, нормализация и индексы. Каждая тема показана на реалистичных примерах — таблицы студентов, курсов и записей."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "SELECT, WHERE, ORDER BY və JOIN ilə sorğular yazmaq",
+      "GROUP BY və aqreqat funksiyalarla hesabatlar qurmaq",
+      "Cədvəlləri normallaşdırmaq və açarları düzgün seçmək",
+      "İndekslərin sorğu sürətinə təsirini anlamaq"
+    ],
+    "en": [
+      "Write queries with SELECT, WHERE, ORDER BY and JOIN",
+      "Build reports with GROUP BY and aggregate functions",
+      "Normalise tables and choose keys correctly",
+      "Understand how indexes affect query speed"
+    ],
+    "ru": [
+      "Писать запросы с SELECT, WHERE, ORDER BY и JOIN",
+      "Строить отчёты с GROUP BY и агрегатными функциями",
+      "Нормализовать таблицы и правильно выбирать ключи",
+      "Понимать, как индексы влияют на скорость запросов"
+    ]
+  },
+  "modules": [
+    {
+      "title": {
+        "az": "Sorğuların əsasları",
+        "en": "Query Basics",
+        "ru": "Основы запросов"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "SELECT, WHERE və ORDER BY",
+            "en": "SELECT, WHERE and ORDER BY",
+            "ru": "SELECT, WHERE и ORDER BY"
+          },
+          "content": {
+            "az": "<p>SELECT hansı sütunların qaytarılacağını, WHERE hansı sətirlərin seçiləcəyini, ORDER BY isə sıralamanı təyin edir.</p><p>Vacib incəlik: SQL-də sətirlərin təbii sırası yoxdur — ORDER BY olmadan nəticənin ardıcıllığına etibar etmək olmaz.</p>",
+            "en": "<p>SELECT decides which columns come back, WHERE decides which rows are selected, and ORDER BY defines the ordering.</p><p>An important subtlety: rows in SQL have no natural order — without ORDER BY you cannot rely on the sequence of results.</p>",
+            "ru": "<p>SELECT определяет, какие столбцы вернутся, WHERE — какие строки выбираются, ORDER BY — порядок сортировки.</p><p>Важный нюанс: у строк в SQL нет естественного порядка — без ORDER BY полагаться на последовательность результата нельзя.</p>"
+          },
+          "durationMinutes": 14,
+          "resources": [
+            {
+              "languageCode": "RU",
+              "fileName": "SELECT — шпаргалка.sql",
+              "fileUrl": "/assets/materials/sql-select-cheatsheet.ru.sql",
+              "fileType": "sql"
+            },
+            {
+              "languageCode": "EN",
+              "fileName": "SELECT cheat sheet.sql",
+              "fileUrl": "/assets/materials/sql-select-cheatsheet.en.sql",
+              "fileType": "sql"
+            },
+            {
+              "languageCode": "AZ",
+              "fileName": "SELECT cheat sheet (AZ).sql",
+              "fileUrl": "/assets/materials/sql-select-cheatsheet.az.sql",
+              "fileType": "sql"
+            }
+          ]
+        },
+        {
+          "title": {
+            "az": "JOIN növləri",
+            "en": "Types of JOIN",
+            "ru": "Виды JOIN"
+          },
+          "content": {
+            "az": "<p>INNER JOIN yalnız hər iki cədvəldə uyğunluğu olan sətirləri qaytarır. LEFT JOIN sol cədvəlin bütün sətirlərini saxlayır, uyğunluq olmayanda NULL qoyur.</p><p>«Heç bir kursa yazılmayan tələbələr» sorğusu məhz LEFT JOIN və IS NULL ilə qurulur.</p>",
+            "en": "<p>INNER JOIN returns only rows that match in both tables. LEFT JOIN keeps every row of the left table and fills the missing side with NULL.</p><p>A query like students who are not enrolled in any course is built exactly with LEFT JOIN plus IS NULL.</p>",
+            "ru": "<p>INNER JOIN возвращает только строки, совпавшие в обеих таблицах. LEFT JOIN сохраняет все строки левой таблицы, подставляя NULL там, где совпадения нет.</p><p>Запрос «студенты, не записанные ни на один курс» строится именно через LEFT JOIN и IS NULL.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=9yeOJ0ZMUYw",
+          "durationMinutes": 17,
+          "quiz": {
+            "title": "SQL Query Basics Quiz",
+            "description": "SELECT, filtering, sorting and joins.",
+            "passingScore": 60,
+            "timeLimitMinutes": 12,
+            "questions": [
+              {
+                "text": "Which clause filters rows before grouping?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "WHERE",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "HAVING",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "ORDER BY",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "SELECT",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which JOIN keeps all rows from the left table even when there is no match?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "LEFT JOIN",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "INNER JOIN",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "CROSS JOIN",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "SELF JOIN",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Without ORDER BY, what order are rows returned in?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "No order is guaranteed",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Always by primary key ascending",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Always in insertion order",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Always alphabetically by the first column",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "How do you correctly test a column for a missing value?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "WHERE column IS NULL",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "WHERE column = NULL",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "WHERE column == NULL",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "WHERE column EMPTY",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which statements about INNER JOIN are true?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "It returns only rows matching in both tables",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It can join on any condition, not just equality",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It always returns at least one row per left row",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It is the same as a CROSS JOIN",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does SELECT DISTINCT do?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Removes duplicate rows from the result set",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Deletes duplicate rows from the table",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Sorts the result set",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Selects only the first row",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which operator matches a text pattern?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "LIKE",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "BETWEEN",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "IN",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "EXISTS",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Aqreqasiya və qruplaşdırma",
+        "en": "Aggregation and Grouping",
+        "ru": "Агрегация и группировка"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "GROUP BY və aqreqat funksiyalar",
+            "en": "GROUP BY and aggregate functions",
+            "ru": "GROUP BY и агрегатные функции"
+          },
+          "content": {
+            "az": "<p>COUNT, SUM, AVG, MIN və MAX qrup üzrə hesablama aparır. GROUP BY sətirləri qruplara bölür, HAVING isə artıq hazır qrupları süzgəcdən keçirir.</p><p>«Hər kursda neçə tələbə var» kimi hesabatlar məhz bu konstruksiyalarla qurulur.</p>",
+            "en": "<p>COUNT, SUM, AVG, MIN and MAX compute values per group. GROUP BY splits rows into groups, and HAVING filters the groups that were already formed.</p><p>Reports like how many students each course has are built exactly with these constructs.</p>",
+            "ru": "<p>COUNT, SUM, AVG, MIN и MAX считают значения по группам. GROUP BY разбивает строки на группы, а HAVING фильтрует уже сформированные группы.</p><p>Отчёты вроде «сколько студентов на каждом курсе» строятся именно этими конструкциями.</p>"
+          },
+          "durationMinutes": 15
+        },
+        {
+          "title": {
+            "az": "Alt sorğular",
+            "en": "Subqueries",
+            "ru": "Подзапросы"
+          },
+          "content": {
+            "az": "<p>Alt sorğu başqa sorğunun içində yerləşir və ya tək dəyər, ya da sətirlər dəsti qaytarır.</p><p>Çox vaxt eyni nəticəni JOIN ilə də almaq olur və JOIN daha sürətli işləyir — alt sorğu isə oxunaqlılıq baxımından üstün olur.</p>",
+            "en": "<p>A subquery sits inside another query and returns either a single value or a set of rows.</p><p>The same result can often be obtained with a JOIN, and the JOIN is usually faster — while the subquery often reads more clearly.</p>",
+            "ru": "<p>Подзапрос находится внутри другого запроса и возвращает либо одно значение, либо набор строк.</p><p>Часто тот же результат можно получить через JOIN, и JOIN обычно быстрее — зато подзапрос нередко читается понятнее.</p>"
+          },
+          "durationMinutes": 13
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Dizayn və performans",
+        "en": "Design and Performance",
+        "ru": "Проектирование и производительность"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Normallaşdırma və açarlar",
+            "en": "Normalisation and keys",
+            "ru": "Нормализация и ключи"
+          },
+          "content": {
+            "az": "<p>Normallaşdırma məlumat təkrarını aradan qaldırır: hər fakt bazada bir dəfə saxlanılır. Birinci açar sətiri unikal edir, xarici açar isə cədvəllər arasında əlaqə qurur.</p><p>Unikal indeks məntiqi qaydaları bazanın özündə təmin edir — məsələn, bir tələbə eyni kursa iki dəfə yazıla bilməz.</p>",
+            "en": "<p>Normalisation removes duplication: every fact is stored once. A primary key makes a row unique, a foreign key links tables together.</p><p>A unique index enforces business rules in the database itself — for example, a student cannot enroll in the same course twice.</p>",
+            "ru": "<p>Нормализация убирает дублирование: каждый факт хранится один раз. Первичный ключ делает строку уникальной, внешний ключ связывает таблицы.</p><p>Уникальный индекс обеспечивает бизнес-правила на уровне самой базы — например, студент не может записаться на один курс дважды.</p>"
+          },
+          "durationMinutes": 18
+        },
+        {
+          "title": {
+            "az": "İndekslər və sorğu planı",
+            "en": "Indexes and the query plan",
+            "ru": "Индексы и план запроса"
+          },
+          "content": {
+            "az": "<p>İndeks oxu sürətləndirir, lakin yazını yavaşladır və yer tutur — ona görə hər sütuna indeks qoymaq səhvdir.</p><p>Sorğu planı serverin nə etdiyini göstərir: index seek yaxşı, table scan isə böyük cədvəllərdə problem əlamətidir.</p>",
+            "en": "<p>An index speeds up reads but slows down writes and takes space — so indexing every column is a mistake.</p><p>The query plan shows what the server actually does: an index seek is good, while a table scan on a large table is a warning sign.</p>",
+            "ru": "<p>Индекс ускоряет чтение, но замедляет запись и занимает место — поэтому вешать индекс на каждый столбец неправильно.</p><p>План запроса показывает, что на самом деле делает сервер: index seek — хорошо, а table scan на большой таблице — тревожный признак.</p>"
+          },
+          "durationMinutes": 16,
+          "quiz": {
+            "title": "Database Design and Indexing Quiz",
+            "description": "Normalisation, keys, constraints and indexes.",
+            "passingScore": 65,
+            "timeLimitMinutes": 14,
+            "questions": [
+              {
+                "text": "What is the purpose of a primary key?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "To uniquely identify every row in a table",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "To sort the table alphabetically",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "To link two databases together",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "To store the row creation date",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does a foreign key enforce?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "That a referenced row actually exists in the parent table",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "That the column value is unique",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "That the column cannot be updated",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "That the table is normalised",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which are real costs of adding an index?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Slower INSERT and UPDATE operations",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Extra disk space",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Slower SELECT queries on the indexed column",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Loss of referential integrity",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which clause filters groups after aggregation?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "HAVING",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "WHERE",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "GROUP BY",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "ORDER BY",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "How do you guarantee at the database level that a pair of columns is never duplicated?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Create a unique index on both columns together",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Create two separate unique indexes, one per column",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Add a CHECK constraint on the first column",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Validate it only in application code",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "A table scan on a large table usually means what?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "No suitable index exists for the query",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The table is corrupted",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The query returns no rows",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The database is out of disk space",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does normalisation primarily reduce?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Data duplication and update anomalies",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The number of queries an application sends",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The need for primary keys",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Disk read speed",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

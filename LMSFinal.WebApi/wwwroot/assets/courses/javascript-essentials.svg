@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" width="480" height="260" role="img" aria-label="Course cover">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9333ea"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="260" fill="url(#g)"/>
+  <circle cx="392" cy="46" r="110" fill="#ffffff" opacity="0.10"/>
+  <circle cx="72" cy="226" r="90" fill="#ffffff" opacity="0.08"/>
+  <text x="240" y="150" font-size="76" text-anchor="middle" dominant-baseline="middle">&#127912;</text>
+</svg>

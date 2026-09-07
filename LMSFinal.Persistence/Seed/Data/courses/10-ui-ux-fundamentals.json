@@ -1,0 +1,214 @@
+{
+  "categorySlug": "design",
+  "instructorEmail": "nigar.instructor@lms.com",
+  "level": "Beginner",
+  "status": "Published",
+  "price": 29.99,
+  "thumbnailUrl": "/assets/courses/ui-ux-fundamentals.svg",
+  "createdDaysAgo": 70,
+
+  "title": {
+    "az": "UI/UX Əsasları",
+    "en": "UI/UX Fundamentals",
+    "ru": "Основы UI/UX"
+  },
+  "shortDescription": {
+    "az": "Vizual iyerarxiya, tipoqrafiya, rəng sistemi və istifadəçi axınının qurulması.",
+    "en": "Visual hierarchy, typography, colour systems and designing user flows.",
+    "ru": "Визуальная иерархия, типографика, цветовые системы и построение пользовательских сценариев."
+  },
+  "description": {
+    "az": "Kurs interfeysin niyə «gözəl görünmək»dən daha çox «anlaşıqlı olmaq» demək olduğunu izah edir. Vizual iyerarxiya, boşluq, tipoqrafiya, rəng və vəziyyətlərin dizaynı — boş ekran, yüklənmə, xəta — bunların hamısı praktik nümunələrlə göstərilir.",
+    "en": "The course explains why an interface is less about looking pretty and more about being understandable. Visual hierarchy, spacing, typography, colour and the design of states — empty, loading, error — are all shown on practical examples.",
+    "ru": "Курс объясняет, почему интерфейс — это не столько «красиво выглядеть», сколько «быть понятным». Визуальная иерархия, отступы, типографика, цвет и проектирование состояний — пустое, загрузка, ошибка — всё показано на практических примерах."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "Vizual iyerarxiya qurmaq və diqqəti idarə etmək",
+      "Tipoqrafiya və boşluq sistemini seçmək",
+      "Əlçatan rəng kontrastı ilə işləmək",
+      "Boş, yüklənmə və xəta vəziyyətlərini dizayn etmək"
+    ],
+    "en": [
+      "Build visual hierarchy and direct attention",
+      "Choose a typography and spacing system",
+      "Work with accessible colour contrast",
+      "Design empty, loading and error states"
+    ],
+    "ru": [
+      "Строить визуальную иерархию и направлять внимание",
+      "Подбирать систему типографики и отступов",
+      "Работать с доступным цветовым контрастом",
+      "Проектировать состояния пустоты, загрузки и ошибки"
+    ]
+  },
+
+  "modules": [
+    {
+      "title": {
+        "az": "Vizual əsaslar",
+        "en": "Visual Foundations",
+        "ru": "Визуальные основы"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "İyerarxiya və boşluq",
+            "en": "Hierarchy and spacing",
+            "ru": "Иерархия и отступы"
+          },
+          "content": {
+            "az": "<p>İstifadəçi səhifəni oxumur — skan edir. Ölçü, çəki və kontrast nəyin əvvəl görünəcəyini müəyyən edir.</p><p>Boşluq elementləri qruplaşdırır: bir-birinə yaxın olanlar əlaqəli qəbul edilir. Ona görə boşluq təsadüfi deyil, 4 və ya 8 piksel addımlı sistem üzrə seçilir.</p>",
+            "en": "<p>Users do not read a page — they scan it. Size, weight and contrast decide what is noticed first.</p><p>Spacing groups elements: things placed close together are perceived as related. That is why spacing is not arbitrary but follows a 4- or 8-pixel scale.</p>",
+            "ru": "<p>Пользователь не читает страницу — он её сканирует. Размер, насыщенность и контраст определяют, что заметят первым.</p><p>Отступы группируют элементы: то, что расположено рядом, воспринимается как связанное. Поэтому отступы выбираются не наугад, а по шкале с шагом 4 или 8 пикселей.</p>"
+          },
+          "durationMinutes": 15
+        },
+        {
+          "title": {
+            "az": "Tipoqrafiya və rəng",
+            "en": "Typography and colour",
+            "ru": "Типографика и цвет"
+          },
+          "content": {
+            "az": "<p>İki şrift ailəsi kifayətdir. Ölçülər üçün miqyas seçilir, sətirlərarası məsafə isə mətn üçün təxminən 1.5 olur.</p><p>Rəng sistemində əsas, ikinci dərəcəli və vəziyyət rəngləri (uğur, xəbərdarlıq, xəta) olur. Mətn və fon arasındakı kontrast ən azı 4.5:1 olmalıdır.</p>",
+            "en": "<p>Two font families are enough. Sizes follow a scale, and line height for body text sits around 1.5.</p><p>A colour system has primary, secondary and state colours (success, warning, error). Contrast between text and background must be at least 4.5:1.</p>",
+            "ru": "<p>Двух гарнитур достаточно. Размеры подбираются по шкале, а межстрочный интервал для основного текста — около 1.5.</p><p>В цветовой системе есть основной, вторичный и статусные цвета (успех, предупреждение, ошибка). Контраст текста и фона должен быть не ниже 4.5:1.</p>"
+          },
+          "durationMinutes": 16
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "İstifadəçi təcrübəsi",
+        "en": "User Experience",
+        "ru": "Пользовательский опыт"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Vəziyyətlər: boş, yüklənmə, xəta",
+            "en": "States: empty, loading, error",
+            "ru": "Состояния: пустое, загрузка, ошибка"
+          },
+          "content": {
+            "az": "<p>Ekranın yalnız «hər şey yaxşıdır» halını dizayn etmək ən çox rast gəlinən səhvdir. Real tətbiqdə istifadəçi tez-tez boş siyahı, gözləmə və ya xəta görür.</p><p>Boş vəziyyət nə etməli olduğunu izah etməlidir, yüklənmə skeleton ilə göstərilməli, xəta isə növbəti addımı təklif etməlidir.</p>",
+            "en": "<p>Designing only the everything-is-fine state of a screen is the most common mistake. In a real application users often see an empty list, a wait, or an error.</p><p>An empty state should explain what to do next, loading is best shown with a skeleton, and an error should offer a way forward.</p>",
+            "ru": "<p>Проектировать только состояние «всё хорошо» — самая частая ошибка. В реальном приложении пользователь регулярно видит пустой список, ожидание или ошибку.</p><p>Пустое состояние должно объяснять, что делать дальше, загрузку лучше показывать скелетоном, а ошибка должна предлагать следующий шаг.</p>"
+          },
+          "durationMinutes": 14
+        },
+        {
+          "title": {
+            "az": "İstifadəçi axını və geribildirim",
+            "en": "User flow and feedback",
+            "ru": "Пользовательский сценарий и обратная связь"
+          },
+          "content": {
+            "az": "<p>Hər hərəkət cavab tələb edir: düymə basıldıqda vəziyyət dəyişməli, əməliyyat bitəndə isə bildiriş görünməlidir.</p><p>Geri qaytarıla bilməyən əməliyyatlar təsdiq pəncərəsi ilə qorunur — silmə düyməsi heç vaxt bir kliklə işləməməlidir.</p>",
+            "en": "<p>Every action needs a response: pressing a button must change its state, and finishing an operation must produce a notification.</p><p>Irreversible actions are protected by a confirmation dialog — a delete button should never fire on a single click.</p>",
+            "ru": "<p>Каждое действие требует отклика: нажатие кнопки должно менять её состояние, а завершение операции — давать уведомление.</p><p>Необратимые действия защищаются диалогом подтверждения — кнопка удаления никогда не должна срабатывать с одного клика.</p>"
+          },
+          "durationMinutes": 13,
+          "quiz": {
+            "title": "UI/UX Fundamentals Quiz",
+            "description": "Hierarchy, typography, colour, states and feedback.",
+            "passingScore": 60,
+            "timeLimitMinutes": 12,
+            "questions": [
+              {
+                "text": "What creates visual hierarchy on a screen?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  { "text": "Differences in size and weight", "isCorrect": true },
+                  { "text": "Contrast and spacing", "isCorrect": true },
+                  { "text": "Using as many colours as possible", "isCorrect": false },
+                  { "text": "Centring absolutely everything", "isCorrect": false }
+                ]
+              },
+              {
+                "text": "What is the minimum contrast ratio for normal body text under WCAG AA?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  { "text": "4.5:1", "isCorrect": true },
+                  { "text": "1.5:1", "isCorrect": false },
+                  { "text": "10:1", "isCorrect": false },
+                  { "text": "2:1", "isCorrect": false }
+                ]
+              },
+              {
+                "text": "Why does proximity matter in layout?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  { "text": "Elements placed close together are perceived as related", "isCorrect": true },
+                  { "text": "It reduces the page loading time", "isCorrect": false },
+                  { "text": "It removes the need for headings", "isCorrect": false },
+                  { "text": "It improves colour contrast", "isCorrect": false }
+                ]
+              },
+              {
+                "text": "What should a good empty state contain?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  { "text": "An explanation of what is missing and a clear next action", "isCorrect": true },
+                  { "text": "Nothing — a blank area is enough", "isCorrect": false },
+                  { "text": "A raw error code from the API", "isCorrect": false },
+                  { "text": "A list of random suggested items", "isCorrect": false }
+                ]
+              },
+              {
+                "text": "Which pattern best communicates that content is loading?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  { "text": "A skeleton that mirrors the shape of the coming content", "isCorrect": true },
+                  { "text": "A blank white screen", "isCorrect": false },
+                  { "text": "An alert dialog saying please wait", "isCorrect": false },
+                  { "text": "Redirecting to another page", "isCorrect": false }
+                ]
+              },
+              {
+                "text": "When should a confirmation dialog be used?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  { "text": "Before an action that is destructive or hard to undo", "isCorrect": true },
+                  { "text": "Before every button click", "isCorrect": false },
+                  { "text": "Only on mobile devices", "isCorrect": false },
+                  { "text": "Never — dialogs always hurt usability", "isCorrect": false }
+                ]
+              },
+              {
+                "text": "Which practices help keep a spacing system consistent?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  { "text": "Using a fixed scale such as multiples of 4 or 8 pixels", "isCorrect": true },
+                  { "text": "Defining spacing values as reusable CSS variables", "isCorrect": true },
+                  { "text": "Choosing pixel values by eye for each component", "isCorrect": false },
+                  { "text": "Using inline styles everywhere", "isCorrect": false }
+                ]
+              },
+              {
+                "text": "Why should a disabled button look visibly different?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  { "text": "So the user understands the action is currently unavailable instead of thinking the app is broken", "isCorrect": true },
+                  { "text": "Because CSS requires it", "isCorrect": false },
+                  { "text": "To make the page load faster", "isCorrect": false },
+                  { "text": "Disabled buttons should look identical to active ones", "isCorrect": false }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

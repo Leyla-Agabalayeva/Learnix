@@ -1,0 +1,301 @@
+/* ===========================================================================
+   Сертификат и публичная проверка (Phase 26)
+
+   Лист сертификата — один и тот же на обеих страницах, поэтому его стили
+   лежат здесь, а не в двух местах.
+   =========================================================================== */
+
+/* --- Лист ---------------------------------------------------------------- */
+
+.certificate-sheet {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+
+    /* Пропорции альбомного A4 — те же, что у PDF (PageSizes.A4.Landscape()).
+       Так экран и распечатка совпадают, а не «примерно похожи». */
+    aspect-ratio: 297 / 210;
+
+    display: grid;
+    place-items: center;
+
+    /* Размеры текста ниже заданы в cqw — доле ширины САМОГО ЛИСТА, а не окна.
+       Иначе сертификат в узкой колонке кабинета и во всю ширину страницы
+       проверки выглядел бы по-разному свёрстанным. */
+    container-type: inline-size;
+}
+
+/* Декоративная двойная рамка. Отдельным элементом, потому что ей нужен
+   отступ ВНУТРЬ от края листа — border на самом листе так не умеет. */
+.certificate-frame {
+    position: absolute;
+    inset: clamp(0.75rem, 2.2vw, 1.5rem);
+    border: 2px solid var(--color-primary-200);
+    border-radius: var(--radius-md);
+    pointer-events: none;
+}
+
+.certificate-frame::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--color-primary-100);
+    border-radius: calc(var(--radius-md) - 3px);
+}
+
+.certificate-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: clamp(1.25rem, 4vw, 3rem);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.35rem, 1.2vw, 0.75rem);
+    text-align: center;
+}
+
+/* --- Строки -------------------------------------------------------------- */
+
+.certificate-seal {
+    font-size: clamp(1.75rem, 7cqw, 3.5rem);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.certificate-heading {
+    font-size: clamp(0.95rem, 4.4cqw, 2rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary-700);
+}
+
+.certificate-label {
+    font-size: clamp(0.65rem, 1.9cqw, 0.95rem);
+    color: var(--color-text-muted);
+}
+
+.certificate-name {
+    font-size: clamp(1.1rem, 5cqw, 2.4rem);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    line-height: 1.15;
+
+    /* Имя может быть длинным и с диакритикой — переносим, а не обрезаем:
+       обрезанное имя на сертификате хуже, чем имя в две строки. */
+    overflow-wrap: anywhere;
+    max-width: 90%;
+}
+
+.certificate-course {
+    font-size: clamp(0.95rem, 3.6cqw, 1.75rem);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary-700);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+    max-width: 92%;
+}
+
+/* --- Подписи внизу ------------------------------------------------------- */
+
+.certificate-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem clamp(0.75rem, 3cqw, 2rem);
+    margin-top: clamp(0.35rem, 1.5cqw, 1rem);
+    font-size: clamp(0.6rem, 1.7cqw, 0.875rem);
+}
+
+.certificate-meta dt {
+    color: var(--color-text-muted);
+    display: inline;
+}
+
+.certificate-meta dt::after {
+    content: ":";
+}
+
+.certificate-meta dd {
+    display: inline;
+    margin: 0 0 0 0.35em;
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+}
+
+/* dt и dd идут парами в одну строку — разрыв ставим перед каждым dt,
+   кроме первого, иначе браузер разложит их столбиком. */
+.certificate-meta dt + dd {
+    margin-right: 0;
+}
+
+.certificate-footer {
+    margin-top: auto;
+    padding-top: clamp(0.5rem, 2cqw, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+/* Имена не пересекаются с .certificate-number из student.css — см. комментарий
+   в certificate-view.js. */
+.certificate-id {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4em;
+    align-items: baseline;
+    font-size: clamp(0.6rem, 1.7cqw, 0.875rem);
+}
+
+.certificate-id-label {
+    color: var(--color-text-muted);
+}
+
+.certificate-id-value {
+    font-family: var(--font-mono);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+}
+
+.certificate-verify-hint {
+    font-size: clamp(0.55rem, 1.4cqw, 0.75rem);
+    color: var(--color-text-muted);
+}
+
+/* --- Страница одного сертификата ---------------------------------------- */
+
+.certificate-stage {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.certificate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+/* --- Публичная проверка -------------------------------------------------- */
+
+.verify-intro {
+    max-width: 34rem;
+    margin: 0 auto var(--space-6);
+    text-align: center;
+}
+
+.verify-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+    max-width: 34rem;
+    margin: 0 auto;
+}
+
+.verify-form .field {
+    flex: 1 1 18rem;
+    text-align: left;
+    margin-bottom: 0;   /* .field снаружи задаёт отступ снизу — в строке он лишний */
+}
+
+/* Номер вводят с бумаги или копируют — моноширинный шрифт и увеличенный
+   интервал помогают не спутать O и 0 при наборе. */
+#certificate-number {
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.verify-submit {
+    flex: 0 0 auto;
+    align-self: end;
+}
+
+.verify-result {
+    margin-top: var(--space-8);
+}
+
+/* Полоса вердикта: зелёная — сертификат настоящий, красная — номера нет.
+   Цвет дублируется значком и текстом, чтобы вердикт читался и без цвета. */
+.verify-verdict {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-6);
+    text-align: center;
+}
+
+.verify-verdict.is-valid {
+    background: var(--color-success-subtle);
+    color: #14532d;
+}
+
+.verify-verdict.is-invalid {
+    background: var(--color-danger-subtle);
+    color: #7f1d1d;
+}
+
+.verify-verdict-icon {
+    font-size: var(--text-xl);
+    line-height: 1;
+}
+
+/* --- Печать -------------------------------------------------------------- */
+
+/* Ctrl+P на странице сертификата должен давать сам сертификат, а не страницу
+   с навбаром и кнопками. Полноценная замена PDF это не заменяет, но человек,
+   нажавший «печать» по привычке, получает ожидаемое. */
+@media print {
+    body {
+        background: #ffffff;
+    }
+
+    #navbar,
+    .certificate-actions,
+    .skip-link,
+    .page-header,
+    .toast-container {
+        display: none !important;
+    }
+
+    .container.page {
+        padding: 0;
+        max-width: none;
+    }
+
+    .certificate-sheet {
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+        break-inside: avoid;
+    }
+}
+
+/* --- Узкие экраны -------------------------------------------------------- */
+
+@media (max-width: 600px) {
+    /* На 375px альбомный лист становится 90px в высоту — текст в него не влезает
+       и накладывается сам на себя. Отпускаем пропорции: пусть лист вытянется
+       по содержимому, читаемость важнее точного соответствия формату бумаги. */
+    .certificate-sheet {
+        aspect-ratio: auto;
+        min-height: 26rem;
+    }
+
+    .verify-submit {
+        flex: 1 1 100%;
+    }
+}

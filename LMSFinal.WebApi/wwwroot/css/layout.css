@@ -1,0 +1,509 @@
+/* ============================================================================
+   Layout — контейнеры, сетка, навбар, сайдбар, футер.
+   ========================================================================= */
+
+/* --- Контейнеры ---------------------------------------------------------- */
+
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+}
+
+.container-narrow {
+    width: 100%;
+    max-width: var(--container-narrow);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+}
+
+.page {
+    padding-block: var(--space-8) var(--space-16);
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.page-title {
+    font-size: var(--text-3xl);
+}
+
+.page-subtitle {
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+}
+
+/* --- Сетка ---------------------------------------------------------------
+   auto-fill + minmax: количество колонок подбирается само под ширину экрана,
+   поэтому отдельные media-запросы для карточек не нужны.                  */
+
+.grid {
+    display: grid;
+    gap: var(--space-6);
+}
+
+.grid-cards {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.grid-stats {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* --- Навбар --------------------------------------------------------------- */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-navbar);
+    height: var(--navbar-height);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    height: 100%;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-slate-900);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+    .navbar-brand:hover {
+        color: var(--color-accent);
+        text-decoration: none;
+    }
+
+.navbar-logo {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--color-primary-600), var(--color-secondary-500));
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-link {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    color: var(--color-slate-600);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+    .navbar-link:hover {
+        background-color: var(--color-surface-alt);
+        color: var(--color-slate-900);
+        text-decoration: none;
+    }
+
+    .navbar-link.is-active {
+        background-color: var(--color-accent-subtle);
+        color: var(--color-accent);
+    }
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
+}
+
+/* --- Поиск в шапке --------------------------------------------------------- */
+.navbar-search {
+    flex: 1 1 auto;
+    max-width: 360px;
+}
+
+.navbar-search .input {
+    height: 36px;
+    padding: var(--space-1) var(--space-3);
+}
+
+/* Узкие экраны: и так тесно рядом с гамбургером, а на каталоге есть свой
+   поиск — здесь просто прячем, чтобы не сжимать остальную шапку в кашу. */
+@media (max-width: 900px) {
+    .navbar-search {
+        display: none;
+    }
+}
+
+/* --- Иконка корзины --------------------------------------------------------- */
+.navbar-cart {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background-color var(--transition-fast);
+}
+
+.navbar-cart:hover {
+    background-color: var(--color-surface-alt);
+}
+
+.navbar-cart-badge {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 var(--space-1);
+    border-radius: var(--radius-full);
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
+    font-size: 10px;
+    font-weight: var(--weight-bold);
+    line-height: 16px;
+    text-align: center;
+}
+
+.navbar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+/* --- Переключатель языка --------------------------------------------------- */
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-full);
+}
+
+.lang-option {
+    padding: var(--space-1) var(--space-3);
+    border: 0;
+    background: none;
+    border-radius: var(--radius-full);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+    .lang-option:hover {
+        color: var(--color-slate-900);
+    }
+
+    .lang-option.is-active {
+        background-color: var(--color-surface);
+        color: var(--color-accent);
+        box-shadow: var(--shadow-xs);
+    }
+
+/* --- Меню пользователя ------------------------------------------------------ */
+
+.user-menu {
+    position: relative;
+}
+
+.user-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+    .user-trigger:hover {
+        background-color: var(--color-surface-alt);
+    }
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    background-color: var(--color-primary-100);
+    border-radius: var(--radius-full);
+    color: var(--color-primary-700);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.user-name {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    z-index: var(--z-dropdown);
+    min-width: 220px;
+    padding: var(--space-2);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.dropdown-header {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-2);
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    background: none;
+    border: 0;
+    border-radius: var(--radius-md);
+    color: var(--color-slate-700);
+    font-size: var(--text-sm);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+    .dropdown-item:hover {
+        background-color: var(--color-surface-alt);
+        color: var(--color-slate-900);
+        text-decoration: none;
+    }
+
+    .dropdown-item.is-danger {
+        color: var(--color-danger);
+    }
+
+/* --- Сайдбар (дашборды) ----------------------------------------------------- */
+
+.layout-with-sidebar {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+/* Элемент grid по умолчанию получает min-width: auto — он НЕ сжимается уже
+   своего содержимого. Из-за этого широкая таблица (ведомость, список студентов)
+   растягивала колонку до своей ширины, страница уезжала вбок на весь экран,
+   а overflow-x: auto у .table-wrapper не срабатывал: сжиматься было некуда.
+   min-width: 0 снимает этот запрет — колонка ужимается до экрана, и таблица
+   наконец прокручивается внутри себя. */
+.layout-with-sidebar > * {
+    min-width: 0;
+}
+
+.sidebar {
+    position: sticky;
+    top: calc(var(--navbar-height) + var(--space-6));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    color: var(--color-slate-600);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+    .sidebar-link:hover {
+        background-color: var(--color-surface-alt);
+        color: var(--color-slate-900);
+        text-decoration: none;
+    }
+
+    .sidebar-link.is-active {
+        background-color: var(--color-accent-subtle);
+        color: var(--color-accent);
+    }
+
+/* --- Футер ------------------------------------------------------------------- */
+
+.footer {
+    margin-top: auto;
+    padding-block: var(--space-10);
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+/* --- Адаптивность ------------------------------------------------------------
+   Mobile-first здесь нарушен сознательно: базовая версия — десктопная, а
+   мобильная описана через max-width. Для админ-подобного интерфейса с
+   сайдбаром так получается меньше кода, чем наоборот.                      */
+
+@media (max-width: 900px) {
+    .layout-with-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .sidebar-link {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Навигация уезжает в выпадающую панель под шапкой. */
+    .navbar-toggle {
+        display: flex;
+        /* Без этого кнопка меню сжималась с 40px до 16 и вылезала за край
+           экрана: flex-элементы по умолчанию ужимаются, а места в строке
+           не хватало. Кнопка «Меню» — последнее, что можно ужимать. */
+        flex-shrink: 0;
+    }
+
+    /* Строка навбара на 375px не помещалась: логотип, переключатель языка,
+       аватар и кнопка меню требовали 427px. Ужимаем отступы между блоками. */
+    .navbar-inner {
+        gap: var(--space-3);
+    }
+
+    .navbar-actions {
+        gap: var(--space-2);
+    }
+
+    .lang-option {
+        padding: var(--space-1) var(--space-2);
+    }
+
+    /* Кнопка меню — основная цель нажатия в шапке, доводим до 44px. */
+    .navbar-toggle {
+        width: 44px;
+        height: 44px;
+    }
+
+    .navbar-links {
+        position: absolute;
+        top: var(--navbar-height);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: var(--space-2);
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-md);
+    }
+
+        .navbar-links:not(.is-open) {
+            display: none;
+        }
+
+    .navbar-link {
+        padding: var(--space-3);
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .page-title {
+        font-size: var(--text-2xl);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Очень узкие экраны (≤480px)
+   --------------------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+    /* Оставляем только квадрат логотипа. Ссылка на главную никуда не девается,
+       а 85px, которые занимало слово «Learnix», уходят кнопке меню и аватару. */
+    .navbar-brand-name {
+        display: none;
+    }
+}

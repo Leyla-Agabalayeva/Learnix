@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="builder.title">Course Builder — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/student.css">
+    <link rel="stylesheet" href="/css/pages/instructor.css">
+    <link rel="stylesheet" href="/css/pages/builder.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/instructor/course-builder.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="builder.title">Kurs konstruktoru</a>
+    <div id="navbar" data-active="my-courses"></div>
+
+    <div class="container page">
+        <div class="layout-with-sidebar">
+            <aside id="sidebar" data-active="my-courses"></aside>
+
+            <main id="main">
+                <header class="page-header">
+                    <div>
+                        <h1 class="page-title" id="course-title">—</h1>
+                        <p class="page-subtitle" data-i18n="builder.subtitle"></p>
+                    </div>
+                    <a class="btn btn-secondary" id="preview-link" href="#"
+                       data-i18n="actions.viewCourse">Kursa bax</a>
+                </header>
+
+                <!-- Статус курса и переходы Draft → Published → Archived -->
+                <section class="course-status-bar">
+                    <div class="course-status-info">
+                        <span id="course-status-badge" class="badge badge-neutral">—</span>
+                        <span class="text-sm text-muted" id="course-summary"></span>
+                    </div>
+                    <div class="flex gap-2 flex-wrap" id="status-actions"></div>
+                </section>
+
+                <p class="builder-hint">
+                    <span aria-hidden="true">☰</span>
+                    <span data-i18n="builder.dragHint"></span>
+                </p>
+
+                <!-- Модули собираются в course-builder.js -->
+                <div id="modules"></div>
+
+                <button class="btn btn-primary mt-4" type="button" id="add-module"
+                        data-i18n="actions.addModule">Modul əlavə et</button>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

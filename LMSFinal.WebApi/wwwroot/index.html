@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="nav.home">Learnix — Online Learning Management System</title>
+    <meta name="description" content="Онлайн-платформа обучения: курсы с модулями, уроками и тестами, отслеживание прогресса и сертификаты.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/home.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.home">Ana səhifə</a>
+    <div id="navbar" data-active="home"></div>
+
+    <main id="main">
+        <!-- ============================ HERO ============================ -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <div>
+                    <span class="badge badge-primary hero-eyebrow">
+                        <span aria-hidden="true">🎓</span>
+                        <span data-i18n="app.name">Learnix</span>
+                    </span>
+
+                    <h1 class="hero-title" data-i18n="home.heroTitle">Limitsiz öyrən. Gələcəyini qur.</h1>
+
+                    <p class="hero-text" data-i18n="home.heroText"></p>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-primary btn-lg" href="/pages/courses.html"
+                           data-i18n="actions.explore">Kurslara bax</a>
+                        <a class="btn btn-secondary btn-lg" href="/pages/register.html"
+                           data-i18n="actions.becomeInstructor">Müəllim ol</a>
+                    </div>
+                </div>
+
+                <!-- Декоративный блок: смысловой информации нет, поэтому скрыт от скринридера. -->
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="hero-card">
+                        <span class="hero-card-icon">📚</span>
+                        <div>
+                            <p class="font-semibold" data-i18n="home.step1Title">Kurs seçin</p>
+                            <p class="text-sm text-muted" data-i18n="course.modules">Modullar</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <span class="hero-card-icon">📈</span>
+                        <div>
+                            <p class="font-semibold" data-i18n="course.progress">İrəliləyiş</p>
+                            <div class="progress mt-2" style="width:160px">
+                                <div class="progress-bar" style="width:72%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <span class="hero-card-icon">🏆</span>
+                        <div>
+                            <p class="font-semibold" data-i18n="nav.certificates">Sertifikatlar</p>
+                            <p class="text-sm text-muted">LMS-2026-000001</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== КАРУСЕЛЬ БАННЕРОВ =======================
+             Слайды загружает администратор (админ-панель → Баннеры);
+             если слайдов нет, секция скрывает себя сама (см. carousel.js). -->
+        <section class="container">
+            <div class="carousel hidden" id="hero-carousel" aria-label="Баннеры"></div>
+        </section>
+
+        <!-- ======================== СТАТИСТИКА ==========================
+             Цифры подставляются из API в home.js — ничего не захардкожено
+             (раздел 68 ТЗ: никаких fake statistics).                      -->
+        <section class="container">
+            <div class="stats-strip" id="platform-stats">
+                <div class="stat">
+                    <p class="stat-value" data-stat="courses">—</p>
+                    <p class="stat-label" data-i18n="home.statsCourses">Kurs</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-value" data-stat="students">—</p>
+                    <p class="stat-label" data-i18n="home.statsStudents">Tələbə</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-value" data-stat="lessons">—</p>
+                    <p class="stat-label" data-i18n="home.statsLessons">Dərs</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-value" data-stat="instructors">—</p>
+                    <p class="stat-label" data-i18n="home.statsInstructors">Müəllim</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================= КАТЕГОРИИ ========================== -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title" data-i18n="home.categoriesTitle">İstiqamət seçin</h2>
+                        <p class="section-text" data-i18n="home.categoriesText"></p>
+                    </div>
+                </div>
+                <div class="category-grid" id="categories"></div>
+            </div>
+        </section>
+
+        <!-- ==================== РЕКОМЕНДУЕМЫЕ КУРСЫ ===================== -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title" data-i18n="home.featuredTitle">Tövsiyə olunan kurslar</h2>
+                        <p class="section-text" data-i18n="home.featuredText"></p>
+                    </div>
+                    <a class="btn btn-secondary" href="/pages/courses.html" data-i18n="actions.viewAll">Hamısına bax</a>
+                </div>
+                <div class="grid-cards" id="featured-courses"></div>
+            </div>
+        </section>
+
+        <!-- ====================== ПОПУЛЯРНЫЕ КУРСЫ ====================== -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title" data-i18n="home.popularTitle">Ən populyar</h2>
+                        <p class="section-text" data-i18n="home.popularText"></p>
+                    </div>
+                    <a class="btn btn-secondary" href="/pages/courses.html" data-i18n="actions.viewAll">Hamısına bax</a>
+                </div>
+                <div class="grid-cards" id="popular-courses"></div>
+            </div>
+        </section>
+
+        <!-- ====================== КАК ЭТО РАБОТАЕТ ====================== -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title" data-i18n="home.howTitle">Necə işləyir</h2>
+                        <p class="section-text" data-i18n="home.howText"></p>
+                    </div>
+                </div>
+                <div class="steps">
+                    <article class="step">
+                        <h3 class="step-title" data-i18n="home.step1Title"></h3>
+                        <p class="step-text" data-i18n="home.step1Text"></p>
+                    </article>
+                    <article class="step">
+                        <h3 class="step-title" data-i18n="home.step2Title"></h3>
+                        <p class="step-text" data-i18n="home.step2Text"></p>
+                    </article>
+                    <article class="step">
+                        <h3 class="step-title" data-i18n="home.step3Title"></h3>
+                        <p class="step-text" data-i18n="home.step3Text"></p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================= CTA ============================ -->
+        <section class="section">
+            <div class="container">
+                <div class="cta">
+                    <h2 data-i18n="home.ctaTitle">Öyrənməyə başlamağa hazırsınız?</h2>
+                    <p data-i18n="home.ctaText"></p>
+                    <div class="flex gap-3 flex-wrap justify-center">
+                        <a class="btn btn-primary btn-lg" href="/pages/register.html"
+                           data-i18n="actions.getStarted">Başla</a>
+                        <a class="btn btn-secondary btn-lg" href="/pages/courses.html"
+                           data-i18n="actions.explore">Kurslara bax</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>© 2026 <span data-i18n="app.name">Learnix</span> — Code Academy Final Project</p>
+            <nav class="flex gap-4 flex-wrap">
+                <a href="/pages/courses.html" data-i18n="nav.courses">Kurslar</a>
+                <a href="/pages/verify-certificate.html" data-i18n="nav.verifyCertificate">Sertifikatı yoxla</a>
+                <a href="/styleguide.html">Design System</a>
+                <a href="/swagger" target="_blank" rel="noopener">API</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

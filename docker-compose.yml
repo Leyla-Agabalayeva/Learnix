@@ -1,0 +1,84 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: lmsfinal-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      # Пароль только для контейнера — с твоим локальным SQL Server (Leyla-Comp)
+      # никак не связан, там вход через Windows-аутентификацию, а тут нужен свой.
+      # Настоящее значение — в .env (файл не в git, есть образец .env.example).
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 20s
+
+  minio:
+    image: minio/minio:latest
+    container_name: lmsfinal-minio
+    environment:
+      MINIO_ROOT_USER: "${MINIO_ROOT_USER}"
+      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
+    ports:
+      - "9000:9000" # S3 API — сюда ходит и webapi, и браузер за публичными файлами
+      - "9001:9001" # веб-консоль MinIO
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+
+  webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lmsfinal-api
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      # Server=sqlserver — имя СЕРВИСА выше, а не "Leyla-Comp": внутри Docker
+      # контейнеры находят друг друга по имени сервиса, а не по имени компьютера.
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=LMSFinal;User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;"
+      Jwt__Key: "${JWT_KEY}"
+      Jwt__Issuer: "LMSFinal.WebApi"
+      Jwt__Audience: "LMSFinal.Client"
+      Jwt__ExpiresInMinutes: "120"
+      Seed__AdminEmail: "${SEED_ADMIN_EMAIL}"
+      Seed__AdminPassword: "${SEED_ADMIN_PASSWORD}"
+      Seed__EnableDemoData: "true"
+      Seed__DemoPassword: "${SEED_DEMO_PASSWORD}"
+      Email__SmtpHost: "smtp.gmail.com"
+      Email__SmtpPort: "587"
+      Email__SenderEmail: "${EMAIL_SENDER_ADDRESS}"
+      Email__SenderPassword: "${EMAIL_SENDER_APP_PASSWORD}"
+      Email__SenderName: "Learnix"
+      # localhost изнутри контейнера — это сам контейнер, а не твой браузер,
+      # поэтому ссылка в письме должна вести на порт, который ты открываешь
+      # на компьютере (5204), а не на внутренний 8080.
+      Email__ClientBaseUrl: "http://localhost:5204"
+      # Внутри docker-сети webapi обращается к MinIO по имени сервиса,
+      # а браузер — снаружи, по localhost:9000, поэтому Endpoint и
+      # PublicBaseUrl различаются.
+      Storage__Endpoint: "minio:9000"
+      Storage__AccessKey: "${MINIO_ROOT_USER}"
+      Storage__SecretKey: "${MINIO_ROOT_PASSWORD}"
+      Storage__UseSsl: "false"
+      Storage__PublicBaseUrl: "http://localhost:9000"
+    ports:
+      - "5204:8080"
+
+volumes:
+  sql-data:
+  minio-data:

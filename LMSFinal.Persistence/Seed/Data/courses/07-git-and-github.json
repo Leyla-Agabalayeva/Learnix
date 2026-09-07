@@ -1,0 +1,311 @@
+﻿{
+  "categorySlug": "web-development",
+  "instructorEmail": "rashad.instructor@lms.com",
+  "level": "Beginner",
+  "status": "Archived",
+  "price": 19.99,
+  "thumbnailUrl": "/assets/courses/git-and-github.svg",
+  "createdDaysAgo": 300,
+
+  "title": {
+    "az": "Git və GitHub",
+    "en": "Git and GitHub",
+    "ru": "Git и GitHub"
+  },
+  "shortDescription": {
+    "az": "Versiya nəzarəti, branch-lar, merge və komanda ilə birgə iş.",
+    "en": "Version control, branches, merging and working together as a team.",
+    "ru": "Контроль версий, ветки, слияние и командная работа."
+  },
+  "description": {
+    "az": "Arxivlənmiş kurs: material yeni versiya ilə əvəz olunub, lakin artıq yazılmış tələbələr onu tamamlaya bilər. Kurs commit tarixçəsi, branch strategiyası, merge və konfliktlərin həlli mövzularını əhatə edir.",
+    "en": "An archived course: the material has been replaced by a newer edition, but students who already enrolled can still finish it. It covers commit history, branching strategy, merging and conflict resolution.",
+    "ru": "Архивный курс: материал заменён более новой версией, но уже записавшиеся студенты могут его закончить. Курс охватывает историю коммитов, стратегию ветвления, слияние и разрешение конфликтов."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "Repozitori yaratmaq və commit tarixçəsi qurmaq",
+      "Branch yaratmaq və dəyişiklikləri birləşdirmək",
+      "Merge konfliktlərini həll etmək",
+      "Pull request vasitəsilə komanda ilə işləmək"
+    ],
+    "en": [
+      "Create a repository and build a commit history",
+      "Create branches and merge changes",
+      "Resolve merge conflicts",
+      "Collaborate through pull requests"
+    ],
+    "ru": [
+      "Создавать репозиторий и вести историю коммитов",
+      "Создавать ветки и объединять изменения",
+      "Разрешать конфликты слияния",
+      "Работать в команде через pull request"
+    ]
+  },
+
+  "modules": [
+    {
+      "title": {
+        "az": "Git əsasları",
+        "en": "Git Basics",
+        "ru": "Основы Git"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Repozitori və commit",
+            "en": "Repository and commits",
+            "ru": "Репозиторий и коммиты"
+          },
+          "content": {
+            "az": "<p><code>git init</code> repozitori yaradır, <code>git add</code> dəyişiklikləri staging sahəsinə əlavə edir, <code>git commit</code> isə onları tarixçəyə yazır.</p><p>Yaxşı commit mesajı nə edildiyini bir sətirdə izah edir — «fix» və ya «update» kimi mesajlar tarixçəni oxunmaz edir.</p>",
+            "en": "<p><code>git init</code> creates a repository, <code>git add</code> moves changes into the staging area, and <code>git commit</code> records them in history.</p><p>A good commit message explains what was done in one line — messages like fix or update make the history unreadable.</p>",
+            "ru": "<p><code>git init</code> создаёт репозиторий, <code>git add</code> переносит изменения в staging, а <code>git commit</code> записывает их в историю.</p><p>Хорошее сообщение коммита объясняет сделанное одной строкой — сообщения вроде «fix» или «update» делают историю нечитаемой.</p>"
+          },
+          "durationMinutes": 13
+        },
+        {
+          "title": {
+            "az": ".gitignore və layihə gigiyenası",
+            "en": ".gitignore and project hygiene",
+            "ru": ".gitignore и гигиена проекта"
+          },
+          "content": {
+            "az": "<p><code>.gitignore</code> repozitoriyə düşməməli faylları sadalayır: <code>bin/</code>, <code>obj/</code>, <code>node_modules/</code> və gizli açarlar olan konfiqurasiya faylları.</p><p>Bir dəfə commit olunmuş sirr tarixçədə qalır — ona görə .gitignore ilk commit-dən əvvəl əlavə edilməlidir.</p>",
+            "en": "<p><code>.gitignore</code> lists files that must never reach the repository: <code>bin/</code>, <code>obj/</code>, <code>node_modules/</code> and configuration files containing secrets.</p><p>A secret committed once stays in history — which is why .gitignore must be added before the very first commit.</p>",
+            "ru": "<p><code>.gitignore</code> перечисляет файлы, которым нельзя попадать в репозиторий: <code>bin/</code>, <code>obj/</code>, <code>node_modules/</code> и конфиги с секретами.</p><p>Однажды закоммиченный секрет остаётся в истории — поэтому .gitignore добавляют до первого коммита.</p>"
+          },
+          "durationMinutes": 10
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Branch-lar və komanda işi",
+        "en": "Branches and Teamwork",
+        "ru": "Ветки и командная работа"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Branch, merge və konfliktlər",
+            "en": "Branch, merge and conflicts",
+            "ru": "Ветки, слияние и конфликты"
+          },
+          "content": {
+            "az": "<p>Branch işi əsas koddan təcrid edir. <code>git merge</code> iki branch-ı birləşdirir; eyni sətirlər hər iki tərəfdə dəyişibsə, konflikt yaranır.</p><p>Konflikt qorxulu deyil: Git ziddiyyətli hissələri işarələyir, siz isə hansı variantın qalacağını seçirsiniz.</p>",
+            "en": "<p>A branch isolates work from the main code. <code>git merge</code> combines two branches; if the same lines changed on both sides, a conflict appears.</p><p>A conflict is nothing to fear: Git marks the contradicting parts and you decide which version stays.</p>",
+            "ru": "<p>Ветка изолирует работу от основного кода. <code>git merge</code> объединяет две ветки; если одни и те же строки изменились с обеих сторон, возникает конфликт.</p><p>Конфликт не страшен: Git помечает противоречащие участки, а вы решаете, какой вариант останется.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=e2IbNHi4uCI",
+          "durationMinutes": 17
+        },
+        {
+          "title": {
+            "az": "Pull request və kod baxışı",
+            "en": "Pull requests and code review",
+            "ru": "Pull request и code review"
+          },
+          "content": {
+            "az": "<p>Pull request dəyişikliyi əsas branch-a birləşdirməzdən əvvəl müzakirəyə çıxarır. Komanda yoldaşları şərh yazır, dəyişiklik təsdiqlənəndən sonra merge olunur.</p><p>Kiçik və fokuslanmış PR-lar daha tez baxılır və daha az səhv buraxır.</p>",
+            "en": "<p>A pull request puts a change up for discussion before it is merged into the main branch. Teammates leave comments, and after approval the change is merged.</p><p>Small, focused pull requests get reviewed faster and let fewer mistakes through.</p>",
+            "ru": "<p>Pull request выносит изменение на обсуждение до слияния в основную ветку. Коллеги оставляют комментарии, и после одобрения изменение вливается.</p><p>Небольшие и сфокусированные PR проверяются быстрее и пропускают меньше ошибок.</p>"
+          },
+          "durationMinutes": 12,
+          "quiz": {
+            "title": "Git and GitHub Quiz",
+            "description": "Commits, branching, merging and collaboration.",
+            "passingScore": 60,
+            "timeLimitMinutes": 12,
+            "questions": [
+              {
+                "text": "What does git add do?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Moves changes into the staging area, ready to be committed",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Uploads changes to GitHub",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Creates a new branch",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Permanently records changes in history",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which command uploads local commits to a remote repository?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "git push",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "git commit",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "git status",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "git stash",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "When does a merge conflict occur?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "When the same lines were changed differently on both branches",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Every time two branches are merged",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "When a branch has more commits than another",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "When the repository has no remote",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What belongs in .gitignore for a Visual Studio solution?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "bin/ and obj/ folders",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The .vs/ folder",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Source .cs files",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The .sln file",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Why is a detailed commit history valuable?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "It shows how the project evolved step by step",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It makes it possible to find when a bug was introduced",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It reduces the size of the repository",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It automatically prevents merge conflicts",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What is a pull request?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "A proposal to merge a branch, opened for review and discussion",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A command that downloads the remote repository",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A way to delete a branch on the server",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "An automatic backup of the repository",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which command shows which files are staged and which are not?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "git status",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "git log",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "git diff --staged only",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "git branch",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "If a password was committed and pushed, what is the correct reaction?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Treat it as compromised, rotate the secret, and remove it from the code",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Just delete the line in the next commit — that is enough",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Nothing, private repositories are always safe",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Rename the file containing it",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

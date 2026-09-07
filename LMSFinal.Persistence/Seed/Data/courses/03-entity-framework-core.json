@@ -1,0 +1,371 @@
+﻿{
+  "categorySlug": "backend",
+  "instructorEmail": "instructor@lms.com",
+  "level": "Intermediate",
+  "status": "Published",
+  "price": 49.99,
+  "thumbnailUrl": "/assets/courses/entity-framework-core.svg",
+  "createdDaysAgo": 115,
+
+  "title": {
+    "az": "Entity Framework Core",
+    "en": "Entity Framework Core",
+    "ru": "Entity Framework Core"
+  },
+  "shortDescription": {
+    "az": "Code First yanaşması, miqrasiyalar, əlaqələr və sorğuların optimallaşdırılması.",
+    "en": "The Code First approach, migrations, relationships and query optimisation.",
+    "ru": "Подход Code First, миграции, связи и оптимизация запросов."
+  },
+  "description": {
+    "az": "Entity Framework Core C# siniflərini verilənlər bazası cədvəllərinə çevirən ORM-dir. Kursda modeli Fluent API ilə konfiqurasiya etməyi, miqrasiyalarla sxemi idarə etməyi, əlaqələri düzgün qurmağı və LINQ sorğularının SQL-ə necə çevrildiyini öyrənəcəksiniz.",
+    "en": "Entity Framework Core is an ORM that maps C# classes onto database tables. You will learn to configure the model with the Fluent API, manage the schema with migrations, model relationships correctly and understand how LINQ queries translate into SQL.",
+    "ru": "Entity Framework Core — это ORM, отображающая классы C# на таблицы базы данных. Вы научитесь настраивать модель через Fluent API, управлять схемой миграциями, правильно описывать связи и понимать, как LINQ-запросы превращаются в SQL."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "DbContext və entity konfiqurasiyalarını yazmaq",
+      "Miqrasiyalar yaratmaq və bazanı yeniləmək",
+      "Bir-çoxa və çox-çoxa əlaqələri qurmaq",
+      "N+1 problemi tanımaq və sorğuları optimallaşdırmaq"
+    ],
+    "en": [
+      "Write a DbContext and entity configurations",
+      "Create migrations and update the database",
+      "Model one-to-many and many-to-many relationships",
+      "Recognise the N+1 problem and optimise queries"
+    ],
+    "ru": [
+      "Писать DbContext и конфигурации сущностей",
+      "Создавать миграции и обновлять базу данных",
+      "Строить связи один-ко-многим и многие-ко-многим",
+      "Распознавать проблему N+1 и оптимизировать запросы"
+    ]
+  },
+
+  "modules": [
+    {
+      "title": {
+        "az": "Model və miqrasiyalar",
+        "en": "Model and Migrations",
+        "ru": "Модель и миграции"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "DbContext və DbSet",
+            "en": "DbContext and DbSet",
+            "ru": "DbContext и DbSet"
+          },
+          "content": {
+            "az": "<p><code>DbContext</code> bazaya olan sessiyanı təmsil edir, hər <code>DbSet&lt;T&gt;</code> isə bir cədvələ uyğun gəlir.</p><p>Kontekst dəyişiklikləri izləyir (change tracking) və <code>SaveChanges</code> çağırılana qədər onları yaddaşda saxlayır.</p>",
+            "en": "<p><code>DbContext</code> represents a session with the database, and each <code>DbSet&lt;T&gt;</code> maps to one table.</p><p>The context tracks changes and keeps them in memory until <code>SaveChanges</code> is called.</p>",
+            "ru": "<p><code>DbContext</code> представляет сессию работы с базой, а каждый <code>DbSet&lt;T&gt;</code> соответствует одной таблице.</p><p>Контекст отслеживает изменения и держит их в памяти, пока не вызван <code>SaveChanges</code>.</p>"
+          },
+          "durationMinutes": 13
+        },
+        {
+          "title": {
+            "az": "Fluent API konfiqurasiyaları",
+            "en": "Fluent API configurations",
+            "ru": "Конфигурации через Fluent API"
+          },
+          "content": {
+            "az": "<p><code>IEntityTypeConfiguration&lt;T&gt;</code> hər entity üçün ayrıca fayl yaratmağa imkan verir: sahə uzunluqları, indekslər, unikal məhdudiyyətlər və silinmə davranışı.</p><p>Data Annotations-dan fərqli olaraq bu yanaşma domen siniflərini infrastruktur atributlarından təmiz saxlayır.</p>",
+            "en": "<p><code>IEntityTypeConfiguration&lt;T&gt;</code> lets you keep a separate file per entity: column lengths, indexes, unique constraints and delete behaviour.</p><p>Unlike Data Annotations, this keeps domain classes free of infrastructure attributes.</p>",
+            "ru": "<p><code>IEntityTypeConfiguration&lt;T&gt;</code> позволяет держать отдельный файл на каждую сущность: длины колонок, индексы, уникальные ограничения и поведение при удалении.</p><p>В отличие от Data Annotations, этот подход оставляет доменные классы чистыми от инфраструктурных атрибутов.</p>"
+          },
+          "durationMinutes": 16
+        },
+        {
+          "title": {
+            "az": "Miqrasiyalar",
+            "en": "Migrations",
+            "ru": "Миграции"
+          },
+          "content": {
+            "az": "<p><code>dotnet ef migrations add</code> modelin cari vəziyyəti ilə əvvəlki snapshot arasındakı fərqi hesablayır və C# faylı yaradır.</p><p><code>dotnet ef database update</code> isə həmin dəyişiklikləri bazaya tətbiq edir. Miqrasiyalar git-ə commit olunmalıdır — komanda üzvləri eyni sxemi almalıdır.</p>",
+            "en": "<p><code>dotnet ef migrations add</code> compares the current model with the previous snapshot and generates a C# file with the difference.</p><p><code>dotnet ef database update</code> applies those changes to the database. Migrations belong in git — every teammate must end up with the same schema.</p>",
+            "ru": "<p><code>dotnet ef migrations add</code> сравнивает текущую модель с предыдущим снимком и генерирует C#-файл с разницей.</p><p><code>dotnet ef database update</code> применяет эти изменения к базе. Миграции коммитятся в git — у всей команды должна быть одинаковая схема.</p>"
+          },
+          "videoUrl": "https://youtu.be/fl6r-9rQjns?si=CfMM-w-jD6VeqiHR",
+
+          "durationMinutes": 15
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Əlaqələr və sorğular",
+        "en": "Relationships and Queries",
+        "ru": "Связи и запросы"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Əlaqələr və silinmə davranışı",
+            "en": "Relationships and delete behaviour",
+            "ru": "Связи и поведение при удалении"
+          },
+          "content": {
+            "az": "<p>Bir-çoxa əlaqə xarici açarla, çox-çoxa isə aralıq cədvəllə qurulur. <code>OnDelete</code> valideyn silinəndə nə olacağını təyin edir.</p><p>Cascade uşaq sətirləri də silir, Restrict isə silinməyə icazə vermir — sertifikat və qeydiyyat kimi tarixi məlumatlar üçün məhz Restrict lazımdır.</p>",
+            "en": "<p>One-to-many is modelled with a foreign key, many-to-many with a join table. <code>OnDelete</code> decides what happens when the parent is deleted.</p><p>Cascade removes the child rows too, Restrict blocks the delete — and for historical data such as certificates and enrollments Restrict is exactly what you want.</p>",
+            "ru": "<p>Связь один-ко-многим строится через внешний ключ, многие-ко-многим — через промежуточную таблицу. <code>OnDelete</code> определяет, что произойдёт при удалении родителя.</p><p>Cascade удалит и дочерние строки, Restrict запретит удаление — и для исторических данных вроде сертификатов и записей на курс нужен именно Restrict.</p>"
+          },
+          "durationMinutes": 18
+        },
+        {
+          "title": {
+            "az": "LINQ sorğuları və N+1 problemi",
+            "en": "LINQ queries and the N+1 problem",
+            "ru": "LINQ-запросы и проблема N+1"
+          },
+          "content": {
+            "az": "<p>LINQ sorğusu <code>IQueryable</code> olduğu müddətdə SQL-ə çevrilir; <code>ToList()</code> çağırıldıqdan sonra isə iş yaddaşda gedir.</p><p>N+1 problemi əlaqəli məlumatı dövr içində yükləyəndə yaranır: bir sorğu əvəzinə yüzlərlə sorğu gedir. Həlli — <code>Include</code> və ya proyeksiya.</p>",
+            "en": "<p>A LINQ query is translated into SQL as long as it stays <code>IQueryable</code>; after <code>ToList()</code> the work happens in memory.</p><p>The N+1 problem appears when related data is loaded inside a loop: instead of one query you get hundreds. The fix is <code>Include</code> or a projection.</p>",
+            "ru": "<p>LINQ-запрос транслируется в SQL, пока остаётся <code>IQueryable</code>; после <code>ToList()</code> работа идёт уже в памяти.</p><p>Проблема N+1 возникает, когда связанные данные грузятся внутри цикла: вместо одного запроса уходят сотни. Решение — <code>Include</code> или проекция.</p>"
+          },
+          "durationMinutes": 20,
+          "quiz": {
+            "title": "Entity Framework Core Quiz",
+            "description": "Model configuration, migrations, relationships and query behaviour.",
+            "passingScore": 65,
+            "timeLimitMinutes": 18,
+            "questions": [
+              {
+                "text": "What does DbContext.SaveChanges() do?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Sends all tracked changes to the database inside one transaction",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Creates a new migration file",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Drops and recreates the database",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Only writes changes to an in-memory cache",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which command applies pending migrations to the database?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "dotnet ef database update",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "dotnet ef migrations add",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "dotnet build",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "dotnet ef dbcontext scaffold",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What is the N+1 query problem?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "One query loads a list and then one extra query runs per item to load related data",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A query returns one row more than expected",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A migration is applied twice",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A table has one index too many",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which delete behaviour prevents deleting a parent row while children still reference it?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Restrict",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Cascade",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "SetNull",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "ClientSetNull",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which methods load related data in a single database round trip?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Include",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "ThenInclude",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "ToList called inside a foreach loop",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "SaveChanges",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "When is AsNoTracking() a good choice?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "For read-only queries where entities will not be updated",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Whenever you plan to modify and save the entities",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Only inside migrations",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It should always be used everywhere",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "How do you enforce that a student cannot enroll in the same course twice at the database level?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "A unique index on the pair (StudentId, CourseId)",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A check constraint on StudentId only",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "An if-statement in the controller",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A foreign key on CourseId",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which statements about IQueryable are true?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Filters applied to it are translated into SQL",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Execution is deferred until the results are enumerated",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It always loads the whole table into memory first",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It cannot be combined with Where",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does a global query filter (HasQueryFilter) do?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Adds a condition automatically to every query for that entity",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Deletes rows that do not match the condition",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Creates a database view",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Filters only the results of raw SQL queries",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Why should migration files be committed to source control?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "So every developer and environment ends up with the identical schema history",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Because EF Core cannot run without them in memory",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "To make the build faster",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "They should not be committed — they are generated files",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

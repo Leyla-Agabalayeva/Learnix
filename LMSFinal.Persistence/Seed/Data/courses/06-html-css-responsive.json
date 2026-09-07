@@ -1,0 +1,329 @@
+﻿{
+  "categorySlug": "frontend",
+  "instructorEmail": "nigar.instructor@lms.com",
+  "level": "Beginner",
+  "status": "Published",
+  "price": 0,
+  "thumbnailUrl": "/assets/courses/html-css-responsive.svg",
+  "createdDaysAgo": 160,
+  "title": {
+    "az": "HTML və CSS: Responsiv Dizayn",
+    "en": "HTML and CSS: Responsive Design",
+    "ru": "HTML и CSS: адаптивная вёрстка"
+  },
+  "shortDescription": {
+    "az": "Semantik HTML, Flexbox, Grid və media sorğuları ilə istənilən ekrana uyğunlaşan səhifələr.",
+    "en": "Semantic HTML, Flexbox, Grid and media queries for pages that fit any screen.",
+    "ru": "Семантичный HTML, Flexbox, Grid и медиазапросы для страниц под любой экран."
+  },
+  "description": {
+    "az": "Pulsuz giriş kursu. Semantik teqlərdən başlayıb CSS qutu modeli, Flexbox, Grid və media sorğularına keçirik. Kursun sonunda mobil telefondan geniş monitora qədər düzgün görünən səhifə qura biləcəksiniz.",
+    "en": "A free introductory course. We start from semantic tags and move through the CSS box model, Flexbox, Grid and media queries. By the end you will be able to build a page that looks right from a phone to a wide monitor.",
+    "ru": "Бесплатный вводный курс. Начинаем с семантичных тегов и переходим к блочной модели CSS, Flexbox, Grid и медиазапросам. К концу вы сможете сверстать страницу, которая корректно выглядит и на телефоне, и на широком мониторе."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "Semantik HTML teqlərindən düzgün istifadə etmək",
+      "Qutu modelini və CSS seçicilərinin prioritetini anlamaq",
+      "Flexbox və Grid ilə maket qurmaq",
+      "Media sorğuları ilə mobil versiya hazırlamaq"
+    ],
+    "en": [
+      "Use semantic HTML tags correctly",
+      "Understand the box model and CSS selector specificity",
+      "Build layouts with Flexbox and Grid",
+      "Create a mobile version with media queries"
+    ],
+    "ru": [
+      "Правильно использовать семантичные HTML-теги",
+      "Понимать блочную модель и специфичность CSS-селекторов",
+      "Строить макеты на Flexbox и Grid",
+      "Делать мобильную версию через медиазапросы"
+    ]
+  },
+  "modules": [
+    {
+      "title": {
+        "az": "HTML və CSS əsasları",
+        "en": "HTML and CSS Basics",
+        "ru": "Основы HTML и CSS"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Semantik teqlər",
+            "en": "Semantic tags",
+            "ru": "Семантичные теги"
+          },
+          "content": {
+            "az": "<p><code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>section</code> və <code>footer</code> səhifənin strukturunu təsvir edir.</p><p>Onlar sadəcə üslub üçün deyil: ekran oxuyucuları və axtarış sistemləri məhz bu teqlərə görə səhifəni başa düşür.</p>",
+            "en": "<p><code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>section</code> and <code>footer</code> describe the structure of the page.</p><p>They are not just styling hooks: screen readers and search engines understand the page through exactly these tags.</p>",
+            "ru": "<p><code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>section</code> и <code>footer</code> описывают структуру страницы.</p><p>Это не просто зацепки для стилей: скринридеры и поисковые системы понимают страницу именно по этим тегам.</p>"
+          },
+          "durationMinutes": 11,
+          "resources": [
+            {
+              "languageCode": "RU",
+              "fileName": "Чек-лист адаптивной вёрстки.md",
+              "fileUrl": "/assets/materials/responsive-checklist.ru.md",
+              "fileType": "md"
+            },
+            {
+              "languageCode": "EN",
+              "fileName": "Responsive design checklist.md",
+              "fileUrl": "/assets/materials/responsive-checklist.en.md",
+              "fileType": "md"
+            },
+            {
+              "languageCode": "AZ",
+              "fileName": "Responsive dizayn yoxlama siyahısı.md",
+              "fileUrl": "/assets/materials/responsive-checklist.en.md",
+              "fileType": "md"
+            }
+          ]
+        },
+        {
+          "title": {
+            "az": "Qutu modeli və seçicilər",
+            "en": "The box model and selectors",
+            "ru": "Блочная модель и селекторы"
+          },
+          "content": {
+            "az": "<p>Hər element content, padding, border və margin-dən ibarətdir. <code>box-sizing: border-box</code> eni hesablamağı sadələşdirir.</p><p>Seçicilərin prioriteti: inline üslub &gt; id &gt; class &gt; teq. <code>!important</code> isə son çarədir və ondan qaçmaq lazımdır.</p>",
+            "en": "<p>Every element consists of content, padding, border and margin. <code>box-sizing: border-box</code> makes width calculations much simpler.</p><p>Selector specificity: inline style &gt; id &gt; class &gt; tag. <code>!important</code> is a last resort and is better avoided.</p>",
+            "ru": "<p>Каждый элемент состоит из content, padding, border и margin. <code>box-sizing: border-box</code> сильно упрощает расчёт ширины.</p><p>Специфичность селекторов: инлайн-стиль &gt; id &gt; class &gt; тег. <code>!important</code> — крайняя мера, которой лучше избегать.</p>"
+          },
+          "durationMinutes": 14
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Maket və responsivlik",
+        "en": "Layout and Responsiveness",
+        "ru": "Макет и адаптивность"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Flexbox və Grid",
+            "en": "Flexbox and Grid",
+            "ru": "Flexbox и Grid"
+          },
+          "content": {
+            "az": "<p>Flexbox bir ölçüdə — sətir və ya sütun üzrə — düzülüş üçündür. Grid isə eyni anda həm sətir, həm sütun idarə edir.</p><p>Praktikada naviqasiya paneli üçün Flexbox, kurs kartlarının şəbəkəsi üçün isə Grid seçilir.</p>",
+            "en": "<p>Flexbox lays out items in one dimension — a row or a column. Grid controls rows and columns at the same time.</p><p>In practice you reach for Flexbox for a navigation bar, and for Grid for a grid of course cards.</p>",
+            "ru": "<p>Flexbox раскладывает элементы в одном измерении — по строке или по колонке. Grid управляет строками и колонками одновременно.</p><p>На практике для панели навигации берут Flexbox, а для сетки карточек курсов — Grid.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=fYq5PXgSsbE",
+          "durationMinutes": 19
+        },
+        {
+          "title": {
+            "az": "Media sorğuları və mobil versiya",
+            "en": "Media queries and the mobile version",
+            "ru": "Медиазапросы и мобильная версия"
+          },
+          "content": {
+            "az": "<p>Media sorğusu üslubları ekran enindən asılı olaraq dəyişir. Mobile-first yanaşmada əsas üslublar kiçik ekran üçün yazılır, <code>min-width</code> ilə isə böyük ekranlar üçün genişləndirilir.</p><p>Yan panel mobil versiyada hamburger menyuya çevrilir, kartlar isə tək sütuna düzülür.</p>",
+            "en": "<p>A media query changes styles depending on the screen width. In a mobile-first approach the base styles target small screens and <code>min-width</code> queries extend them for larger ones.</p><p>On mobile the sidebar turns into a hamburger menu and cards collapse into a single column.</p>",
+            "ru": "<p>Медиазапрос меняет стили в зависимости от ширины экрана. При подходе mobile-first базовые стили пишутся под маленький экран, а запросы <code>min-width</code> расширяют их для больших.</p><p>На мобильном боковая панель превращается в гамбургер-меню, а карточки выстраиваются в одну колонку.</p>"
+          },
+          "durationMinutes": 15,
+          "quiz": {
+            "title": "HTML and CSS Quiz",
+            "description": "Semantics, the box model, layout and responsiveness.",
+            "passingScore": 60,
+            "timeLimitMinutes": 12,
+            "questions": [
+              {
+                "text": "What does box-sizing: border-box change?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Padding and border are included in the declared width",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Margins collapse automatically",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The element becomes inline",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Borders are removed",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which selector has the highest specificity?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "#main-title",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": ".title",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "h1",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "*",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which layout tool is designed for two-dimensional layouts?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "CSS Grid",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Flexbox",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "float",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "position: absolute",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which tags are semantic HTML5 elements?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "article",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "nav",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "div",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "span",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does the mobile-first approach mean?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Base styles target small screens and min-width queries extend them upward",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The desktop version is written first and then shrunk",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Only mobile devices are supported",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "All sizes are set in pixels",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which attribute makes an image accessible to screen readers?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "alt",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "title",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "src",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "loading",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which CSS property distributes space between flex items along the main axis?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "justify-content",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "align-items",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "flex-wrap",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "order",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which practices improve accessibility?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Sufficient colour contrast between text and background",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Visible focus states for keyboard navigation",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Removing outlines from all focusable elements",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Using div elements instead of buttons for clickable actions",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

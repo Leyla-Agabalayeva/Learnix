@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="nav.profile">Profile — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/student.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/student/profile.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.dashboard">Panel</a>
+    <div id="navbar" data-active=""></div>
+
+    <div class="container page">
+        <div class="layout-with-sidebar">
+            <!-- Меню кабинета собирается из js/components/student-sidebar.js -->
+            <aside id="sidebar" data-active="profile"></aside>
+
+            <main id="main">
+                <header class="page-header">
+                    <div>
+                        <h1 class="page-title" data-i18n="student.profileTitle">Profil</h1>
+                        <p class="page-subtitle" data-i18n="student.profileSubtitle"></p>
+                    </div>
+                </header>
+
+                <div class="profile-head">
+                    <button type="button" class="profile-avatar" id="profile-avatar" aria-label="Изменить фото"></button>
+                    <div>
+                        <p class="text-lg font-semibold" id="profile-name">—</p>
+                        <p class="text-sm text-muted" id="profile-email"></p>
+                        <p class="text-sm text-muted mt-2" id="profile-meta"></p>
+                    </div>
+                </div>
+
+                <div class="card profile-form">
+                    <div class="card-body">
+                        <div class="auth-alert" id="form-error" role="alert"></div>
+
+                        <form id="profile-form" novalidate>
+                            <div class="flex gap-3">
+                                <div class="field w-full">
+                                    <label class="field-label" for="firstName"
+                                           data-i18n="auth.firstName">Ad</label>
+                                    <input class="input" id="firstName" name="firstName" type="text"
+                                           required aria-describedby="firstName-error">
+                                    <p class="field-error hidden" id="firstName-error"></p>
+                                </div>
+                                <div class="field w-full">
+                                    <label class="field-label" for="lastName"
+                                           data-i18n="auth.lastName">Soyad</label>
+                                    <input class="input" id="lastName" name="lastName" type="text"
+                                           required aria-describedby="lastName-error">
+                                    <p class="field-error hidden" id="lastName-error"></p>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="field-label" for="bio" data-i18n="student.bio">Haqqınızda</label>
+                                <textarea class="textarea" id="bio" name="bio"
+                                          data-i18n-placeholder="student.bioPlaceholder"
+                                          aria-describedby="bio-error"></textarea>
+                                <p class="field-error hidden" id="bio-error"></p>
+                            </div>
+
+                            <div class="field">
+                                <label class="field-label" for="avatarUrl"
+                                       data-i18n="student.avatarUrl">Avatar</label>
+                                <input class="input" id="avatarUrl" name="avatarUrl" type="url"
+                                       aria-describedby="avatarUrl-hint avatarUrl-error">
+                                <p class="field-hint" id="avatarUrl-hint" data-i18n="student.avatarHint"></p>
+                                <p class="field-error hidden" id="avatarUrl-error"></p>
+                            </div>
+
+                            <!-- Email и роль показаны, но не редактируются: email — это логин,
+                                 а роль пользователь не может выдать себе сам. -->
+                            <div class="field">
+                                <label class="field-label" for="email" data-i18n="auth.email">E-poçt</label>
+                                <input class="input" id="email" type="email" disabled>
+                                <p class="field-hint" data-i18n="student.emailLocked"></p>
+                            </div>
+
+                            <button class="btn btn-primary mt-2" type="submit" id="submit"
+                                    data-i18n="actions.saveChanges">Yadda saxla</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

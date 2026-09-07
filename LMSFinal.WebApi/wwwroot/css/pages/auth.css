@@ -1,0 +1,265 @@
+/* ============================================================================
+   Страницы входа и регистрации.
+
+   Макет в две колонки: слева форма, справа смысловая панель. На мобильном
+   панель скрывается — на маленьком экране важна только форма.
+   ========================================================================= */
+
+.auth-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+/* --- Левая колонка: форма ------------------------------------------------- */
+
+.auth-form-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-10) var(--space-8);
+    background-color: var(--color-surface);
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+}
+
+/* Логотип слева, переключатель языка справа. На странице входа нет навбара,
+   поэтому переключатель живёт здесь — иначе сменить язык до входа нечем. */
+.auth-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+}
+
+/* У .auth-brand свой нижний отступ — внутри строки он сдвигал бы логотип
+   вверх относительно переключателя. Отступ теперь задаёт .auth-head. */
+.auth-head .auth-brand {
+    margin-bottom: 0;
+}
+
+.auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-slate-900);
+    text-decoration: none;
+}
+
+.auth-brand:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.auth-title {
+    font-size: var(--text-3xl);
+}
+
+.auth-subtitle {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-8);
+    color: var(--color-text-muted);
+}
+
+.auth-footer {
+    margin-top: var(--space-6);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+/* Общая ошибка формы — например «Неверный email или пароль».
+   Ошибки по конкретным полям показываются под самими полями. */
+.auth-alert {
+    display: none;
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-5);
+    background-color: var(--color-danger-subtle);
+    border-left: 3px solid var(--color-danger);
+    border-radius: var(--radius-md);
+    color: #991b1b;
+    font-size: var(--text-sm);
+}
+
+.auth-alert.is-visible {
+    display: block;
+}
+
+/* Нейтральный успех — «письмо отправлено» и т.п., не ошибка. */
+.auth-alert-success {
+    background-color: var(--color-success-subtle);
+    border-left-color: var(--color-success);
+    color: #166534;
+}
+
+/* --- Выбор роли при регистрации --------------------------------------------
+   Радиокнопки оформлены карточками: роль определяет весь дальнейший опыт
+   в системе, и такой выбор не должен выглядеть как мелкий переключатель.   */
+
+.role-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+}
+
+.role-option {
+    position: relative;
+    display: block;
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.role-option:hover {
+    border-color: var(--color-primary-300);
+}
+
+/* Сам input скрыт визуально, но остаётся в потоке — иначе он выпал бы из
+   навигации с клавиатуры и перестал работать со скринридером. */
+.role-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.role-option:has(input:checked) {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+}
+
+.role-option:has(input:focus-visible) {
+    box-shadow: var(--shadow-focus);
+}
+
+.role-option-title {
+    display: block;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+}
+
+.role-option-hint {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+/* --- Демо-аккаунты ----------------------------------------------------------
+   Нужны на защите: подставляют логин и пароль в один клик, чтобы не набирать
+   их руками перед комиссией.                                              */
+
+.demo-accounts {
+    margin-top: var(--space-8);
+    padding: var(--space-4);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-lg);
+}
+
+.demo-accounts-title {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+}
+
+.demo-account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    margin-top: var(--space-2);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+}
+
+.demo-account:hover {
+    border-color: var(--color-accent);
+}
+
+.demo-account code {
+    background: none;
+    padding: 0;
+    color: var(--color-slate-600);
+}
+
+/* --- Правая колонка: смысловая панель ---------------------------------------- */
+
+.auth-info-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-12);
+    background:
+        radial-gradient(600px 320px at 20% 10%, rgba(255, 255, 255, 0.16), transparent 60%),
+        linear-gradient(140deg, var(--color-primary-700), var(--color-secondary-600));
+    color: #fff;
+}
+
+.auth-info-title {
+    font-size: var(--text-3xl);
+    color: #fff;
+}
+
+.auth-info-list {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding: 0;
+    list-style: none;
+}
+
+.auth-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.auth-info-check {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+}
+
+@media (max-width: 900px) {
+    .auth-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-info-side {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-form-side {
+        padding: var(--space-8) var(--space-4);
+    }
+
+    .role-options {
+        grid-template-columns: 1fr;
+    }
+}

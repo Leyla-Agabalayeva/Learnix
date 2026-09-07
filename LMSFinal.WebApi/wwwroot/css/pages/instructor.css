@@ -1,0 +1,104 @@
+/* ============================================================================
+   Кабинет преподавателя (раздел 27 ТЗ).
+   Дополняет student.css — общие блоки (сайдбар, вкладки, плитки, профиль)
+   переиспользуются, здесь только специфичное для преподавателя.
+   ========================================================================= */
+
+/* --- Выбор курса на страницах аналитики и студентов ------------------------
+   Обе страницы работают в контексте ОДНОГО курса: у API нет сводных
+   эндпоинтов «аналитика по всем курсам» и «все мои студенты», да и по сути
+   такие цифры смешивали бы разные курсы в одну кучу.                      */
+
+.course-picker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 420px;
+    margin-bottom: var(--space-6);
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+/* --- Полоса завершаемости в аналитике --------------------------------------- */
+
+.completion-card {
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+}
+
+.completion-numbers {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.completion-value {
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    color: var(--color-slate-900);
+}
+
+/* --- Карточка отзыва в ленте преподавателя ----------------------------------- */
+
+.instructor-review {
+    padding: var(--space-5);
+    margin-bottom: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.instructor-review-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3);
+}
+
+/* Название курса — ссылка: из ленты отзывов удобно сразу перейти к курсу. */
+.instructor-review-course {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.instructor-review-course:hover {
+    text-decoration: underline;
+}
+
+.instructor-review-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+/* --- Карточка курса преподавателя --------------------------------------------
+   Отличается от студенческой набором действий: не «продолжить обучение»,
+   а «редактировать» и «аналитика».                                        */
+
+.instructor-course-actions {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-3);
+}
+
+.instructor-course-actions .btn {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .course-picker {
+        max-width: 100%;
+    }
+}

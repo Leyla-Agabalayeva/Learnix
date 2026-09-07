@@ -1,0 +1,237 @@
+/* ============================================================================
+   Course Builder (разделы 6 и 28 ТЗ): модули, уроки, drag & drop.
+   ========================================================================= */
+
+/* --- Обложка курса: превью + кнопка загрузки, вместо поля для ручного ввода
+   URL — инструктор выбирает файл через проводник, как аватар в профиле. --- */
+.thumbnail-picker {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.thumbnail-preview {
+    width: 96px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-alt);
+    border: 1px dashed var(--color-border-strong);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.thumbnail-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Вкладки языков в формах ------------------------------------------------ */
+
+.translation-tabs .tabs {
+    margin-bottom: var(--space-4);
+}
+
+.tab-dot {
+    margin-left: var(--space-1);
+    color: var(--color-success);
+    font-size: var(--text-base);
+    line-height: 1;
+}
+
+.translation-panel {
+    padding-top: var(--space-1);
+}
+
+/* --- Список модулей ---------------------------------------------------------- */
+
+.builder-hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.builder-module {
+    margin-bottom: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.builder-module-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background-color: var(--color-surface-alt);
+}
+
+.builder-module-title {
+    flex: 1;
+    min-width: 0;
+    font-weight: var(--weight-semibold);
+}
+
+.builder-module-index {
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.builder-actions {
+    display: flex;
+    gap: var(--space-1);
+    flex-shrink: 0;
+}
+
+/* --- Ручка перетаскивания -----------------------------------------------------
+   Это <button>, поэтому она попадает в порядок обхода Tab и работает
+   с клавиатуры: Ctrl + стрелки двигают элемент (см. drag-list.js).        */
+
+.drag-handle {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--color-slate-400);
+    font-size: var(--text-lg);
+    line-height: 1;
+    cursor: grab;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.drag-handle:hover {
+    background-color: var(--color-slate-200);
+    color: var(--color-slate-700);
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+/* Фокус на ручке заметен намеренно: с клавиатуры пользователь должен
+   понимать, какой именно элемент он сейчас двигает. */
+.drag-handle:focus-visible {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent);
+}
+
+/* --- Состояния перетаскивания ---------------------------------------------- */
+
+.is-dragging {
+    opacity: 0.45;
+}
+
+.is-drop-target {
+    /* Линия сверху показывает, куда именно встанет элемент. */
+    box-shadow: 0 -3px 0 0 var(--color-accent);
+}
+
+/* --- Уроки внутри модуля ------------------------------------------------------ */
+
+.builder-lessons {
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+}
+
+.builder-lesson {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.builder-lesson:last-child {
+    margin-bottom: 0;
+}
+
+.builder-lesson-title {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--text-sm);
+}
+
+.builder-lesson-meta {
+    flex-shrink: 0;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+.builder-empty-lessons {
+    padding: var(--space-4);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-align: center;
+}
+
+.builder-module-footer {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+/* --- Панель статуса курса ------------------------------------------------------- */
+
+.course-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding: var(--space-4) var(--space-5);
+    margin-bottom: var(--space-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+}
+
+.course-status-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+    .builder-lessons {
+        padding-left: var(--space-3);
+    }
+
+    .builder-module-head {
+        flex-wrap: wrap;
+    }
+
+    /* Кнопки уходят на свою строку, иначе название модуля сжимается в пыль.
+       Селектор ограничен шапкой МОДУЛЯ намеренно: раньше правило било по всем
+       .builder-actions, включая строку урока. Там переноса нет, кнопки получали
+       width: 100% и уезжали на 200px за край, где их срезал overflow: hidden
+       у .builder-module — редактировать и удалять урок с телефона было нечем. */
+    .builder-module-head > .builder-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    /* Строка урока тоже переносится: название на первой строке, под ним —
+       бейдж, длительность и кнопки. */
+    .builder-lesson {
+        flex-wrap: wrap;
+    }
+
+    .builder-lesson-title {
+        flex: 1 1 100%;
+    }
+
+    .builder-lesson > .builder-actions {
+        margin-left: auto;
+    }
+}

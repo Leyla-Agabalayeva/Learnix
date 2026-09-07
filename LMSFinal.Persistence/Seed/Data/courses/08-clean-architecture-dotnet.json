@@ -1,0 +1,311 @@
+﻿{
+  "categorySlug": "backend",
+  "instructorEmail": "instructor@lms.com",
+  "level": "Advanced",
+  "status": "Published",
+  "price": 69.99,
+  "thumbnailUrl": "/assets/courses/clean-architecture.svg",
+  "createdDaysAgo": 85,
+
+  "title": {
+    "az": ".NET-də Təmiz Arxitektura",
+    "en": "Clean Architecture in .NET",
+    "ru": "Чистая архитектура в .NET"
+  },
+  "shortDescription": {
+    "az": "Qatlar, asılılıq istiqaməti, SOLID prinsipləri və layihənin uzunmüddətli dayanıqlığı.",
+    "en": "Layers, direction of dependencies, SOLID principles and long-term maintainability.",
+    "ru": "Слои, направление зависимостей, принципы SOLID и долгосрочная поддерживаемость."
+  },
+  "description": {
+    "az": "Kurs kiçik layihənin niyə böyüdükcə idarəolunmaz hala düşdüyünü və bunun qarşısını necə almağı izah edir. Domain, Application, Infrastructure və Presentation qatlarını ayırırıq, asılılıqların istiqamətini idarə edirik və SOLID prinsiplərini real kodda tətbiq edirik.",
+    "en": "The course explains why a small project becomes unmanageable as it grows, and how to prevent that. We separate the Domain, Application, Infrastructure and Presentation layers, control the direction of dependencies and apply SOLID principles to real code.",
+    "ru": "Курс объясняет, почему маленький проект становится неуправляемым по мере роста и как этого избежать. Разделяем слои Domain, Application, Infrastructure и Presentation, управляем направлением зависимостей и применяем принципы SOLID к реальному коду."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "Qatları ayırmaq və asılılıqları içəriyə yönəltmək",
+      "Repository və Unit of Work şablonlarını yerində tətbiq etmək",
+      "SOLID prinsiplərini konkret nümunələrdə görmək",
+      "Arxitektura qərarlarını əsaslandırmağı bacarmaq"
+    ],
+    "en": [
+      "Separate layers and point dependencies inward",
+      "Apply the Repository and Unit of Work patterns where they belong",
+      "See SOLID principles on concrete examples",
+      "Be able to justify architectural decisions"
+    ],
+    "ru": [
+      "Разделять слои и направлять зависимости внутрь",
+      "Применять паттерны Repository и Unit of Work там, где они уместны",
+      "Видеть принципы SOLID на конкретных примерах",
+      "Уметь обосновывать архитектурные решения"
+    ]
+  },
+
+  "modules": [
+    {
+      "title": {
+        "az": "Qatlar və asılılıqlar",
+        "en": "Layers and Dependencies",
+        "ru": "Слои и зависимости"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Niyə tək layihə çatmır",
+            "en": "Why a single project is not enough",
+            "ru": "Почему одного проекта мало"
+          },
+          "content": {
+            "az": "<p>Bütün kodun bir layihədə olduğu halda controller birbaşa DbContext-i çağırır, biznes məntiqi hər yerə səpələnir və məntiqi bazasız test etmək mümkün olmur.</p><p>Qatlara bölmə bu üç problemi eyni anda həll edir.</p>",
+            "en": "<p>When all the code lives in one project, controllers call DbContext directly, business logic spreads everywhere and it becomes impossible to test that logic without a database.</p><p>Splitting into layers solves all three problems at once.</p>",
+            "ru": "<p>Когда весь код лежит в одном проекте, контроллеры дёргают DbContext напрямую, бизнес-логика расползается повсюду, и протестировать её без базы становится невозможно.</p><p>Разделение на слои решает все три проблемы сразу.</p>"
+          },
+          "durationMinutes": 14
+        },
+        {
+          "title": {
+            "az": "Asılılıq istiqaməti və Dependency Inversion",
+            "en": "Direction of dependencies and Dependency Inversion",
+            "ru": "Направление зависимостей и Dependency Inversion"
+          },
+          "content": {
+            "az": "<p>Əsas qayda: asılılıqlar həmişə içəriyə — domenə doğru yönəlir. Domain heç kimə istinad etmir.</p><p>Buna görə repozitori interfeysləri Domain-də elan olunur, tətbiqləri isə Infrastructure-də yerləşir: daxili qat xarici qatdan asılı olmadan onun imkanlarından istifadə edir.</p>",
+            "en": "<p>The core rule: dependencies always point inward, toward the domain. The Domain layer references nothing.</p><p>That is why repository interfaces are declared in Domain while their implementations live in Infrastructure: the inner layer uses outer capabilities without depending on them.</p>",
+            "ru": "<p>Главное правило: зависимости всегда направлены внутрь, к домену. Слой Domain не ссылается ни на кого.</p><p>Поэтому интерфейсы репозиториев объявляются в Domain, а их реализации живут в Infrastructure: внутренний слой пользуется внешними возможностями, не завися от них.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=dK4Yb6-LxAk",
+          "durationMinutes": 18
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Şablonlar və prinsiplər",
+        "en": "Patterns and Principles",
+        "ru": "Паттерны и принципы"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Repository və Unit of Work",
+            "en": "Repository and Unit of Work",
+            "ru": "Repository и Unit of Work"
+          },
+          "content": {
+            "az": "<p>Repozitori məlumat mənbəyinə girişi gizlədir, Unit of Work isə bir neçə dəyişikliyi tək tranzaksiyada yekunlaşdırır.</p><p>Yalnız generic repozitori yazmaq mənasızdır — dəyər konkret metodlardadır: <code>ExistsAsync(studentId, courseId)</code> kimi.</p>",
+            "en": "<p>A repository hides access to the data source, and Unit of Work commits several changes inside a single transaction.</p><p>Writing only a generic repository is pointless — the value is in concrete methods such as <code>ExistsAsync(studentId, courseId)</code>.</p>",
+            "ru": "<p>Репозиторий скрывает доступ к источнику данных, а Unit of Work фиксирует несколько изменений в одной транзакции.</p><p>Писать только generic-репозиторий бессмысленно — ценность в конкретных методах вроде <code>ExistsAsync(studentId, courseId)</code>.</p>"
+          },
+          "durationMinutes": 16
+        },
+        {
+          "title": {
+            "az": "SOLID prinsipləri praktikada",
+            "en": "SOLID principles in practice",
+            "ru": "Принципы SOLID на практике"
+          },
+          "content": {
+            "az": "<p>SRP — hər sinifin bir dəyişmə səbəbi olmalıdır. OCP — genişlənməyə açıq, dəyişikliyə bağlı. LSP — törəmə sinif baza sinifi əvəz edə bilməlidir. ISP — geniş interfeys əvəzinə bir neçə dar interfeys. DIP — abstraksiyalardan asılılıq.</p><p>Bu prinsiplər ayrı-ayrı qaydalar deyil: birlikdə onlar kodu dəyişikliyə davamlı edir.</p>",
+            "en": "<p>SRP — a class should have one reason to change. OCP — open for extension, closed for modification. LSP — a derived type must be usable in place of its base. ISP — several narrow interfaces instead of one wide one. DIP — depend on abstractions.</p><p>These are not five separate rules: together they make code resistant to change.</p>",
+            "ru": "<p>SRP — у класса должна быть одна причина для изменения. OCP — открыт для расширения, закрыт для модификации. LSP — наследник должен подходить вместо базового типа. ISP — несколько узких интерфейсов вместо одного широкого. DIP — зависимость от абстракций.</p><p>Это не пять отдельных правил: вместе они делают код устойчивым к изменениям.</p>"
+          },
+          "durationMinutes": 20,
+          "quiz": {
+            "title": "Clean Architecture and SOLID Quiz",
+            "description": "Layering, dependency direction, patterns and SOLID.",
+            "passingScore": 70,
+            "timeLimitMinutes": 18,
+            "questions": [
+              {
+                "text": "In Clean Architecture, which direction do dependencies point?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Inward, toward the domain layer",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Outward, toward the presentation layer",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "In both directions equally",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Toward the database layer",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Why are repository interfaces declared in the Domain layer?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "So the domain can define what it needs without depending on the implementation",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Because interfaces must always be in the smallest project",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Because EF Core requires it",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "To make the build faster",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does the Single Responsibility Principle state?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "A class should have only one reason to change",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A class should have only one method",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A method should have only one parameter",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A project should have only one class",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What problem does Unit of Work solve?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "It commits several related changes as one atomic transaction",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It caches query results in memory",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It generates DTOs automatically",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It replaces dependency injection",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which responsibilities belong in the Application layer rather than in a controller?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Checking that a student is enrolled before allowing a review",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Calculating a quiz score",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Choosing the HTTP status code to return",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Reading the route parameter from the URL",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does the Interface Segregation Principle recommend?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Several small, focused interfaces instead of one large one",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "One interface per project",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Avoiding interfaces altogether",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Putting every method into a base class",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Why should the Domain layer avoid referencing EF Core?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "So business rules can be tested without a database",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "So the persistence technology can be replaced without touching the domain",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Because EF Core is slow",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Because entities cannot have navigation properties otherwise",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "A controller action in a well-layered API should mostly do what?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Delegate to a service and translate the result into an HTTP response",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Contain the full business rule set for the feature",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Open a database transaction manually",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Map entities to SQL by hand",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

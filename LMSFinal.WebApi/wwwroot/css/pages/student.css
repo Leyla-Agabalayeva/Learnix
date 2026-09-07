@@ -1,0 +1,283 @@
+/* ============================================================================
+   Личный кабинет студента (раздел 26 ТЗ).
+   Общие стили для шести страниц: дашборд, мои курсы, избранное,
+   ведомость, сертификаты, профиль.
+   ========================================================================= */
+
+/* --- Приветствие ---------------------------------------------------------- */
+
+.dashboard-greeting {
+    margin-bottom: var(--space-6);
+}
+
+.dashboard-greeting h1 {
+    font-size: var(--text-3xl);
+}
+
+/* --- Блок «Продолжить обучение» -------------------------------------------
+   Главный элемент дашборда: студент заходит, чтобы продолжить, а не читать
+   статистику. Поэтому он идёт первым и визуально выделен.                */
+
+.continue-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-6);
+    align-items: center;
+    padding: var(--space-6);
+    background: linear-gradient(135deg, var(--color-primary-700), var(--color-secondary-600));
+    border-radius: var(--radius-xl);
+    color: #fff;
+}
+
+.continue-card h2,
+.continue-card h3 {
+    color: #fff;
+}
+
+.continue-thumb {
+    height: 120px;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+
+.continue-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.continue-progress {
+    height: 8px;
+    margin-top: var(--space-3);
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.continue-progress-bar {
+    height: 100%;
+    background-color: #fff;
+    border-radius: var(--radius-full);
+}
+
+.continue-card .btn-primary {
+    background-color: #fff;
+    color: var(--color-primary-700);
+}
+
+.continue-card .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-800);
+}
+
+/* --- Карточка курса с прогрессом ---------------------------------------------
+   На «Моих курсах» карточка каталога дополняется полосой прогресса —
+   это то, ради чего студент сюда заходит.                                 */
+
+.enrolled-progress {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+}
+
+.enrolled-progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+/* --- Вкладки-фильтры ---------------------------------------------------------- */
+
+.tabs {
+    display: flex;
+    gap: var(--space-1);
+    padding: var(--space-1);
+    margin-bottom: var(--space-6);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-lg);
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.tab {
+    padding: var(--space-2) var(--space-4);
+    background: none;
+    border: 0;
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.tab:hover {
+    color: var(--color-slate-900);
+}
+
+.tab.is-active {
+    background-color: var(--color-surface);
+    color: var(--color-accent);
+    box-shadow: var(--shadow-xs);
+}
+
+/* --- Сертификат ----------------------------------------------------------------- */
+
+.certificate-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-5);
+    align-items: center;
+    padding: var(--space-5);
+    background-color: var(--color-surface);
+    /* Двойная рамка и лента намекают на «документ», а не на обычную карточку. */
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-star);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-4);
+}
+
+.certificate-seal {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-star), #fbbf24);
+    border-radius: var(--radius-full);
+    font-size: var(--text-2xl);
+}
+
+.certificate-number {
+    display: inline-block;
+    margin-top: var(--space-1);
+    padding: 2px var(--space-2);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-slate-600);
+}
+
+/* --- Ведомость --------------------------------------------------------------------- */
+
+.score-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.score-bar {
+    width: 60px;
+    height: 6px;
+    background-color: var(--color-slate-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.score-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+/* --- Профиль ------------------------------------------------------------------------ */
+
+.profile-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+}
+
+.profile-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Сам кружок — отдельно от кнопки, чтобы значок камеры мог сидеть
+   поверх его края, а не обрезаться вместе с картинкой. */
+.profile-avatar-circle {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--color-primary-100);
+    border-radius: var(--radius-full);
+    color: var(--color-primary-700);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    transition: filter var(--transition-fast);
+}
+
+.profile-avatar:hover .profile-avatar-circle,
+.profile-avatar:focus-visible .profile-avatar-circle {
+    filter: brightness(0.9);
+}
+
+/* Значок камеры — маленький бейдж в уголке, как в мессенджерах,
+   а не тёмная плашка на весь кружок. */
+.profile-avatar-overlay {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    background-color: var(--color-primary-600);
+    color: #fff;
+    font-size: 13px;
+    border: 2px solid var(--color-surface);
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast);
+}
+
+.profile-avatar:hover .profile-avatar-overlay,
+.profile-avatar:focus-visible .profile-avatar-overlay {
+    transform: scale(1.1);
+}
+
+.profile-avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-form {
+    max-width: 560px;
+}
+
+@media (max-width: 700px) {
+    .continue-card {
+        grid-template-columns: 1fr;
+    }
+
+    .continue-thumb {
+        display: none;
+    }
+
+    .certificate-card {
+        grid-template-columns: auto 1fr;
+    }
+
+    /* Кнопка скачивания переезжает под текст, а не жмётся сбоку. */
+    .certificate-card > :last-child {
+        grid-column: 1 / -1;
+    }
+}

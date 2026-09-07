@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="nav.createCourse">Create Course — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/student.css">
+    <link rel="stylesheet" href="/css/pages/instructor.css">
+    <link rel="stylesheet" href="/css/pages/builder.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/instructor/create-course.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.createCourse">Kurs yarat</a>
+    <div id="navbar" data-active="my-courses"></div>
+
+    <div class="container page">
+        <div class="layout-with-sidebar">
+            <aside id="sidebar" data-active="my-courses"></aside>
+
+            <main id="main">
+                <header class="page-header">
+                    <div>
+                        <h1 class="page-title" data-i18n="builder.createTitle">Kurs yaratmaq</h1>
+                        <p class="page-subtitle" data-i18n="builder.createSubtitle"></p>
+                    </div>
+                </header>
+
+                <div class="card" style="max-width: 720px">
+                    <div class="card-body">
+                        <div class="auth-alert" id="form-error" role="alert"></div>
+
+                        <form id="course-form" novalidate>
+                            <h2 class="card-title mb-4" data-i18n="builder.basics">Kurs parametrləri</h2>
+
+                            <div class="flex gap-3 flex-wrap">
+                                <div class="field w-full">
+                                    <label class="field-label" for="categoryId"
+                                           data-i18n="builder.category">
+                                        Kateqoriya
+                                        <span class="required">*</span>
+                                    </label>
+                                    <select class="select" id="categoryId" name="categoryId" required>
+                                        <option value="" data-i18n="builder.selectCategory">Kateqoriya seçin…</option>
+                                    </select>
+                                    <p class="field-error hidden" id="categoryId-error"></p>
+                                </div>
+
+                                <div class="field w-full">
+                                    <label class="field-label" for="level"
+                                           data-i18n="builder.level">Səviyyə</label>
+                                    <select class="select" id="level" name="level">
+                                        <option value="Beginner" data-i18n="course.levelBeginner">Başlanğıc</option>
+                                        <option value="Intermediate" data-i18n="course.levelIntermediate">Orta</option>
+                                        <option value="Advanced" data-i18n="course.levelAdvanced">Qabaqcıl</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3 flex-wrap">
+                                <div class="field w-full">
+                                    <label class="field-label" for="price"
+                                           data-i18n="builder.price">Qiymət</label>
+                                    <input class="input" id="price" name="price" type="number"
+                                           min="0" step="0.01" value="0" aria-describedby="price-error">
+                                    <p class="field-error hidden" id="price-error"></p>
+                                </div>
+
+                                <div class="field w-full">
+                                    <label class="field-label" for="durationMinutes"
+                                           data-i18n="builder.duration">Müddət
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input class="input" id="durationMinutes" name="durationMinutes"
+                                           type="number" min="1" required aria-describedby="durationMinutes-error">
+                                    <p class="field-error hidden" id="durationMinutes-error"></p>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="field-label" data-i18n="builder.thumbnail">Örtük</label>
+                                <div class="thumbnail-picker">
+                                    <div class="thumbnail-preview" id="thumbnail-preview"></div>
+                                    <button class="btn btn-secondary btn-sm" type="button" id="thumbnail-upload"
+                                            data-i18n="builder.uploadThumbnail">Şəkil yüklə</button>
+                                </div>
+                                <input type="hidden" id="thumbnailUrl" name="thumbnailUrl">
+                                <p class="field-error hidden" id="thumbnailUrl-error"></p>
+                            </div>
+
+                            <hr>
+
+                            <h2 class="card-title mb-2" data-i18n="builder.content">Kurs məzmunu</h2>
+                            <p class="field-hint mb-4" data-i18n="builder.translationsHint"></p>
+
+                            <!-- Вкладки AZ / EN / RU собираются в translation-tabs.js -->
+                            <div id="translations"></div>
+
+                            <!--<div class="field">
+                                <label class="field-label" for="whatYouWillLearn"
+                                       data-i18n="builder.fieldLearn">Nə öyrənəcək</label>
+                                <textarea class="textarea" id="whatYouWillLearn"
+                                          aria-describedby="learn-hint"></textarea>
+                                <p class="field-hint" id="learn-hint" data-i18n="builder.fieldLearnHint"></p>
+                            </div>-->
+
+                            <div class="flex gap-3 mt-4">
+                                <button class="btn btn-primary" type="submit" id="submit"
+                                        data-i18n="actions.create">Yarat</button>
+                                <a class="btn btn-secondary" href="/pages/instructor/courses.html"
+                                   data-i18n="actions.cancel">Ləğv et</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

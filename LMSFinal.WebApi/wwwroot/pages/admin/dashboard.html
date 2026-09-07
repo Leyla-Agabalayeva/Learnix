@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="admin.title">Admin Panel — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/student.css">
+    <link rel="stylesheet" href="/css/pages/instructor.css">
+    <link rel="stylesheet" href="/css/pages/admin.css">
+    <script src="/js/vendor/chart.umd.min.js"></script>
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/admin/dashboard.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.dashboard">Panel</a>
+    <div id="navbar" data-active="dashboard"></div>
+
+    <div class="container page">
+        <div class="layout-with-sidebar">
+            <aside id="sidebar" data-active="dashboard"></aside>
+
+            <main id="main">
+                <header class="dashboard-greeting">
+                    <h1 id="greeting">—</h1>
+                    <p class="text-muted" data-i18n="admin.welcomeHint"></p>
+                </header>
+
+                <section class="grid-stats admin-stats-primary mb-4" id="stats-users"></section>
+                <section class="grid-stats admin-stats-secondary mb-8" id="stats-courses"></section>
+
+                <section class="admin-charts">
+                    <div class="card admin-chart-card admin-chart-wide">
+                        <div class="card-body">
+                            <h2 class="section-title" data-i18n="admin.chartSignups">Signups</h2>
+                            <canvas id="chart-signups" height="90"></canvas>
+                        </div>
+                    </div>
+                    <div class="card admin-chart-card">
+                        <div class="card-body">
+                            <h2 class="section-title" data-i18n="admin.chartCourseStatus">Course status</h2>
+                            <canvas id="chart-course-status" height="220"></canvas>
+                        </div>
+                    </div>
+                    <div class="card admin-chart-card">
+                        <div class="card-body">
+                            <h2 class="section-title" data-i18n="admin.chartUserRoles">User roles</h2>
+                            <canvas id="chart-user-roles" height="220"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="auth.register">Sign Up — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/auth.css">
+    <script type="module" src="/js/pages/register.js"></script>
+</head>
+<body>
+    <div class="auth-layout">
+        <section class="auth-form-side">
+            <div class="auth-box">
+                <!-- Логотип и переключатель языка в одной строке: навбара на этой
+                     странице нет, а сменить язык до входа нужно уметь. -->
+                <div class="auth-head">
+                    <a class="auth-brand" href="/">
+                        <span class="navbar-logo" aria-hidden="true">L</span>
+                        <span data-i18n="app.name">Learnix</span>
+                    </a>
+
+                    <!-- Собирается в js/components/language-switcher.js -->
+                    <div id="language-switcher"></div>
+                </div>
+
+                <h1 class="auth-title" data-i18n="auth.registerTitle">Hesab yaradın</h1>
+                <p class="auth-subtitle" data-i18n="auth.registerSubtitle"></p>
+
+                <div class="auth-alert" id="form-error" role="alert"></div>
+
+                <form id="register-form" novalidate>
+                    <!-- Роль первой: она определяет весь дальнейший опыт в системе. -->
+                    <div class="field">
+                        <span class="field-label" id="role-label" data-i18n="auth.role">Rol</span>
+                        <div class="role-options" role="radiogroup" aria-labelledby="role-label">
+                            <label class="role-option">
+                                <input type="radio" name="role" value="Student" checked>
+                                <span class="role-option-title" data-i18n="auth.roleStudent">Tələbə</span>
+                                <span class="role-option-hint" data-i18n="auth.roleStudentHint"></span>
+                            </label>
+                            <label class="role-option">
+                                <input type="radio" name="role" value="Instructor">
+                                <span class="role-option-title" data-i18n="auth.roleInstructor">Müəllim</span>
+                                <span class="role-option-hint" data-i18n="auth.roleInstructorHint"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <div class="field w-full">
+                            <label class="field-label" for="firstName" data-i18n="auth.firstName">Ad</label>
+                            <input class="input" id="firstName" name="firstName" type="text"
+                                   autocomplete="given-name" required aria-describedby="firstName-error">
+                            <p class="field-error hidden" id="firstName-error"></p>
+                        </div>
+
+                        <div class="field w-full">
+                            <label class="field-label" for="lastName" data-i18n="auth.lastName">Soyad</label>
+                            <input class="input" id="lastName" name="lastName" type="text"
+                                   autocomplete="family-name" required aria-describedby="lastName-error">
+                            <p class="field-error hidden" id="lastName-error"></p>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="email" data-i18n="auth.email">E-poçt</label>
+                        <input class="input" id="email" name="email" type="email"
+                               autocomplete="email" required aria-describedby="email-error">
+                        <p class="field-error hidden" id="email-error"></p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="password" data-i18n="auth.password">Şifrə</label>
+                        <input class="input" id="password" name="password" type="password"
+                               autocomplete="new-password" minlength="8" required
+                               aria-describedby="password-hint password-error">
+                        <p class="field-hint" id="password-hint" data-i18n="auth.passwordHint"></p>
+                        <p class="field-error hidden" id="password-error"></p>
+                    </div>
+
+                    <button class="btn btn-primary btn-block btn-lg mt-2" type="submit" id="submit"
+                            data-i18n="actions.createAccount">Hesab yarat</button>
+                </form>
+
+                <p class="auth-footer">
+                    <span data-i18n="auth.hasAccount">Artıq hesabınız var?</span>
+                    <a href="/pages/login.html" data-i18n="auth.login">Daxil ol</a>
+                </p>
+
+                <p class="auth-footer">
+                    <a href="/" data-i18n="auth.backToSite">Sayta qayıt</a>
+                </p>
+            </div>
+        </section>
+
+        <aside class="auth-info-side">
+            <h2 class="auth-info-title" data-i18n="auth.sidePanelTitle">Hamısı bir yerdə</h2>
+            <ul class="auth-info-list">
+                <li class="auth-info-item">
+                    <span class="auth-info-check" aria-hidden="true">✓</span>
+                    <span data-i18n="auth.sidePanelPoint1"></span>
+                </li>
+                <li class="auth-info-item">
+                    <span class="auth-info-check" aria-hidden="true">✓</span>
+                    <span data-i18n="auth.sidePanelPoint2"></span>
+                </li>
+                <li class="auth-info-item">
+                    <span class="auth-info-check" aria-hidden="true">✓</span>
+                    <span data-i18n="auth.sidePanelPoint3"></span>
+                </li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

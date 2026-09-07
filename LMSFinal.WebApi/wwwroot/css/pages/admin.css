@@ -1,0 +1,138 @@
+/* ============================================================================
+   Админ-панель.
+
+   Сознательно отличается от кабинетов студента/преподавателя только одним:
+   боковое меню — тёмно-фиолетовое (var(--color-primary-900/800)), а не белое.
+   Всё остальное — те же токены, те же компоненты (.table, .stat, .badge,
+   .btn), что и везде в приложении. Так админка выглядит как отдельная зона
+   ответственности, но остаётся частью той же дизайн-системы, а не смотрится
+   вставленным чужим шаблоном.
+   ========================================================================= */
+
+.sidebar-admin {
+    background: linear-gradient(180deg, var(--color-primary-900), var(--color-primary-800));
+    border: none;
+    border-radius: var(--radius-lg);
+}
+
+.sidebar-admin .sidebar-link {
+    color: var(--color-primary-200);
+}
+
+.sidebar-admin .sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.sidebar-admin .sidebar-link.is-active {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .sidebar-admin {
+        background: linear-gradient(90deg, var(--color-primary-900), var(--color-primary-800));
+    }
+}
+
+/* --- Верхние карточки статистики: разделены на два ряда (люди / контент),
+   первый ряд немного крупнее — это то, на что смотрят чаще всего. --------- */
+.admin-stats-primary .stat-value {
+    color: var(--color-primary-700);
+}
+
+:root[data-theme="dark"] .admin-stats-primary .stat-value {
+    color: var(--color-primary-300);
+}
+
+/* --- Панель поиска/фильтра над таблицами -------------------------------- */
+.admin-toolbar {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.admin-toolbar .input {
+    flex: 1 1 260px;
+}
+
+.admin-toolbar .select {
+    flex: 0 0 200px;
+}
+
+.select-sm {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-sm);
+}
+
+/* --- Превью обложки в таблице курсов: кликабельная миниатюра, открывающая
+   выбор файла — сама подсказывает, что по ней можно кликнуть. ------------- */
+.admin-course-thumb {
+    width: 64px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface-alt);
+    border: 1px dashed var(--color-border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color var(--transition-fast);
+}
+
+.admin-course-thumb:hover {
+    border-color: var(--color-accent);
+}
+
+.admin-course-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Графики на дашборде: линия по всей ширине сверху, два донат-чарта
+   рядом снизу — так же, как разложена статистика (общее / по категориям). */
+.admin-charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.admin-chart-wide {
+    grid-column: 1 / -1;
+}
+
+.admin-chart-card .section-title {
+    margin-bottom: var(--space-4);
+}
+
+.admin-chart-card canvas {
+    max-height: 260px;
+}
+
+@media (max-width: 700px) {
+    .admin-charts {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Баннеры карусели ----------------------------------------------------- */
+.admin-slides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-4);
+}
+
+.admin-slide-card img {
+    width: 100%;
+    aspect-ratio: 21 / 6;
+    object-fit: cover;
+}
+
+.admin-slide-link {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

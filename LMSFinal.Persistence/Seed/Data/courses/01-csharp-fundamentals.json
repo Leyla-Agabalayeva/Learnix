@@ -1,0 +1,570 @@
+﻿{
+  "categorySlug": "programming",
+  "instructorEmail": "instructor@lms.com",
+  "level": "Beginner",
+  "status": "Published",
+  "price": 39.99,
+  "thumbnailUrl": "/assets/courses/csharp-fundamentals.svg",
+  "createdDaysAgo": 150,
+  "title": {
+    "az": "C# Əsasları",
+    "en": "C# Fundamentals",
+    "ru": "Основы C#"
+  },
+  "shortDescription": {
+    "az": "Sıfırdan C# dilini öyrənin: dəyişənlər, şərtlər, dövrlər və obyekt yönümlü proqramlaşdırma.",
+    "en": "Learn C# from zero: variables, conditions, loops and object-oriented programming.",
+    "ru": "Изучите C# с нуля: переменные, условия, циклы и объектно-ориентированное программирование."
+  },
+  "description": {
+    "az": "Bu kurs .NET platformasında proqramlaşdırmaya başlamaq üçün lazım olan bütün əsasları əhatə edir. Sadə konsol tətbiqindən başlayaraq addım-addım tiplər sistemi, metodlar, siniflər və interfeyslərə keçirik. Hər modulun sonunda biliklərinizi yoxlamaq üçün test var.",
+    "en": "This course covers everything you need to start programming on the .NET platform. Starting from a simple console application, we move step by step through the type system, methods, classes and interfaces. Each module ends with a quiz so you can verify what you learned.",
+    "ru": "Курс охватывает всё необходимое, чтобы начать программировать на платформе .NET. Начиная с простого консольного приложения, мы шаг за шагом разбираем систему типов, методы, классы и интерфейсы. В конце каждого модуля — тест для проверки знаний."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      ".NET SDK quraşdırmaq və ilk konsol tətbiqini yaratmaq",
+      "Dəyişənlər, tiplər və tip çevrilmələri ilə işləmək",
+      "Şərtlər və dövrlərlə proqram məntiqini qurmaq",
+      "Sinif, obyekt və interfeys anlayışlarını tətbiq etmək"
+    ],
+    "en": [
+      "Install the .NET SDK and create your first console application",
+      "Work with variables, types and type conversions",
+      "Build program logic with conditions and loops",
+      "Apply classes, objects and interfaces in practice"
+    ],
+    "ru": [
+      "Установить .NET SDK и создать первое консольное приложение",
+      "Работать с переменными, типами и преобразованиями типов",
+      "Строить логику программы с помощью условий и циклов",
+      "Применять классы, объекты и интерфейсы на практике"
+    ]
+  },
+  "modules": [
+    {
+      "title": {
+        "az": "Başlanğıc",
+        "en": "Getting Started",
+        "ru": "Начало работы"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": ".NET nədir?",
+            "en": "What is .NET?",
+            "ru": "Что такое .NET?"
+          },
+          "content": {
+            "az": "<p>.NET — Microsoft tərəfindən hazırlanmış açıq mənbəli platformadır. C# kodu əvvəlcə IL adlanan aralıq dilə çevrilir, sonra isə işə salındığı zaman maşın koduna kompilyasiya olunur.</p><p>Bu yanaşma sayəsində eyni kod Windows, Linux və macOS üzərində işləyir.</p>",
+            "en": "<p>.NET is an open-source platform built by Microsoft. C# code is first compiled into an intermediate language called IL, and then translated into machine code at run time.</p><p>Thanks to this approach the same code runs on Windows, Linux and macOS.</p>",
+            "ru": "<p>.NET — это открытая платформа, созданная Microsoft. Код на C# сначала компилируется в промежуточный язык IL, а уже во время выполнения переводится в машинный код.</p><p>Благодаря этому один и тот же код работает на Windows, Linux и macOS.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=eIHKZfgddLM",
+          "durationMinutes": 9
+        },
+        {
+          "title": {
+            "az": "SDK quraşdırılması və ilk tətbiq",
+            "en": "Installing the SDK and your first app",
+            "ru": "Установка SDK и первое приложение"
+          },
+          "content": {
+            "az": "<p>SDK quraşdırıldıqdan sonra terminalda <code>dotnet new console</code> əmri ilə yeni layihə yaradılır, <code>dotnet run</code> ilə isə işə salınır.</p><p>Yaranan Program.cs faylı tətbiqin giriş nöqtəsidir.</p>",
+            "en": "<p>Once the SDK is installed, the command <code>dotnet new console</code> creates a new project and <code>dotnet run</code> starts it.</p><p>The generated Program.cs file is the entry point of the application.</p>",
+            "ru": "<p>После установки SDK команда <code>dotnet new console</code> создаёт новый проект, а <code>dotnet run</code> запускает его.</p><p>Созданный файл Program.cs — точка входа приложения.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=BM4CHBmAPh4",
+          "durationMinutes": 12
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Dil əsasları",
+        "en": "Language Basics",
+        "ru": "Основы языка"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Dəyişənlər və tiplər",
+            "en": "Variables and types",
+            "ru": "Переменные и типы"
+          },
+          "content": {
+            "az": "<p>C# statik tipli dildir: hər dəyişənin tipi kompilyasiya zamanı məlum olur. Əsas tiplər <code>int</code>, <code>double</code>, <code>bool</code> və <code>string</code>-dir.</p><p>Value tiplər dəyəri birbaşa saxlayır, reference tiplər isə obyektə istinad saxlayır — bu fərq sonrakı bütün mövzular üçün vacibdir.</p>",
+            "en": "<p>C# is a statically typed language: the type of every variable is known at compile time. The core types are <code>int</code>, <code>double</code>, <code>bool</code> and <code>string</code>.</p><p>Value types hold the value directly, while reference types hold a reference to an object — this distinction matters for every topic that follows.</p>",
+            "ru": "<p>C# — язык со статической типизацией: тип каждой переменной известен на этапе компиляции. Основные типы — <code>int</code>, <code>double</code>, <code>bool</code> и <code>string</code>.</p><p>Значимые типы хранят значение напрямую, ссылочные — ссылку на объект. Это различие важно для всех последующих тем.</p>"
+          },
+          "durationMinutes": 14
+        },
+        {
+          "title": {
+            "az": "Şərtlər və dövrlər",
+            "en": "Conditions and loops",
+            "ru": "Условия и циклы"
+          },
+          "content": {
+            "az": "<p><code>if</code>, <code>switch</code>, <code>for</code>, <code>while</code> və <code>foreach</code> konstruksiyaları proqramın idarəetmə axınını təşkil edir.</p><p>Kolleksiyalar üzərində gəzərkən <code>foreach</code> daha oxunaqlıdır və indeks səhvlərinin qarşısını alır.</p>",
+            "en": "<p>The <code>if</code>, <code>switch</code>, <code>for</code>, <code>while</code> and <code>foreach</code> constructs form the control flow of a program.</p><p>When iterating over collections, <code>foreach</code> is more readable and prevents off-by-one index errors.</p>",
+            "ru": "<p>Конструкции <code>if</code>, <code>switch</code>, <code>for</code>, <code>while</code> и <code>foreach</code> образуют поток управления программы.</p><p>При обходе коллекций <code>foreach</code> читается лучше и защищает от ошибок с индексами.</p>"
+          },
+          "durationMinutes": 16
+        },
+        {
+          "title": {
+            "az": "Metodlar və parametrlər",
+            "en": "Methods and parameters",
+            "ru": "Методы и параметры"
+          },
+          "content": {
+            "az": "<p>Metod təkrarlanan məntiqi bir ad altında birləşdirir. Parametrlər giriş məlumatını, qaytarılan dəyər isə nəticəni təmsil edir.</p><p>Eyni adlı, lakin fərqli parametrlərə malik metodlar yaratmaq mümkündür — buna overloading deyilir.</p>",
+            "en": "<p>A method groups repeated logic under a single name. Parameters represent the input, the return value represents the result.</p><p>You can define several methods with the same name but different parameters — this is called overloading.</p>",
+            "ru": "<p>Метод объединяет повторяющуюся логику под одним именем. Параметры — это входные данные, возвращаемое значение — результат.</p><p>Можно объявить несколько методов с одинаковым именем, но разными параметрами — это называется перегрузкой.</p>"
+          },
+          "durationMinutes": 13,
+          "quiz": {
+            "title": "C# Language Basics Quiz",
+            "description": "Check your understanding of types, control flow and methods.",
+            "passingScore": 60,
+            "timeLimitMinutes": 12,
+            "questions": [
+              {
+                "text": "Which statement about C# is correct?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "C# is statically typed — variable types are known at compile time",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "C# is dynamically typed — types are resolved only at run time",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "C# has no type system at all",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Types in C# exist only inside classes",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What is the default value of an uninitialized int field in a class?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "0",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "null",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "-1",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It causes a compilation error",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which of the following are value types in C#?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "int",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "bool",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "string",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "object",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which loop is the most appropriate for iterating over all items of a List<T>?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "foreach",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "goto",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "do-while with a manual counter",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "switch",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does method overloading mean?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Several methods share a name but differ in parameters",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A method calls itself recursively",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A method is marked with the override keyword",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A method has more than ten parameters",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which keyword makes a method return no value?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "void",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "null",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "empty",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "none",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which statements about string in C# are true?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "string is a reference type",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "string instances are immutable",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "string is stored on the stack like int",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Modifying a string changes it in place",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What is the result of the expression 7 / 2 when both operands are int?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "3",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "3.5",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "4",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A compilation error",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Obyekt yönümlü proqramlaşdırma",
+        "en": "Object-Oriented Programming",
+        "ru": "Объектно-ориентированное программирование"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Siniflər və obyektlər",
+            "en": "Classes and objects",
+            "ru": "Классы и объекты"
+          },
+          "content": {
+            "az": "<p>Sinif obyektin şablonudur: hansı məlumatı saxlayacağını (sahələr və xassələr) və nə edə biləcəyini (metodlar) təsvir edir.</p><p>Obyekt isə həmin şablon əsasında yaradılmış konkret nüsxədir.</p>",
+            "en": "<p>A class is a blueprint for an object: it describes what data it holds (fields and properties) and what it can do (methods).</p><p>An object is a concrete instance created from that blueprint.</p>",
+            "ru": "<p>Класс — это шаблон объекта: он описывает, какие данные объект хранит (поля и свойства) и что он умеет (методы).</p><p>Объект — конкретный экземпляр, созданный по этому шаблону.</p>"
+          },
+          "durationMinutes": 15,
+          "resources": [
+            {
+              "languageCode": "RU",
+              "fileName": "Какую коллекцию выбрать.md",
+              "fileUrl": "/assets/materials/csharp-collections-guide.ru.md",
+              "fileType": "md"
+            },
+            {
+              "languageCode": "EN",
+              "fileName": "Choosing a collection.md",
+              "fileUrl": "/assets/materials/csharp-collections-guide.en.md",
+              "fileType": "md"
+            },
+            {
+              "languageCode": "AZ",
+              "fileName": "Kolleksiya seçimi.md",
+              "fileUrl": "/assets/materials/csharp-collections-guide.en.md",
+              "fileType": "md"
+            }
+          ]
+        },
+        {
+          "title": {
+            "az": "İrsiyyət və interfeyslər",
+            "en": "Inheritance and interfaces",
+            "ru": "Наследование и интерфейсы"
+          },
+          "content": {
+            "az": "<p>İrsiyyət sinifə başqa sinifin davranışını genişləndirməyə imkan verir. İnterfeys isə yalnız müqaviləni — hansı metodların olmalı olduğunu — təyin edir.</p><p>C#-da sinif yalnız bir sinifdən miras ala bilər, lakin istənilən sayda interfeys tətbiq edə bilər.</p>",
+            "en": "<p>Inheritance lets a class extend the behaviour of another class. An interface defines only a contract — which members must exist.</p><p>In C# a class can inherit from a single class but can implement any number of interfaces.</p>",
+            "ru": "<p>Наследование позволяет классу расширять поведение другого класса. Интерфейс же задаёт только контракт — какие члены должны быть реализованы.</p><p>В C# класс наследуется лишь от одного класса, но может реализовать сколько угодно интерфейсов.</p>"
+          },
+          "durationMinutes": 18,
+          "quiz": {
+            "title": "Object-Oriented Programming Quiz",
+            "description": "Classes, inheritance, interfaces and encapsulation.",
+            "passingScore": 65,
+            "timeLimitMinutes": 15,
+            "questions": [
+              {
+                "text": "How many base classes can a C# class inherit from directly?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Exactly one",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Any number",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Up to three",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "None — C# has no inheritance",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "How many interfaces can a single class implement?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Any number",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Exactly one",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "At most two",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Only if it has no base class",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What is encapsulation?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Hiding internal state and exposing it only through a controlled interface",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Creating several methods with the same name",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Copying a class into another project",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Storing all fields as public by default",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which keyword allows a derived class to provide its own implementation of a virtual method?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "override",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "overload",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "sealed",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "static",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which statements about an abstract class are true?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "It cannot be instantiated directly",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It can contain both abstract and implemented members",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It can implement interfaces",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It must have at least one abstract method",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does polymorphism let you do?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Treat objects of different derived types through a common base type",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Store several values in one variable at the same time",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Convert any type into a string automatically",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Run methods in parallel",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which access modifier makes a member visible only inside its own class?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "private",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "protected",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "internal",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "public",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which of these are valid reasons to prefer an interface over an abstract class?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "A type needs to satisfy several unrelated contracts",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "You only need to describe a contract, not share implementation",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "You want to store instance fields in the contract",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "You want to force a single inheritance chain",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

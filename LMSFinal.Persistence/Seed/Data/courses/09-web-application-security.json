@@ -1,0 +1,310 @@
+﻿{
+  "categorySlug": "cybersecurity",
+  "instructorEmail": "rashad.instructor@lms.com",
+  "level": "Advanced",
+  "status": "Draft",
+  "price": 74.99,
+  "thumbnailUrl": "/assets/courses/web-application-security.svg",
+  "createdDaysAgo": 12,
+
+  "title": {
+    "az": "Veb Tətbiqlərin Təhlükəsizliyi",
+    "en": "Web Application Security",
+    "ru": "Безопасность веб-приложений"
+  },
+  "shortDescription": {
+    "az": "OWASP Top 10, autentifikasiya səhvləri, inyeksiyalar və təhlükəsiz kodlaşdırma vərdişləri.",
+    "en": "OWASP Top 10, authentication mistakes, injection attacks and secure coding habits.",
+    "ru": "OWASP Top 10, ошибки аутентификации, инъекции и привычки безопасного программирования."
+  },
+  "description": {
+    "az": "Hazırlanma mərhələsindədir — kurs hələ dərc olunmayıb və kataloqda görünmür. Materialda ən çox rast gəlinən zəifliklər, onların real nümunələri və müdafiə üsulları toplanır.",
+    "en": "Work in progress — the course is not published yet and does not appear in the catalogue. The material collects the most common vulnerabilities, real examples of them and the corresponding defences.",
+    "ru": "В процессе подготовки — курс ещё не опубликован и не отображается в каталоге. Материал собирает самые частые уязвимости, реальные примеры и способы защиты."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "OWASP Top 10 zəifliklərini tanımaq",
+      "Sorğu parametrlərinə etibar etməməyi vərdiş etmək",
+      "Autentifikasiya və avtorizasiya səhvlərini ayırd etmək",
+      "Təhlükəsizlik baxışını kod nəzərdən keçirməsinə daxil etmək"
+    ],
+    "en": [
+      "Recognise the OWASP Top 10 vulnerabilities",
+      "Build the habit of never trusting request input",
+      "Tell authentication and authorization flaws apart",
+      "Make a security pass part of code review"
+    ],
+    "ru": [
+      "Распознавать уязвимости из OWASP Top 10",
+      "Выработать привычку не доверять входным данным",
+      "Различать ошибки аутентификации и авторизации",
+      "Встроить проверку безопасности в code review"
+    ]
+  },
+
+  "modules": [
+    {
+      "title": {
+        "az": "Giriş məlumatlarına etibar etməmək",
+        "en": "Never Trust Input",
+        "ru": "Не доверяй входным данным"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "SQL inyeksiyası",
+            "en": "SQL injection",
+            "ru": "SQL-инъекция"
+          },
+          "content": {
+            "az": "<p>SQL inyeksiyası istifadəçi mətninin sorğuya birbaşa yapışdırılmasından yaranır. Parametrləşdirilmiş sorğular və ORM bu problemi kökündən həll edir.</p><p>ORM istifadə edərkən də diqqətli olmaq lazımdır: xam SQL üçün sətir birləşdirmək eyni zəifliyi geri qaytarır.</p>",
+            "en": "<p>SQL injection comes from pasting user text straight into a query. Parameterised queries and an ORM remove the problem at its root.</p><p>Even with an ORM you must stay careful: concatenating strings for raw SQL brings the same vulnerability right back.</p>",
+            "ru": "<p>SQL-инъекция возникает, когда пользовательский текст подставляется прямо в запрос. Параметризованные запросы и ORM решают проблему в корне.</p><p>Но и с ORM нужно быть внимательным: склейка строк для сырого SQL возвращает ту же уязвимость.</p>"
+          },
+          "durationMinutes": 16
+        },
+        {
+          "title": {
+            "az": "XSS və çıxışın kodlaşdırılması",
+            "en": "XSS and output encoding",
+            "ru": "XSS и экранирование вывода"
+          },
+          "content": {
+            "az": "<p>XSS zamanı istifadəçinin göndərdiyi mətn səhifədə skript kimi işə düşür. Müdafiə — çıxışı kodlaşdırmaq və <code>innerHTML</code>-dən qaçmaq.</p><p>Content Security Policy əlavə qat yaradır: icazəsiz mənbədən skript yüklənməsinin qarşısını alır.</p>",
+            "en": "<p>In an XSS attack, text submitted by a user is executed as a script on the page. The defence is to encode output and avoid <code>innerHTML</code>.</p><p>A Content Security Policy adds another layer: it blocks scripts loaded from sources you did not allow.</p>",
+            "ru": "<p>При XSS текст, отправленный пользователем, выполняется на странице как скрипт. Защита — экранировать вывод и не использовать <code>innerHTML</code>.</p><p>Content Security Policy добавляет ещё один слой: блокирует скрипты из источников, которые вы не разрешали.</p>"
+          },
+          "durationMinutes": 15
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Autentifikasiya və avtorizasiya",
+        "en": "Authentication and Authorization",
+        "ru": "Аутентификация и авторизация"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Parollar və token-lər",
+            "en": "Passwords and tokens",
+            "ru": "Пароли и токены"
+          },
+          "content": {
+            "az": "<p>Parollar heç vaxt açıq şəkildə saxlanılmır — yalnız duz ilə güclü hash. JWT isə imzalanır, şifrələnmir: payload-a gizli məlumat yazmaq olmaz.</p><p>Token-in ömrü qısa olmalıdır, uzunmüddətli giriş üçün refresh token istifadə olunur.</p>",
+            "en": "<p>Passwords are never stored in clear text — only as a strong salted hash. A JWT is signed, not encrypted: secrets must never go into the payload.</p><p>Token lifetime should be short, with a refresh token used for long-lived sessions.</p>",
+            "ru": "<p>Пароли никогда не хранятся в открытом виде — только сильный хеш с солью. JWT подписан, но не зашифрован: секреты в payload класть нельзя.</p><p>Время жизни токена должно быть коротким, а для долгих сессий используется refresh-токен.</p>"
+          },
+          "durationMinutes": 18
+        },
+        {
+          "title": {
+            "az": "Sahiblik yoxlaması (IDOR)",
+            "en": "Ownership checks (IDOR)",
+            "ru": "Проверка владения (IDOR)"
+          },
+          "content": {
+            "az": "<p>Ən çox buraxılan səhv: istifadəçinin autentifikasiyadan keçdiyini yoxlamaq, lakin resursun məhz ona aid olduğunu yoxlamamaq.</p><p>Nəticədə <code>/api/certificates/{id}</code> sorğusunda id-ni dəyişməklə başqasının sertifikatını almaq mümkün olur. Hər sorğuda sahiblik ayrıca yoxlanılmalıdır.</p>",
+            "en": "<p>The most commonly missed check: verifying that the user is authenticated, but not that the resource actually belongs to them.</p><p>As a result, changing the id in <code>/api/certificates/{id}</code> returns someone else's certificate. Ownership must be verified on every request.</p>",
+            "ru": "<p>Самая часто пропускаемая проверка: убедиться, что пользователь аутентифицирован, но не проверить, что ресурс принадлежит именно ему.</p><p>В итоге подмена id в <code>/api/certificates/{id}</code> отдаёт чужой сертификат. Владение нужно проверять в каждом запросе.</p>"
+          },
+          "durationMinutes": 17,
+          "quiz": {
+            "title": "Web Application Security Quiz",
+            "description": "Injection, XSS, authentication and ownership checks.",
+            "passingScore": 70,
+            "timeLimitMinutes": 16,
+            "questions": [
+              {
+                "text": "What is the most reliable defence against SQL injection?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Parameterised queries instead of string concatenation",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Removing single quotes from user input",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Hiding SQL errors from the response",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Renaming database tables",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Is the payload of a JWT encrypted?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "No — it is only signed and can be decoded by anyone",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Yes, with the server key",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Yes, but only the claims section",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It depends on the algorithm used",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What is an IDOR vulnerability?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Accessing another user's resource by changing an identifier in the request",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Injecting script into a page",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Guessing a password by brute force",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Sending too many requests at once",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "How should passwords be stored?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "As a salted hash produced by a slow, purpose-built algorithm",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Encrypted with a symmetric key kept in the config",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "As plain text in a protected table",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "As an MD5 hash without salt",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which measures reduce the impact of XSS?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Encoding user content before inserting it into the page",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A Content Security Policy header",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Storing the JWT in a plain global variable",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Disabling HTTPS to simplify debugging",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Why must a quiz score never be calculated on the client?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Anything sent by the client can be modified before it reaches the server",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "JavaScript cannot perform arithmetic reliably",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It would make the page slower",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Browsers block score calculations",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which response is better when a user requests a resource they are not allowed to even know exists?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "404 Not Found, so the existence of the resource is not confirmed",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "403 Forbidden with the resource owner's name",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "200 OK with an empty body",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "500 Internal Server Error",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which of these belong in secrets management rather than in appsettings committed to git?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "The JWT signing key",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A database password",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The token issuer name",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The default page size for the catalogue",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

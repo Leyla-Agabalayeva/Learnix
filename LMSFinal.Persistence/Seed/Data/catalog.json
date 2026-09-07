@@ -1,0 +1,168 @@
+{
+  "categories": [
+    {
+      "slug": "programming",
+      "iconUrl": "/assets/icons/programming.svg",
+      "name": { "az": "Proqramlaşdırma", "en": "Programming", "ru": "Программирование" },
+      "description": {
+        "az": "Proqramlaşdırmanın əsasları, alqoritmlər və dil sintaksisi.",
+        "en": "Programming fundamentals, algorithms and language syntax.",
+        "ru": "Основы программирования, алгоритмы и синтаксис языков."
+      }
+    },
+    {
+      "slug": "backend",
+      "iconUrl": "/assets/icons/backend.svg",
+      "name": { "az": "Backend", "en": "Backend", "ru": "Backend" },
+      "description": {
+        "az": "Server tərəfi tətbiqlər, API-lar və biznes məntiqi.",
+        "en": "Server-side applications, APIs and business logic.",
+        "ru": "Серверные приложения, API и бизнес-логика."
+      }
+    },
+    {
+      "slug": "frontend",
+      "iconUrl": "/assets/icons/frontend.svg",
+      "name": { "az": "Frontend", "en": "Frontend", "ru": "Frontend" },
+      "description": {
+        "az": "Brauzerdə işləyən interfeyslər: HTML, CSS və JavaScript.",
+        "en": "Interfaces that run in the browser: HTML, CSS and JavaScript.",
+        "ru": "Интерфейсы, работающие в браузере: HTML, CSS и JavaScript."
+      }
+    },
+    {
+      "slug": "web-development",
+      "iconUrl": "/assets/icons/web.svg",
+      "name": { "az": "Veb Proqramlaşdırma", "en": "Web Development", "ru": "Веб-разработка" },
+      "description": {
+        "az": "Tam veb tətbiqlərinin qurulması — frontend və backend birlikdə.",
+        "en": "Building complete web applications — frontend and backend together.",
+        "ru": "Создание полноценных веб-приложений — фронтенд и бэкенд вместе."
+      }
+    },
+    {
+      "slug": "database",
+      "iconUrl": "/assets/icons/database.svg",
+      "name": { "az": "Verilənlər Bazası", "en": "Database", "ru": "Базы данных" },
+      "description": {
+        "az": "Məlumatların saxlanması, SQL sorğuları və verilənlər bazası dizaynı.",
+        "en": "Data storage, SQL queries and database design.",
+        "ru": "Хранение данных, SQL-запросы и проектирование баз данных."
+      }
+    },
+    {
+      "slug": "ai",
+      "iconUrl": "/assets/icons/ai.svg",
+      "name": { "az": "Süni İntellekt", "en": "Artificial Intelligence", "ru": "Искусственный интеллект" },
+      "description": {
+        "az": "Maşın öyrənməsi, model hazırlanması və praktik tətbiqlər.",
+        "en": "Machine learning, model training and practical applications.",
+        "ru": "Машинное обучение, обучение моделей и практическое применение."
+      }
+    },
+    {
+      "slug": "cybersecurity",
+      "iconUrl": "/assets/icons/security.svg",
+      "name": { "az": "Kibertəhlükəsizlik", "en": "Cybersecurity", "ru": "Кибербезопасность" },
+      "description": {
+        "az": "Tətbiqlərin qorunması, zəifliklər və təhlükəsiz kodlaşdırma.",
+        "en": "Application protection, vulnerabilities and secure coding.",
+        "ru": "Защита приложений, уязвимости и безопасное программирование."
+      }
+    },
+    {
+      "slug": "design",
+      "iconUrl": "/assets/icons/design.svg",
+      "name": { "az": "Dizayn", "en": "Design", "ru": "Дизайн" },
+      "description": {
+        "az": "İstifadəçi interfeysi, UX prinsipləri və vizual dizayn.",
+        "en": "User interface, UX principles and visual design.",
+        "ru": "Пользовательский интерфейс, принципы UX и визуальный дизайн."
+      }
+    },
+    {
+      "slug": "business",
+      "iconUrl": "/assets/icons/business.svg",
+      "name": { "az": "Biznes", "en": "Business", "ru": "Бизнес" },
+      "description": {
+        "az": "Layihə idarəetməsi, komanda işi və məhsul inkişafı.",
+        "en": "Project management, teamwork and product development.",
+        "ru": "Управление проектами, работа в команде и развитие продукта."
+      }
+    },
+    {
+      "slug": "languages",
+      "iconUrl": "/assets/icons/languages.svg",
+      "name": { "az": "Dillər", "en": "Languages", "ru": "Языки" },
+      "description": {
+        "az": "Peşəkar ünsiyyət üçün xarici dil bacarıqları.",
+        "en": "Foreign language skills for professional communication.",
+        "ru": "Навыки иностранного языка для профессионального общения."
+      }
+    }
+  ],
+
+  "instructors": [
+    {
+      "email": "instructor@lms.com",
+      "firstName": "Elvin",
+      "lastName": "Məmmədov",
+      "bio": "Senior .NET developer with 9 years of experience building enterprise web applications. Teaches backend development and clean architecture.",
+      "avatarUrl": "/assets/avatars/instructor-1.svg"
+    },
+    {
+      "email": "nigar.instructor@lms.com",
+      "firstName": "Nigar",
+      "lastName": "Əliyeva",
+      "bio": "Frontend engineer and UI designer. Focuses on accessible interfaces, responsive layouts and design systems.",
+      "avatarUrl": "/assets/avatars/instructor-2.svg"
+    },
+    {
+      "email": "rashad.instructor@lms.com",
+      "firstName": "Rəşad",
+      "lastName": "Hüseynov",
+      "bio": "Data engineer and security practitioner. Works with SQL Server, data pipelines and application security reviews.",
+      "avatarUrl": "/assets/avatars/instructor-3.svg"
+    }
+  ],
+
+  "students": [
+    {
+      "email": "student@lms.com",
+      "firstName": "Leyla",
+      "lastName": "Ağabalayeva",
+      "avatarUrl": "/assets/avatars/student-1.svg",
+      "isPrimaryDemo": true
+    },
+    {
+      "email": "kamran.student@lms.com",
+      "firstName": "Kamran",
+      "lastName": "Quliyev",
+      "avatarUrl": "/assets/avatars/student-2.svg"
+    },
+    {
+      "email": "aysel.student@lms.com",
+      "firstName": "Aysel",
+      "lastName": "Rəhimova",
+      "avatarUrl": "/assets/avatars/student-3.svg"
+    },
+    {
+      "email": "orkhan.student@lms.com",
+      "firstName": "Orxan",
+      "lastName": "Səfərov",
+      "avatarUrl": "/assets/avatars/student-4.svg"
+    },
+    {
+      "email": "sabina.student@lms.com",
+      "firstName": "Sabina",
+      "lastName": "Cəfərova",
+      "avatarUrl": "/assets/avatars/student-5.svg"
+    },
+    {
+      "email": "tural.student@lms.com",
+      "firstName": "Tural",
+      "lastName": "Bayramov",
+      "avatarUrl": "/assets/avatars/student-6.svg"
+    }
+  ]
+}

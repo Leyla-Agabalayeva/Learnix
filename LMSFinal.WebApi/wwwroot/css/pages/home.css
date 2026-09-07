@@ -1,0 +1,599 @@
+/* ============================================================================
+   Лендинг (раздел 24 ТЗ) + карточка курса (раздел 25).
+   Подключается только на index.html поверх main.css.
+   ========================================================================= */
+
+/* --- Карусель баннеров (управляется из админ-панели) ---------------------- */
+
+.carousel {
+    position: relative;
+    margin-top: var(--space-8);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background-color: var(--color-surface-alt);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform var(--transition-slow);
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    aspect-ratio: 21 / 6;
+    display: block;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-slate-800);
+    font-size: var(--text-xl);
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+
+.carousel-arrow:hover {
+    background: #ffffff;
+}
+
+.carousel-arrow-prev {
+    left: var(--space-4);
+}
+
+.carousel-arrow-next {
+    right: var(--space-4);
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: var(--space-4);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--space-2);
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+}
+
+.carousel-dot.is-active {
+    background: #ffffff;
+    width: 20px;
+}
+
+@media (max-width: 700px) {
+    .carousel-slide {
+        aspect-ratio: 16 / 9;
+    }
+
+    .carousel-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: var(--text-lg);
+    }
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+
+.hero {
+    position: relative;
+    padding-block: var(--space-20) var(--space-16);
+    background:
+        radial-gradient(900px 400px at 15% -10%, var(--color-hero-glow-1), transparent 60%),
+        radial-gradient(700px 380px at 90% 0%, var(--color-hero-glow-2), transparent 55%),
+        var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+    gap: var(--space-12);
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+}
+
+.hero-title {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+/* Вторая строка заголовка — градиентом, чтобы hero не был плоским. */
+.hero-title .accent {
+    background: linear-gradient(120deg, var(--color-primary-600), var(--color-secondary-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-text {
+    max-width: 52ch;
+    margin-top: var(--space-5);
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+}
+
+/* Правая колонка: декоративная стопка карточек. Помечена aria-hidden —
+   для скринридера это шум, содержательной информации в ней нет. */
+.hero-visual {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.hero-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+    /* По умолчанию карточка 2 (Прогресс) — по центру и спереди,
+   1 и 3 — сдвинуты по бокам и чуть позади. */
+    .hero-card:nth-child(1) {
+        transform: translateX(var(--space-6)) scale(0.97);
+        z-index: 1;
+    }
+
+    .hero-card:nth-child(2) {
+        transform: translateX(0) scale(1);
+        z-index: 2;
+    }
+
+    .hero-card:nth-child(3) {
+        transform: translateX(var(--space-8)) scale(0.97);
+        z-index: 1;
+    }
+
+    .hero-card:hover {
+        box-shadow: var(--shadow-lg);
+    }
+
+/* При наведении на карточку 1 — она выходит в центр, а Прогресс уезжает
+   на её прежнее место. */
+.hero-visual:has(.hero-card:nth-child(1):hover) .hero-card:nth-child(1) {
+    transform: translateX(0) scale(1.05);
+    z-index: 3;
+}
+
+.hero-visual:has(.hero-card:nth-child(1):hover) .hero-card:nth-child(2) {
+    transform: translateX(var(--space-6)) scale(0.97);
+    z-index: 1;
+}
+
+/* При наведении на карточку 3 (Сертификаты) — то же самое, но с другой стороны. */
+.hero-visual:has(.hero-card:nth-child(3):hover) .hero-card:nth-child(3) {
+    transform: translateX(0) scale(1.05);
+    z-index: 3;
+}
+
+.hero-visual:has(.hero-card:nth-child(3):hover) .hero-card:nth-child(2) {
+    transform: translateX(var(--space-8)) scale(0.97);
+    z-index: 1;
+}
+
+.hero-card-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background-color: var(--color-accent-subtle);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-xl);
+}
+
+/* --- Полоса статистики ---------------------------------------------------- */
+
+.stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-4);
+    padding: var(--space-8) 0;
+}
+
+.stats-strip .stat {
+    text-align: center;
+    border: 0;
+    background: none;
+}
+
+/* --- Секции --------------------------------------------------------------- */
+
+.section {
+    padding-block: var(--space-12);
+}
+
+.section-alt {
+    background-color: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+}
+
+.section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+}
+
+.section-title {
+    font-size: var(--text-3xl);
+}
+
+.section-text {
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
+}
+
+/* --- Категории ------------------------------------------------------------ */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-4);
+}
+
+.category-tile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-slate-700);
+    text-decoration: none;
+    transition: border-color var(--transition-fast), transform var(--transition-fast),
+                box-shadow var(--transition-fast);
+}
+
+.category-tile:hover {
+    border-color: var(--color-primary-300);
+    color: var(--color-accent);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.category-tile-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: var(--color-accent-subtle);
+    border-radius: var(--radius-md);
+    font-size: var(--text-lg);
+}
+
+.category-tile-name {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+}
+
+/* --- Карточка курса (раздел 25 ТЗ) ---------------------------------------- */
+
+.course-card-thumb {
+    position: relative;
+    height: 152px;
+    /* Градиент виден, когда картинки нет или путь битый — вместо серой заглушки. */
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-secondary-500));
+}
+
+.course-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Сердечко «в избранное» — поверх обложки, в углу, противоположном бейджу
+   статуса, чтобы они никогда не наложились. */
+.course-card-wishlist {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+
+    /* 40px — минимальная цель нажатия пальцем; сам символ мельче. */
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: var(--text-xl);
+    line-height: 1;
+
+    /* Полупрозрачная подложка: обложки бывают и светлые, и тёмные,
+       и на голом градиенте контур сердца местами пропадал. */
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-slate-600);
+    box-shadow: var(--shadow-sm);
+
+    transition: transform 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.course-card-wishlist:hover {
+    background: #ffffff;
+    color: var(--color-danger);
+    transform: scale(1.08);
+}
+
+.course-card-wishlist.is-active {
+    color: var(--color-danger);
+}
+
+.course-card-wishlist:disabled {
+    opacity: 0.6;
+    cursor: progress;
+}
+
+/* Клавиатурный фокус должен быть виден на любой обложке. */
+.course-card-wishlist:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* На узких экранах сердечко — цель для пальца, а не для курсора. */
+@media (max-width: 600px) {
+    .course-card-wishlist {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .course-card-wishlist {
+        transition: none;
+    }
+
+    .course-card-wishlist:hover {
+        transform: none;
+    }
+}
+
+.course-card-status {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+}
+
+/* «Лидер продаж» — противоположный угол от бейджа статуса и сердечка,
+   тёмная плашка поверх любой обложки читается лучше, чем цветной badge. */
+.course-card-bestseller {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    background: var(--color-slate-900);
+    color: #ffffff;
+    font-weight: var(--weight-semibold);
+    box-shadow: var(--shadow-sm);
+}
+
+.course-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--space-3);
+    padding: var(--space-5);
+}
+
+.course-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.course-card-title {
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+}
+
+.course-card-title a {
+    color: var(--color-slate-900);
+    text-decoration: none;
+}
+
+.course-card-title a:hover {
+    color: var(--color-accent);
+}
+
+/* Описание обрезается тремя строками, иначе карточки в сетке разной высоты. */
+.course-card-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.course-card-instructor {
+    font-size: var(--text-sm);
+    color: var(--color-slate-600);
+}
+
+.course-card-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+}
+
+.course-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    /* Прижимает цену и кнопку к низу карточки при разной длине описания. */
+    margin-top: auto;
+    padding-top: var(--space-3);
+}
+
+.course-card-price {
+    font-size: var(--text-lg);
+    color: var(--color-slate-900);
+}
+
+/* --- Как это работает ------------------------------------------------------ */
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-6);
+    counter-reset: step;
+}
+
+.step {
+    position: relative;
+    padding: var(--space-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+}
+
+.step::before {
+    counter-increment: step;
+    content: counter(step);
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-primary-600), var(--color-secondary-500));
+    border-radius: var(--radius-full);
+    color: #fff;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+}
+
+.step-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+}
+
+.step-text {
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+/* --- CTA ------------------------------------------------------------------- */
+
+.cta {
+    display: grid;
+    gap: var(--space-6);
+    padding: var(--space-12);
+    background: linear-gradient(135deg, var(--color-primary-700), var(--color-secondary-600));
+    border-radius: var(--radius-2xl);
+    color: #fff;
+    text-align: center;
+    justify-items: center;
+}
+
+.cta h2 {
+    color: #fff;
+    font-size: var(--text-3xl);
+}
+
+.cta p {
+    max-width: 48ch;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.cta .btn-primary {
+    background-color: #fff;
+    color: var(--color-primary-700);
+}
+
+.cta .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-800);
+}
+
+.cta .btn-secondary {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+}
+
+.cta .btn-secondary:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+/* --- Адаптив ---------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    /* Декоративная колонка на мобильном только мешает — скрываем. */
+    .hero-visual {
+        display: none;
+    }
+
+    .hero {
+        padding-block: var(--space-12) var(--space-10);
+    }
+}
+
+@media (max-width: 600px) {
+    .cta {
+        padding: var(--space-8) var(--space-5);
+    }
+
+    .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

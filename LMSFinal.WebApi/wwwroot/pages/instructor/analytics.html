@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="nav.analytics">Analytics — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/student.css">
+    <link rel="stylesheet" href="/css/pages/instructor.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/instructor/analytics.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.dashboard">Panel</a>
+    <div id="navbar" data-active="analytics"></div>
+
+    <div class="container page">
+        <div class="layout-with-sidebar">
+            <aside id="sidebar" data-active="analytics"></aside>
+
+            <main id="main">
+                <header class="page-header">
+                    <div>
+                        <h1 class="page-title" data-i18n="instructor.analyticsTitle">Analitika</h1>
+                        <p class="page-subtitle" data-i18n="instructor.analyticsSubtitle"></p>
+                    </div>
+                </header>
+
+                <div class="course-picker">
+                    <label class="field-label" for="course-select"
+                           data-i18n="instructor.selectCourse">Kurs seçin</label>
+                    <select class="select" id="course-select"></select>
+                </div>
+
+                <div id="analytics-content"></div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,342 @@
+﻿{
+  "categorySlug": "frontend",
+  "instructorEmail": "nigar.instructor@lms.com",
+  "level": "Beginner",
+  "status": "Published",
+  "price": 34.99,
+  "thumbnailUrl": "/assets/courses/javascript-essentials.svg",
+  "createdDaysAgo": 120,
+  "title": {
+    "az": "JavaScript Əsasları",
+    "en": "JavaScript Essentials",
+    "ru": "Основы JavaScript"
+  },
+  "shortDescription": {
+    "az": "Dilin əsasları, DOM ilə iş, asinxron kod və Fetch API vasitəsilə serverlə əlaqə.",
+    "en": "Language basics, working with the DOM, asynchronous code and talking to a server via Fetch API.",
+    "ru": "Основы языка, работа с DOM, асинхронный код и обращение к серверу через Fetch API."
+  },
+  "description": {
+    "az": "JavaScript brauzerdə işləyən yeganə dildir və hər interaktiv səhifənin arxasında dayanır. Kursda dəyişənlərdən başlayıb funksiyalar, massivlər, DOM manipulyasiyası, hadisələr, Promise-lər və Fetch API ilə API sorğularına qədər gedirik.",
+    "en": "JavaScript is the only language that runs in the browser and stands behind every interactive page. We start from variables and move through functions, arrays, DOM manipulation, events, promises and API calls with Fetch.",
+    "ru": "JavaScript — единственный язык, работающий в браузере, и он стоит за каждой интерактивной страницей. Начинаем с переменных и доходим до функций, массивов, работы с DOM, событий, промисов и запросов к API через Fetch."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "let, const və müasir sintaksisdən istifadə etmək",
+      "Massivlərlə map, filter və reduce ilə işləmək",
+      "DOM elementlərini tapmaq və hadisələri emal etmək",
+      "async/await və Fetch API ilə serverdən məlumat almaq"
+    ],
+    "en": [
+      "Use let, const and modern syntax",
+      "Work with arrays using map, filter and reduce",
+      "Find DOM elements and handle events",
+      "Fetch data from a server with async/await and the Fetch API"
+    ],
+    "ru": [
+      "Использовать let, const и современный синтаксис",
+      "Работать с массивами через map, filter и reduce",
+      "Находить элементы DOM и обрабатывать события",
+      "Получать данные с сервера через async/await и Fetch API"
+    ]
+  },
+  "modules": [
+    {
+      "title": {
+        "az": "Dilin əsasları",
+        "en": "Language Basics",
+        "ru": "Основы языка"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Dəyişənlər və tiplər",
+            "en": "Variables and types",
+            "ru": "Переменные и типы"
+          },
+          "content": {
+            "az": "<p><code>let</code> dəyişən, <code>const</code> isə yenidən təyin olunmayan bağlama yaradır. <code>var</code> köhnə sintaksisdir və blok əhatəsinə tabe olmadığı üçün istifadə edilmir.</p><p>JavaScript dinamik tiplidir: dəyişənin tipi işləmə zamanı dəyişə bilər.</p>",
+            "en": "<p><code>let</code> declares a variable, <code>const</code> declares a binding that cannot be reassigned. <code>var</code> is legacy syntax and is avoided because it ignores block scope.</p><p>JavaScript is dynamically typed: the type of a variable can change at run time.</p>",
+            "ru": "<p><code>let</code> объявляет переменную, <code>const</code> — привязку, которую нельзя переприсвоить. <code>var</code> — устаревший синтаксис, его избегают, так как он игнорирует блочную область видимости.</p><p>JavaScript динамически типизирован: тип переменной может меняться во время выполнения.</p>"
+          },
+          "durationMinutes": 12
+        },
+        {
+          "title": {
+            "az": "Funksiyalar və arrow sintaksisi",
+            "en": "Functions and arrow syntax",
+            "ru": "Функции и стрелочный синтаксис"
+          },
+          "content": {
+            "az": "<p>Funksiya JavaScript-də adi qiymətdir: onu dəyişənə mənimsətmək, parametr kimi ötürmək və qaytarmaq olar.</p><p>Arrow funksiyaları qısa yazılır və öz <code>this</code> kontekstini yaratmır — bu, callback-lərdə çox faydalıdır.</p>",
+            "en": "<p>A function in JavaScript is an ordinary value: it can be assigned to a variable, passed as an argument and returned.</p><p>Arrow functions are shorter and do not create their own <code>this</code> context — which is very handy in callbacks.</p>",
+            "ru": "<p>Функция в JavaScript — обычное значение: её можно присвоить переменной, передать аргументом и вернуть из другой функции.</p><p>Стрелочные функции короче и не создают собственный контекст <code>this</code> — это очень удобно в колбэках.</p>"
+          },
+          "durationMinutes": 14
+        },
+        {
+          "title": {
+            "az": "Massivlər: map, filter, reduce",
+            "en": "Arrays: map, filter, reduce",
+            "ru": "Массивы: map, filter, reduce"
+          },
+          "content": {
+            "az": "<p><code>map</code> hər elementi çevirir və yeni massiv qaytarır, <code>filter</code> şərtə uyğun olanları seçir, <code>reduce</code> isə massivi tək dəyərə yığır.</p><p>Bu üç metod dövr yazmaq ehtiyacının böyük hissəsini aradan qaldırır və kodu daha oxunaqlı edir.</p>",
+            "en": "<p><code>map</code> transforms each element and returns a new array, <code>filter</code> keeps the ones matching a condition, and <code>reduce</code> folds the array into a single value.</p><p>These three methods remove most of the need for manual loops and make the code far more readable.</p>",
+            "ru": "<p><code>map</code> преобразует каждый элемент и возвращает новый массив, <code>filter</code> оставляет подходящие под условие, а <code>reduce</code> сворачивает массив в одно значение.</p><p>Эти три метода снимают большую часть необходимости писать циклы вручную и делают код читаемее.</p>"
+          },
+          "durationMinutes": 16
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "DOM və asinxron kod",
+        "en": "DOM and Asynchronous Code",
+        "ru": "DOM и асинхронный код"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "DOM ilə iş və hadisələr",
+            "en": "Working with the DOM and events",
+            "ru": "Работа с DOM и события"
+          },
+          "content": {
+            "az": "<p><code>querySelector</code> elementi CSS selektoruna görə tapır, <code>addEventListener</code> isə hadisəyə reaksiya bağlayır.</p><p>Çoxlu eyni tipli element olduqda hər birinə ayrıca dinləyici əvəzinə valideynə bir dinləyici qoymaq daha səmərəlidir — buna event delegation deyilir.</p>",
+            "en": "<p><code>querySelector</code> finds an element by CSS selector, and <code>addEventListener</code> attaches a reaction to an event.</p><p>When there are many similar elements, attaching one listener to the parent instead of one per element is more efficient — this is called event delegation.</p>",
+            "ru": "<p><code>querySelector</code> находит элемент по CSS-селектору, а <code>addEventListener</code> привязывает реакцию на событие.</p><p>Когда одинаковых элементов много, эффективнее повесить один обработчик на родителя, а не по одному на каждый — это называется делегированием событий.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=y17RuWkWdn8",
+          "durationMinutes": 18
+        },
+        {
+          "title": {
+            "az": "Promise, async/await və Fetch API",
+            "en": "Promises, async/await and the Fetch API",
+            "ru": "Промисы, async/await и Fetch API"
+          },
+          "content": {
+            "az": "<p>Şəbəkə sorğusu dərhal nəticə vermir, ona görə <code>fetch</code> Promise qaytarır. <code>async/await</code> asinxron kodu adi ardıcıl kod kimi yazmağa imkan verir.</p><p>Xətaları <code>try/catch</code> ilə tutmaq lazımdır — və unutmayın: 404 cavabı <code>fetch</code> üçün xəta deyil, <code>response.ok</code> ayrıca yoxlanılmalıdır.</p>",
+            "en": "<p>A network request does not return instantly, so <code>fetch</code> returns a Promise. <code>async/await</code> lets you write asynchronous code as if it were sequential.</p><p>Errors must be caught with <code>try/catch</code> — and remember: a 404 response is not an error for <code>fetch</code>, you have to check <code>response.ok</code> yourself.</p>",
+            "ru": "<p>Сетевой запрос не даёт результат мгновенно, поэтому <code>fetch</code> возвращает Promise. <code>async/await</code> позволяет писать асинхронный код так, будто он последовательный.</p><p>Ошибки нужно ловить через <code>try/catch</code> — и помните: ответ 404 для <code>fetch</code> ошибкой не считается, <code>response.ok</code> проверяется отдельно.</p>"
+          },
+          "durationMinutes": 20,
+          "quiz": {
+            "title": "JavaScript Essentials Quiz",
+            "description": "Syntax, arrays, the DOM and asynchronous code.",
+            "passingScore": 60,
+            "timeLimitMinutes": 15,
+            "questions": [
+              {
+                "text": "What is the difference between let and const?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "A const binding cannot be reassigned after initialisation",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "const variables are always numbers",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "let is function scoped, const is global",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "There is no difference",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does Array.prototype.map return?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "A new array of the same length with transformed elements",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The same array, modified in place",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A single accumulated value",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Only the elements that match a condition",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which method keeps only the elements that satisfy a condition?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "filter",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "map",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "forEach",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "push",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Does fetch() reject its promise when the server responds with 404?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "No — you must check response.ok yourself",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Yes, any status above 399 rejects",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Yes, but only for 500 responses",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It depends on the browser",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which statements about async/await are true?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "An async function always returns a promise",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "await can only be used inside an async function or a module top level",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "await makes the whole browser freeze",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "async/await replaces the need for promises entirely",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does event delegation mean?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Attaching one listener to a parent element instead of many listeners to children",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Sending events to the server",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Removing all listeners on page load",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Using inline onclick attributes",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which comparison performs type coercion?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "==",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "===",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Object.is",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "!==",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which of these correctly describe JSON handling in JavaScript?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "JSON.parse turns a JSON string into an object",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "JSON.stringify turns an object into a JSON string",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "response.json() returns a plain object synchronously",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "JSON supports functions as values",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          },
+          "resources": [
+            {
+              "languageCode": "RU",
+              "fileName": "Асинхронность в JavaScript.md",
+              "fileUrl": "/assets/materials/js-async-notes.ru.md",
+              "fileType": "md"
+            },
+            {
+              "languageCode": "EN",
+              "fileName": "Async JavaScript notes.md",
+              "fileUrl": "/assets/materials/js-async-notes.en.md",
+              "fileType": "md"
+            },
+            {
+              "languageCode": "AZ",
+              "fileName": "Asinxron JavaScript qeydləri.md",
+              "fileUrl": "/assets/materials/js-async-notes.en.md",
+              "fileType": "md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

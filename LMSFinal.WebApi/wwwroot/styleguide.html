@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="styleguide.title">Design System — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Alpine лежит локально: на защите может не быть интернета, а страница,
+         ждущая CDN, превращается в белый экран. -->
+    <script defer src="/js/vendor/alpine.min.js"></script>
+    <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="navbar"></div>
+
+    <main id="main" class="container page">
+        <header class="page-header">
+            <div>
+                <h1 class="page-title" data-i18n="styleguide.title">Dizayn sistemi</h1>
+                <p class="page-subtitle" data-i18n="styleguide.subtitle"></p>
+            </div>
+            <a class="btn btn-secondary" href="/"><span aria-hidden="true">←</span> <span data-i18n="actions.back">Geri</span></a>
+        </header>
+
+        <div class="card mb-8">
+            <div class="card-body">
+                <p class="text-sm" data-i18n="styleguide.i18nNote"></p>
+            </div>
+        </div>
+
+        <!-- ================= Цвета ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4" data-i18n="styleguide.colors">Rənglər</h2>
+            <div class="grid-cards">
+                <div class="card"><div class="card-body">
+                    <div style="height:56px;border-radius:var(--radius-md);background:var(--color-accent)"></div>
+                    <p class="mt-2 font-semibold">Primary</p>
+                    <p class="text-sm text-muted"><code>--color-accent</code></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <div style="height:56px;border-radius:var(--radius-md);background:var(--color-secondary-500)"></div>
+                    <p class="mt-2 font-semibold">Secondary</p>
+                    <p class="text-sm text-muted"><code>--color-secondary-500</code></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <div style="height:56px;border-radius:var(--radius-md);background:var(--color-success)"></div>
+                    <p class="mt-2 font-semibold">Success</p>
+                    <p class="text-sm text-muted"><code>--color-success</code></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <div style="height:56px;border-radius:var(--radius-md);background:var(--color-warning)"></div>
+                    <p class="mt-2 font-semibold">Warning</p>
+                    <p class="text-sm text-muted"><code>--color-warning</code></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <div style="height:56px;border-radius:var(--radius-md);background:var(--color-danger)"></div>
+                    <p class="mt-2 font-semibold">Danger</p>
+                    <p class="text-sm text-muted"><code>--color-danger</code></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <div style="height:56px;border-radius:var(--radius-md);background:var(--color-slate-800)"></div>
+                    <p class="mt-2 font-semibold">Text</p>
+                    <p class="text-sm text-muted"><code>--color-text</code></p>
+                </div></div>
+            </div>
+        </section>
+
+        <!-- ================= Типографика ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4" data-i18n="styleguide.typography">Tipoqrafiya</h2>
+            <div class="card"><div class="card-body">
+                <h1>Heading 1 — 36px</h1>
+                <h2>Heading 2 — 30px</h2>
+                <h3>Heading 3 — 24px</h3>
+                <h4>Heading 4 — 20px</h4>
+                <p class="mt-4">Обычный текст — 16px, высота строки 1.5.</p>
+                <p class="text-sm text-muted">Вторичный текст — 14px, приглушённый цвет.</p>
+            </div></div>
+        </section>
+
+        <!-- ================= Кнопки ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4" data-i18n="styleguide.buttons">Düymələr</h2>
+            <div class="card"><div class="card-body">
+                <div class="flex gap-3 flex-wrap mb-4">
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                    <button class="btn btn-ghost">Ghost</button>
+                    <button class="btn btn-danger">Danger</button>
+                    <button class="btn btn-primary" disabled>Disabled</button>
+                </div>
+                <div class="flex gap-3 flex-wrap items-center">
+                    <button class="btn btn-primary btn-sm">Small</button>
+                    <button class="btn btn-primary">Default</button>
+                    <button class="btn btn-primary btn-lg">Large</button>
+                    <button class="btn btn-primary is-loading">Loading</button>
+                </div>
+            </div></div>
+        </section>
+
+        <!-- ================= Формы ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4" data-i18n="styleguide.forms">Forma sahələri</h2>
+            <div class="card"><div class="card-body" style="max-width:520px">
+                <div class="field">
+                    <label class="field-label" for="sg-email" data-i18n="auth.email">E-poçt</label>
+                    <input class="input" id="sg-email" type="email" placeholder="student@lms.com">
+                </div>
+                <div class="field">
+                    <label class="field-label" for="sg-pass">
+                        <span data-i18n="auth.password">Şifrə</span> <span class="required">*</span>
+                    </label>
+                    <input class="input is-invalid" id="sg-pass" type="password" value="123">
+                    <p class="field-error">Пароль должен быть не короче 8 символов</p>
+                </div>
+                <div class="field">
+                    <label class="field-label" for="sg-role" data-i18n="auth.role">Rol</label>
+                    <select class="select" id="sg-role">
+                        <option data-i18n="auth.roleStudent">Tələbə</option>
+                        <option data-i18n="auth.roleInstructor">Müəllim</option>
+                    </select>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="sg-check" checked>
+                    <label for="sg-check" class="text-sm">Запомнить меня</label>
+                </div>
+            </div></div>
+        </section>
+
+        <!-- ================= Карточки ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4" data-i18n="styleguide.cards">Kartlar</h2>
+
+            <div class="grid-stats mb-6">
+                <div class="stat"><p class="stat-label" data-i18n="course.students">Tələbələr</p><p class="stat-value">1 245</p></div>
+                <div class="stat"><p class="stat-label" data-i18n="course.rating">Reytinq</p><p class="stat-value">4.8</p></div>
+                <div class="stat"><p class="stat-label" data-i18n="nav.certificates">Sertifikatlar</p><p class="stat-value">15</p></div>
+                <div class="stat"><p class="stat-label" data-i18n="course.progress">İrəliləyiş</p><p class="stat-value">72%</p></div>
+            </div>
+
+            <div class="grid-cards">
+                <article class="card card-interactive">
+                    <div style="height:150px;background:linear-gradient(135deg,var(--color-primary-500),var(--color-secondary-500))"></div>
+                    <div class="card-body">
+                        <span class="badge badge-primary mb-2" data-i18n="course.levelBeginner">Başlanğıc</span>
+                        <h3 class="card-title">C# Fundamentals</h3>
+                        <p class="text-sm text-muted mt-2">Изучите C# с нуля: переменные, условия, циклы и ООП.</p>
+                        <div class="flex items-center justify-between mt-4">
+                            <span class="rating">
+                                <span class="rating-stars">★★★★<span class="star-empty">★</span></span>
+                                <span class="text-muted">4.2</span>
+                            </span>
+                            <strong>$39.99</strong>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">ASP.NET Core Web API</h3>
+                        <div class="progress-label mt-4">
+                            <span data-i18n="course.progress">İrəliləyiş</span><span>72%</span>
+                        </div>
+                        <div class="progress"><div class="progress-bar" style="width:72%"></div></div>
+                        <button class="btn btn-primary btn-block mt-6" data-i18n="actions.continueLearning">Davam et</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header"><h3 class="card-title">Badges</h3></div>
+                    <div class="card-body flex gap-2 flex-wrap">
+                        <span class="badge badge-neutral" data-i18n="course.statusDraft">Qaralama</span>
+                        <span class="badge badge-success" data-i18n="course.statusPublished">Dərc olunub</span>
+                        <span class="badge badge-warning" data-i18n="course.statusArchived">Arxiv</span>
+                        <span class="badge badge-danger">Failed</span>
+                        <span class="badge badge-primary" data-i18n="course.free">Pulsuz</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= Обратная связь ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4" data-i18n="styleguide.feedback">Geribildirim</h2>
+            <div class="card"><div class="card-body flex gap-3 flex-wrap">
+                <button class="btn btn-secondary" id="demo-toast-success">✓ <span data-i18n="styleguide.showToast">Toast</span></button>
+                <button class="btn btn-secondary" id="demo-toast-error">✕ Error toast</button>
+                <button class="btn btn-secondary" id="demo-modal" data-i18n="styleguide.openModal">Modal</button>
+                <button class="btn btn-secondary" id="demo-confirm" data-i18n="styleguide.openConfirm">Confirm</button>
+                <button class="btn btn-secondary" id="demo-overlay" data-i18n="styleguide.showLoader">Overlay</button>
+            </div></div>
+        </section>
+
+        <!-- ================= Состояния ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4" data-i18n="styleguide.states">Yüklənmə və boş vəziyyətlər</h2>
+            <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+                <div class="card"><div class="card-body">
+                    <p class="text-sm text-muted mb-4">Skeleton</p>
+                    <div class="grid" style="grid-template-columns:1fr;gap:var(--space-4)" id="demo-skeleton"></div>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <p class="text-sm text-muted mb-4">Empty state</p>
+                    <div id="demo-empty"></div>
+                </div></div>
+            </div>
+        </section>
+
+        <!-- ================= Alpine.js ================= -->
+        <section class="mb-8">
+            <h2 class="mb-4">Alpine.js</h2>
+            <div class="card"><div class="card-body" x-data="{ count: 0, open: false }" x-cloak>
+                <p class="text-sm text-muted mb-4">
+                    Alpine подключён локально и отвечает за реактивность на уровне страницы —
+                    фильтры каталога, аккордеон программы курса, drag &amp; drop в Course Builder.
+                </p>
+                <div class="flex items-center gap-3">
+                    <button class="btn btn-secondary btn-sm" @click="count--">−</button>
+                    <strong x-text="count" style="min-width:2ch;text-align:center">0</strong>
+                    <button class="btn btn-secondary btn-sm" @click="count++">+</button>
+                    <button class="btn btn-ghost btn-sm" @click="open = !open"
+                            x-text="open ? 'Свернуть' : 'Развернуть'">Развернуть</button>
+                </div>
+                <p class="text-sm text-muted mt-4" x-show="open" x-transition>
+                    Этот блок показывается директивой <code>x-show</code> без единой строки нашего JS.
+                </p>
+            </div></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>© 2026 Learnix — Design System</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Ждём, пока app.js поднимет локализацию и навбар.
+        document.addEventListener('lms:ready', () => {
+            const { toast, modal, loader, emptyState, t } = window.LMS;
+
+            document.getElementById('demo-toast-success')
+                .addEventListener('click', () => toast.success('Курс успешно создан'));
+
+            document.getElementById('demo-toast-error')
+                .addEventListener('click', () => toast.error('Вы уже записаны на этот курс'));
+
+            document.getElementById('demo-modal').addEventListener('click', () => {
+                modal.open({
+                    title: t('styleguide.demoModalTitle'),
+                    content: t('styleguide.demoModalBody')
+                });
+            });
+
+            document.getElementById('demo-confirm').addEventListener('click', async () => {
+                const confirmed = await modal.confirm({
+                    title: t('styleguide.confirmTitle'),
+                    message: t('styleguide.confirmBody'),
+                    confirmText: t('actions.delete'),
+                    danger: true
+                });
+
+                confirmed
+                    ? toast.success(t('styleguide.confirmed'))
+                    : toast.info(t('styleguide.cancelled'));
+            });
+
+            document.getElementById('demo-overlay').addEventListener('click', () => {
+                const hide = loader.overlay();
+                setTimeout(hide, 2000);
+            });
+
+            loader.skeleton(document.getElementById('demo-skeleton'), { count: 3, variant: 'row' });
+
+            const renderEmpty = () => emptyState.render(document.getElementById('demo-empty'), {
+                icon: '📚',
+                title: t('states.noCourses'),
+                text: t('states.noCoursesHint'),
+                action: { label: t('actions.retry'), onClick: () => toast.info('Retry') }
+            });
+
+            renderEmpty();
+            // Пустое состояние отрисовано из JS, поэтому при смене языка его
+            // нужно построить заново — data-i18n здесь не поможет.
+            document.addEventListener('language:changed', renderEmpty);
+        });
+    </script>
+</body>
+</html>

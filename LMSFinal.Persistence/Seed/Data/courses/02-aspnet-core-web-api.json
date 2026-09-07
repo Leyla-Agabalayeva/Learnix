@@ -1,0 +1,565 @@
+﻿{
+  "categorySlug": "backend",
+  "instructorEmail": "instructor@lms.com",
+  "level": "Intermediate",
+  "status": "Published",
+  "price": 59.99,
+  "thumbnailUrl": "/assets/courses/aspnet-core-web-api.svg",
+  "createdDaysAgo": 130,
+
+  "title": {
+    "az": "ASP.NET Core Web API",
+    "en": "ASP.NET Core Web API",
+    "ru": "ASP.NET Core Web API"
+  },
+  "shortDescription": {
+    "az": "REST API-ların qurulması: controller-lər, dependency injection, autentifikasiya və sənədləşdirmə.",
+    "en": "Build REST APIs: controllers, dependency injection, authentication and documentation.",
+    "ru": "Создание REST API: контроллеры, внедрение зависимостей, аутентификация и документация."
+  },
+  "description": {
+    "az": "Kurs real layihələrdə istifadə olunan Web API arxitekturasını addım-addım qurur. Controller-lərdən başlayıb DTO-lar, servis qatı, validasiya, xətaların mərkəzi idarə olunması və JWT autentifikasiyasına qədər gedirik. Sonda API tam sənədləşdirilmiş və qorunmuş vəziyyətdə olur.",
+    "en": "The course builds a production-style Web API architecture step by step. We start from controllers and move through DTOs, a service layer, validation, centralised error handling and JWT authentication. By the end the API is fully documented and secured.",
+    "ru": "Курс шаг за шагом выстраивает архитектуру Web API, пригодную для реальных проектов. Начинаем с контроллеров и доходим до DTO, слоя сервисов, валидации, централизованной обработки ошибок и JWT-аутентификации. В итоге API полностью задокументирован и защищён."
+  },
+  "whatYouWillLearn": {
+    "az": [
+      "REST prinsiplərinə uyğun endpoint-lər dizayn etmək",
+      "Controller → Service → Repository ayrımını tətbiq etmək",
+      "JWT ilə autentifikasiya və rol əsaslı icazələr qurmaq",
+      "Xətaları vahid formatda qaytarmaq və API-ni sənədləşdirmək"
+    ],
+    "en": [
+      "Design endpoints that follow REST principles",
+      "Apply the Controller → Service → Repository separation",
+      "Set up JWT authentication and role-based authorization",
+      "Return errors in a single format and document the API"
+    ],
+    "ru": [
+      "Проектировать эндпоинты по принципам REST",
+      "Применять разделение Controller → Service → Repository",
+      "Настроить JWT-аутентификацию и авторизацию по ролям",
+      "Возвращать ошибки в едином формате и документировать API"
+    ]
+  },
+
+  "modules": [
+    {
+      "title": {
+        "az": "Web API-nin əsasları",
+        "en": "Web API Basics",
+        "ru": "Основы Web API"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Controller-lər və marşrutlaşdırma",
+            "en": "Controllers and routing",
+            "ru": "Контроллеры и маршрутизация"
+          },
+          "content": {
+            "az": "<p>Controller HTTP sorğusunu qəbul edən sinifdir. <code>[Route]</code> atributu URL şablonunu, <code>[HttpGet]</code> və <code>[HttpPost]</code> isə metodu təyin edir.</p><p>Marşrutlar yuxarıdan aşağı yoxlanır, ona görə sabit seqmentlər parametrli olanlardan əvvəl gəlməlidir.</p>",
+            "en": "<p>A controller is a class that receives HTTP requests. The <code>[Route]</code> attribute defines the URL template, while <code>[HttpGet]</code> and <code>[HttpPost]</code> define the method.</p><p>Routes are matched top to bottom, so literal segments must be declared before parameterised ones.</p>",
+            "ru": "<p>Контроллер — это класс, принимающий HTTP-запросы. Атрибут <code>[Route]</code> задаёт шаблон URL, а <code>[HttpGet]</code> и <code>[HttpPost]</code> — метод.</p><p>Маршруты сопоставляются сверху вниз, поэтому literal-сегменты объявляются раньше параметризованных.</p>"
+          },
+          "videoUrl": "https://www.youtube.com/watch?v=s1bk-68aB1U&pp=ygUsYXNwLm5ldCBjb3JlIHdlYiBhcGkgY29udHJvbGxlcnMgYW5kIHJvdXRpbmc%3D",
+          "durationMinutes": 16
+        },
+        {
+          "title": {
+            "az": "Status kodları və cavab formatı",
+            "en": "Status codes and response format",
+            "ru": "Коды статуса и формат ответа"
+          },
+          "content": {
+            "az": "<p>Düzgün status kodu API-nin dilidir: 200 uğur, 201 yaradıldı, 204 cavab gövdəsi yoxdur, 400 səhv sorğu, 401 autentifikasiya yoxdur, 403 icazə yoxdur, 404 tapılmadı, 409 konflikt.</p><p>Vahid cavab formatı isə frontend-in hər endpoint üçün ayrıca kod yazmasının qarşısını alır.</p>",
+            "en": "<p>The right status code is the language of an API: 200 success, 201 created, 204 no content, 400 bad request, 401 unauthenticated, 403 forbidden, 404 not found, 409 conflict.</p><p>A single response format saves the frontend from writing special-case code for every endpoint.</p>",
+            "ru": "<p>Правильный код статуса — это язык API: 200 успех, 201 создано, 204 без содержимого, 400 неверный запрос, 401 не аутентифицирован, 403 запрещено, 404 не найдено, 409 конфликт.</p><p>Единый формат ответа избавляет фронтенд от написания отдельного кода под каждый эндпоинт.</p>"
+          },
+          "durationMinutes": 12
+        },
+        {
+          "title": {
+            "az": "DTO-lar və model binding",
+            "en": "DTOs and model binding",
+            "ru": "DTO и привязка модели"
+          },
+          "content": {
+            "az": "<p>Entity-ni birbaşa API-dən qaytarmaq təhlükəlidir: parol hash-ı və daxili sahələr sızır. DTO yalnız lazım olan sahələri açır.</p><p>Model binding sorğunun gövdəsini, query string-i və route parametrlərini avtomatik olaraq metod parametrlərinə çevirir.</p>",
+            "en": "<p>Returning an entity straight from the API is risky: password hashes and internal fields leak out. A DTO exposes only the fields you intend to expose.</p><p>Model binding automatically maps the request body, query string and route parameters onto method parameters.</p>",
+            "ru": "<p>Возвращать сущность напрямую из API опасно: наружу утекают хеши паролей и внутренние поля. DTO открывает только то, что вы намеренно отдаёте.</p><p>Привязка модели автоматически превращает тело запроса, query string и параметры маршрута в аргументы метода.</p>"
+          },
+          "durationMinutes": 14,
+          "quiz": {
+            "title": "Web API Basics Quiz",
+            "description": "Routing, status codes and DTOs.",
+            "passingScore": 60,
+            "timeLimitMinutes": 12,
+            "questions": [
+              {
+                "text": "Which status code should a successful POST that creates a new resource return?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "201 Created",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "200 OK",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "204 No Content",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "302 Found",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What is the difference between 401 and 403?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "401 means not authenticated, 403 means authenticated but not allowed",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "401 means the server crashed, 403 means the client crashed",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "They are interchangeable",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "401 is for GET requests, 403 is for POST requests",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Why should an API return DTOs instead of entities?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "To avoid leaking internal or sensitive fields",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "To keep the API contract independent from the database schema",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Because entities cannot be serialised to JSON",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Because DTOs make database queries faster",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which status code fits a DELETE that succeeded and returns no body?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "204 No Content",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "200 OK with an empty string",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "404 Not Found",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "410 Gone",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "In the route template api/courses/{id:guid}, what does the :guid part do?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "It constrains the segment so only a valid GUID matches the route",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It converts any value into a GUID automatically",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It marks the parameter as optional",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It has no effect and is only documentation",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which attribute binds a parameter to the request body?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "[FromBody]",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "[FromRoute]",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "[FromHeader]",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "[FromServices]",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which status code is appropriate when a client tries to enroll in a course twice?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "409 Conflict",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "500 Internal Server Error",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "201 Created",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "403 Forbidden",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which of these belong in a controller action of a well-layered API?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Calling a service method",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Translating the service result into an HTTP response",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Writing raw SQL queries",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Calculating quiz scores",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Arxitektura və asılılıqlar",
+        "en": "Architecture and Dependencies",
+        "ru": "Архитектура и зависимости"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "Dependency Injection",
+            "en": "Dependency injection",
+            "ru": "Внедрение зависимостей"
+          },
+          "content": {
+            "az": "<p>ASP.NET Core-un daxili DI konteyneri asılılıqları özü yaradır və konstruktora ötürür. Üç ömür müddəti var: Singleton, Scoped və Transient.</p><p>Veb tətbiqlərində repozitorilər və servislər adətən Scoped olur — hər HTTP sorğusu üçün bir nüsxə.</p>",
+            "en": "<p>The built-in DI container of ASP.NET Core creates dependencies itself and passes them into the constructor. There are three lifetimes: Singleton, Scoped and Transient.</p><p>In web applications repositories and services are usually Scoped — one instance per HTTP request.</p>",
+            "ru": "<p>Встроенный DI-контейнер ASP.NET Core сам создаёт зависимости и передаёт их в конструктор. Есть три времени жизни: Singleton, Scoped и Transient.</p><p>В веб-приложениях репозитории и сервисы обычно Scoped — один экземпляр на HTTP-запрос.</p>"
+          },
+          "durationMinutes": 15
+        },
+        {
+          "title": {
+            "az": "Servis qatı və biznes məntiqi",
+            "en": "The service layer and business logic",
+            "ru": "Слой сервисов и бизнес-логика"
+          },
+          "content": {
+            "az": "<p>Controller-də biznes məntiqi saxlamaq onu test etməyi qeyri-mümkün edir. Bütün qaydalar servis qatına köçürülür, controller isə yalnız çağırış və HTTP cavabı ilə məşğul olur.</p><p>Nəticədə servis HTTP olmadan, mock repozitori ilə test oluna bilir.</p>",
+            "en": "<p>Keeping business logic in a controller makes it impossible to test. All rules move into the service layer, while the controller only makes the call and shapes the HTTP response.</p><p>As a result the service can be tested without HTTP, using a mock repository.</p>",
+            "ru": "<p>Держать бизнес-логику в контроллере — значит сделать её непроверяемой. Все правила переносятся в слой сервисов, а контроллер лишь вызывает его и формирует HTTP-ответ.</p><p>В результате сервис можно тестировать без HTTP, с mock-репозиторием.</p>"
+          },
+          "durationMinutes": 17
+        },
+        {
+          "title": {
+            "az": "Validasiya və xətaların idarə olunması",
+            "en": "Validation and error handling",
+            "ru": "Валидация и обработка ошибок"
+          },
+          "content": {
+            "az": "<p>FluentValidation qaydaları ayrıca sinifdə saxlayır, ona görə controller heç nə bilmir. Uğursuz validasiya 422 və sahə-səhv cütlərindən ibarət cavab qaytarır.</p><p>Qlobal exception middleware isə bütün gözlənilməz xətaları tutur — hər controller-də try/catch yazmağa ehtiyac qalmır.</p>",
+            "en": "<p>FluentValidation keeps rules in a separate class, so the controller knows nothing about them. A failed validation returns 422 together with a field-to-errors map.</p><p>A global exception middleware catches everything unexpected — no try/catch is needed in individual controllers.</p>",
+            "ru": "<p>FluentValidation держит правила в отдельном классе, поэтому контроллер о них ничего не знает. Неуспешная валидация возвращает 422 и словарь «поле → ошибки».</p><p>Глобальный exception middleware перехватывает всё непредвиденное — try/catch в каждом контроллере не нужен.</p>"
+          },
+          "durationMinutes": 14,
+          "quiz": {
+            "title": "Architecture and Dependency Injection Quiz",
+            "description": "DI lifetimes, layering and error handling.",
+            "passingScore": 65,
+            "timeLimitMinutes": 14,
+            "questions": [
+              {
+                "text": "Which DI lifetime creates one instance per HTTP request?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Scoped",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Singleton",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Transient",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Request",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which lifetime creates a new instance every single time it is requested?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Transient",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Scoped",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Singleton",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Static",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Why is injecting a Scoped service into a Singleton a problem?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "The Scoped instance would be captured and reused far beyond its intended request",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Singletons cannot have constructors",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It always causes a compile-time error",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Scoped services cannot be injected at all",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What are the benefits of a separate service layer?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "Business logic can be unit tested without HTTP",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Controllers stay small and readable",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The database becomes faster",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "DTOs are no longer needed",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Where should a global exception middleware be registered in the pipeline?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Early, so it wraps the middleware that runs after it",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Last, right before MapControllers",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It does not matter where",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Inside each controller constructor",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which status code suits a request that failed validation?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "422 Unprocessable Entity",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "500 Internal Server Error",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "204 No Content",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "401 Unauthorized",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "What does the Dependency Inversion principle recommend?",
+                "type": "SingleChoice",
+                "points": 1,
+                "answers": [
+                  {
+                    "text": "Depend on abstractions rather than on concrete implementations",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Always use static classes for services",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Put all interfaces in the outermost project",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Avoid interfaces to reduce the number of files",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              {
+                "text": "Which of these should NOT be returned to the client in a production error response?",
+                "type": "MultipleChoice",
+                "points": 2,
+                "answers": [
+                  {
+                    "text": "The full exception stack trace",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "The database connection string",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "A short human-readable message",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "A field-level validation errors map",
+                    "isCorrect": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "az": "Təhlükəsizlik və sənədləşdirmə",
+        "en": "Security and Documentation",
+        "ru": "Безопасность и документация"
+      },
+      "lessons": [
+        {
+          "title": {
+            "az": "JWT autentifikasiyası",
+            "en": "JWT authentication",
+            "ru": "JWT-аутентификация"
+          },
+          "content": {
+            "az": "<p>JWT üç hissədən ibarətdir: header, payload və imza. Server imzanı öz açarı ilə yoxlayır, ona görə token-i saxlamağa ehtiyac yoxdur.</p><p>Vacib qayda: payload şifrələnmir, yalnız imzalanır — ora heç vaxt gizli məlumat yazılmır.</p>",
+            "en": "<p>A JWT consists of three parts: header, payload and signature. The server verifies the signature with its own key, so it does not need to store the token.</p><p>Key rule: the payload is signed, not encrypted — never put secrets in it.</p>",
+            "ru": "<p>JWT состоит из трёх частей: header, payload и подпись. Сервер проверяет подпись своим ключом, поэтому хранить токен не нужно.</p><p>Важное правило: payload подписан, но не зашифрован — секреты туда не кладут.</p>"
+          },
+          "videoUrl": "https://youtu.be/M1pvp2NvO1g?si=RF9tBuuHZGOAWjyG",
+          "durationMinutes": 19
+        },
+        {
+          "title": {
+            "az": "Swagger ilə sənədləşdirmə",
+            "en": "Documenting with Swagger",
+            "ru": "Документирование через Swagger"
+          },
+          "content": {
+            "az": "<p>Swagger OpenAPI spesifikasiyasını kodun özündən yaradır: XML şərhlər Summary və Description-a, <code>[ProducesResponseType]</code> isə status kodlarına çevrilir.</p><p>Beləliklə sənəd kodla eyni yerdə yaşayır və köhnəlmir.</p>",
+            "en": "<p>Swagger generates the OpenAPI specification from the code itself: XML comments become Summary and Description, while <code>[ProducesResponseType]</code> becomes the list of status codes.</p><p>That way the documentation lives next to the code and cannot go stale.</p>",
+            "ru": "<p>Swagger генерирует спецификацию OpenAPI из самого кода: XML-комментарии превращаются в Summary и Description, а <code>[ProducesResponseType]</code> — в список кодов ответа.</p><p>Так документация живёт рядом с кодом и не устаревает.</p>"
+          },
+          "durationMinutes": 11
+        }
+      ]
+    }
+  ]
+}

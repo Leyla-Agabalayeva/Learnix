@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="cart.title">Cart — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/cart.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/cart.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="cart.title">Cart</a>
+    <div id="navbar" data-active="cart"></div>
+
+    <main id="main" class="container page">
+        <header class="page-header">
+            <div>
+                <h1 class="page-title" data-i18n="cart.title">Səbət</h1>
+                <p class="page-subtitle" data-i18n="cart.subtitle"></p>
+            </div>
+        </header>
+
+        <div class="cart-layout">
+            <div id="cart-items"></div>
+
+            <aside class="cart-summary card" id="cart-summary">
+                <div class="card-body">
+                    <div class="cart-summary-row">
+                        <span data-i18n="cart.total"></span>
+                        <strong id="cart-total">$0.00</strong>
+                    </div>
+                    <button class="btn btn-primary w-full" type="button" id="checkout-button"
+                            data-i18n="cart.checkout"></button>
+                </div>
+            </aside>
+        </div>
+    </main>
+</body>
+</html>

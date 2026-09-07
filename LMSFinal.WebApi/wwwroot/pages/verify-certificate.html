@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="verify.title">Verify Certificate — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/pages/certificate.css">
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/pages/verify-certificate.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.verifyCertificate">Sertifikatı yoxla</a>
+    <div id="navbar" data-active="verify"></div>
+
+    <main id="main" class="container page">
+        <header class="page-header">
+            <div>
+                <h1 class="page-title" data-i18n="verify.title">Sertifikatı yoxla</h1>
+                <p class="page-subtitle" data-i18n="verify.subtitle"></p>
+            </div>
+        </header>
+
+        <p class="verify-intro text-muted" data-i18n="verify.intro"></p>
+
+        <form class="verify-form" id="verify-form" novalidate>
+            <div class="field">
+                <label class="field-label" for="certificate-number" data-i18n="student.certificateNumber">
+                    Sertifikat nömrəsi
+                </label>
+                <input class="input" id="certificate-number" name="certificateNumber"
+                       type="text" autocomplete="off" spellcheck="false"
+                       placeholder="LMS-2026-000001" required
+                       aria-describedby="number-hint">
+                <p class="field-hint" id="number-hint" data-i18n="verify.numberHint"></p>
+            </div>
+
+            <button class="btn btn-primary verify-submit" type="submit" id="submit"
+                    data-i18n="actions.verify">Yoxla</button>
+        </form>
+
+        <!-- Вердикт и лист сертификата собираются в js/pages/verify-certificate.js.
+             aria-live: результат появляется без перезагрузки, и о нём нужно
+             сообщить тем, кто не видит экран. -->
+        <section class="verify-result" id="result" aria-live="polite"></section>
+    </main>
+</body>
+</html>

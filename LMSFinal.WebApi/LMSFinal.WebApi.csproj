@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Phase 16: включает генерацию XML-файла документации из /// комментариев.
+		     Swagger читает этот файл и показывает Summary/Description под каждым эндпоинтом. -->
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<!-- CS1591 = "Missing XML comment for publicly visible type or member".
+		     Без этого сборка выдаст сотни предупреждений на каждый публичный класс без ///. -->
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.19">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\LMSFinal.Application\LMSFinal.Application.csproj" />
+		<ProjectReference Include="..\LMSFinal.Contracts\LMSFinal.Contracts.csproj" />
+		<ProjectReference Include="..\LMSFinal.Infrastructure\LMSFinal.Infrastructure.csproj" />
+		<ProjectReference Include="..\LMSFinal.Persistence\LMSFinal.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n-page-title="states.forbidden">403 — Learnix</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <main id="main" class="container page">
+        <!-- Сюда приводит requireAuth(), когда роль не совпадает: студент открыл
+             страницу преподавателя или наоборот. Сервер в любом случае вернул бы
+             403, эта страница просто объясняет причину по-человечески. -->
+        <div class="empty-state" style="padding-block: var(--space-20)">
+            <div class="empty-state-icon" aria-hidden="true">🔒</div>
+            <h1 class="empty-state-title" data-i18n="states.forbidden">Bu səhifəyə girişiniz yoxdur</h1>
+            <p class="empty-state-text" data-i18n="states.errorHint"></p>
+            <a class="btn btn-primary mt-2" href="/" data-i18n="nav.home">Ana səhifə</a>
+        </div>
+    </main>
+</body>
+</html>

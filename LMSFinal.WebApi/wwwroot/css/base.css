@@ -28,6 +28,43 @@ body {
     font-size: var(--text-base);
     line-height: var(--leading-normal);
     -webkit-font-smoothing: antialiased;
+    /* Переключение светлой/тёмной темы плавное, а не мгновенным «морганием»
+       фона. --transition-base уже обнуляется в tokens.css при
+       prefers-reduced-motion, так что это правило само становится мгновенным
+       для тех, кому анимации мешают — отдельно ничего обрабатывать не нужно. */
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Те же поверхности, что меняют цвет между темами — навбар, карточки,
+   сайдбар, поля ввода — переходят синхронно с фоном, а не рывком следом. */
+.navbar,
+.card,
+.sidebar,
+.stat,
+input,
+textarea,
+select {
+    transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+}
+
+/* --- Появление контента --------------------------------------------------
+   Карточки курсов и статистические плитки чуть всплывают и проявляются
+   при отрисовке — без этого re-render (смена фильтра, языка, страницы)
+   выглядит как резкий «щелчок» вместо контента. */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.course-card,
+.stat {
+    animation: fade-in-up 320ms ease both;
 }
 
 img,

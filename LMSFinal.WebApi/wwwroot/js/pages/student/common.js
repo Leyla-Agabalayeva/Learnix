@@ -50,10 +50,18 @@ export function showLoadError(container, error, retry) {
     });
 }
 
-/** Плитка статистики — используется на дашборде и в ведомости. */
-export function buildStat(label, value) {
+/**
+ * Плитка статистики — используется на дашборде и в ведомости.
+ * @param {string} label
+ * @param {string} value
+ * @param {{ tone?: 'success'|'warning'|'danger'|'neutral' }} [options]
+ */
+export function buildStat(label, value, { tone } = {}) {
     const stat = document.createElement('div');
-    stat.className = 'stat';
+    stat.className = tone ? `stat stat-${tone}` : 'stat';
+
+    const body = document.createElement('div');
+    body.className = 'stat-body';
 
     const valueElement = document.createElement('p');
     valueElement.className = 'stat-value';
@@ -63,6 +71,7 @@ export function buildStat(label, value) {
     labelElement.className = 'stat-label';
     labelElement.textContent = label;
 
-    stat.append(valueElement, labelElement);
+    body.append(valueElement, labelElement);
+    stat.appendChild(body);
     return stat;
 }

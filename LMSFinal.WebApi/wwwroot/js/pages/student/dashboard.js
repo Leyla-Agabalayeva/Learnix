@@ -124,9 +124,10 @@ function renderStats(enrollments, gradeBook, certificates) {
 
     container.append(
         buildStat(t('student.statEnrolled'), format.number(enrollments.length)),
-        buildStat(t('student.statCompleted'), format.number(completed)),
-        buildStat(t('student.statCertificates'), format.number(certificates.length)),
-        buildStat(t('student.statAverage'), average > 0 ? `${format.rating(average)}%` : '—')
+        buildStat(t('student.statCompleted'), format.number(completed), { tone: 'success' }),
+        buildStat(t('student.statCertificates'), format.number(certificates.length), { tone: 'success' }),
+        buildStat(t('student.statAverage'), average > 0 ? `${format.rating(average)}%` : '—',
+            { tone: average >= 60 ? 'success' : average > 0 ? 'warning' : 'neutral' })
     );
 }
 

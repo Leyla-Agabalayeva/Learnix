@@ -34,13 +34,16 @@ function renderSummary(summary) {
 
     container.append(
         buildStat(t('student.statAverage'),
-            summary.averageQuizScore > 0 ? `${format.rating(summary.averageQuizScore)}%` : '—'),
+            summary.averageQuizScore > 0 ? `${format.rating(summary.averageQuizScore)}%` : '—',
+            { tone: summary.averageQuizScore >= 60 ? 'success' : summary.averageQuizScore > 0 ? 'warning' : 'neutral' }),
         buildStat(t('student.passed'),
-            `${format.number(summary.passedQuizzes)} / ${format.number(summary.completedQuizzes)}`),
+            `${format.number(summary.passedQuizzes)} / ${format.number(summary.completedQuizzes)}`,
+            { tone: 'success' }),
         buildStat(t('course.progress'),
             `${format.rating(summary.averageCourseCompletion)}%`),
         buildStat(t('student.statCompleted'),
-            `${format.number(summary.completedCoursesCount)} / ${format.number(summary.enrolledCoursesCount)}`)
+            `${format.number(summary.completedCoursesCount)} / ${format.number(summary.enrolledCoursesCount)}`,
+            { tone: 'success' })
     );
 }
 

@@ -89,21 +89,21 @@ function renderStats(stats) {
     users.innerHTML = '';
     users.append(
         buildStat(t('admin.statUsers'), format.number(stats.totalUsers)),
-        buildStat(t('admin.statStudents'), format.number(stats.totalStudents)),
+        buildStat(t('admin.statStudents'), format.number(stats.totalStudents), { tone: 'success' }),
         buildStat(t('admin.statInstructors'), format.number(stats.totalInstructors)),
-        buildStat(t('admin.statAdmins'), format.number(stats.totalAdmins))
+        buildStat(t('admin.statAdmins'), format.number(stats.totalAdmins), { tone: 'neutral' })
     );
 
     const courses = $('stats-courses');
     courses.innerHTML = '';
     courses.append(
         buildStat(t('admin.statCourses'), format.number(stats.totalCourses)),
-        buildStat(t('admin.statPublished'), format.number(stats.publishedCourses)),
-        buildStat(t('admin.statDraft'), format.number(stats.draftCourses)),
-        buildStat(t('admin.statArchived'), format.number(stats.archivedCourses)),
+        buildStat(t('admin.statPublished'), format.number(stats.publishedCourses), { tone: 'success' }),
+        buildStat(t('admin.statDraft'), format.number(stats.draftCourses), { tone: 'neutral' }),
+        buildStat(t('admin.statArchived'), format.number(stats.archivedCourses), { tone: 'warning' }),
         buildStat(t('admin.statCategories'), format.number(stats.totalCategories)),
-        buildStat(t('admin.statEnrollments'), format.number(stats.totalEnrollments)),
-        buildStat(t('admin.statCertificates'), format.number(stats.totalCertificatesIssued))
+        buildStat(t('admin.statEnrollments'), format.number(stats.totalEnrollments), { tone: 'success' }),
+        buildStat(t('admin.statCertificates'), format.number(stats.totalCertificatesIssued), { tone: 'success' })
     );
 }
 

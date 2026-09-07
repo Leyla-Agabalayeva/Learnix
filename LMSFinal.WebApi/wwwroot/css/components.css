@@ -158,7 +158,19 @@
     padding: var(--space-5);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-border-strong);
     border-radius: var(--radius-xl);
+}
+
+/* Цвет по смыслу цифры (растёт/предупреждение/нейтрально) — только тонкая
+   полоска слева, без иконки-стикера поверх текста: акцент, а не декорация. */
+.stat-success { border-left-color: var(--color-success); }
+.stat-warning { border-left-color: var(--color-warning); }
+.stat-danger { border-left-color: var(--color-danger); }
+.stat-neutral { border-left-color: var(--color-border-strong); }
+
+.stat-body {
+    min-width: 0;
 }
 
 .stat-label {
@@ -167,7 +179,7 @@
 }
 
 .stat-value {
-    margin-top: var(--space-2);
+    margin-top: var(--space-1);
     font-size: var(--text-3xl);
     font-weight: var(--weight-bold);
     line-height: 1;

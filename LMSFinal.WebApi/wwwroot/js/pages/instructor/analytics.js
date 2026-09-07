@@ -55,14 +55,16 @@ function render(analytics) {
 
     stats.append(
         buildStat(t('instructor.analyticsEnrolled'), format.number(analytics.studentsEnrolled)),
-        buildStat(t('instructor.analyticsCompleted'), format.number(analytics.studentsCompleted)),
+        buildStat(t('instructor.analyticsCompleted'), format.number(analytics.studentsCompleted), { tone: 'success' }),
         buildStat(t('instructor.analyticsProgress'), `${format.rating(analytics.averageProgress)}%`),
         // Прочерк вместо нуля там, где данных нет: «0%» читается как плохой
         // результат, хотя тесты просто ещё никто не сдавал.
         buildStat(t('instructor.analyticsQuizScore'),
-            analytics.averageQuizScore > 0 ? `${format.rating(analytics.averageQuizScore)}%` : '—'),
+            analytics.averageQuizScore > 0 ? `${format.rating(analytics.averageQuizScore)}%` : '—',
+            { tone: analytics.averageQuizScore >= 60 ? 'success' : analytics.averageQuizScore > 0 ? 'warning' : 'neutral' }),
         buildStat(t('instructor.analyticsRating'),
-            analytics.reviewsCount > 0 ? `${format.rating(analytics.averageRating)} ⭐` : '—'),
+            analytics.reviewsCount > 0 ? `${format.rating(analytics.averageRating)} ⭐` : '—',
+            { tone: analytics.averageRating >= 4 ? 'success' : 'neutral' }),
         buildStat(t('instructor.analyticsReviews'), format.number(analytics.reviewsCount))
     );
 

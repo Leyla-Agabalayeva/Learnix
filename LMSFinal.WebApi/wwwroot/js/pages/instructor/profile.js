@@ -47,7 +47,6 @@ function render() {
     $('firstName').value = profile.firstName ?? '';
     $('lastName').value = profile.lastName ?? '';
     $('bio').value = profile.bio ?? '';
-    $('avatarUrl').value = profile.avatarUrl ?? '';
     $('email').value = profile.email ?? '';
 }
 
@@ -99,11 +98,13 @@ function bindForm() {
         loader.button(button, true);
 
         try {
+            // avatarUrl намеренно не отправляем: аватар меняется отдельным
+            // действием (клик по фото → загрузка файла или камера).
             profile = await api.put('/auth/me', {
                 firstName: $('firstName').value.trim(),
                 lastName: $('lastName').value.trim(),
                 bio: $('bio').value.trim(),
-                avatarUrl: $('avatarUrl').value.trim()
+                avatarUrl: profile.avatarUrl
             });
 
             // Имя в навбаре берётся из сохранённой сессии, а не из ответа /auth/me,

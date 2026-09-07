@@ -43,12 +43,14 @@ function renderStats(stats) {
     container.append(
         buildStat(t('instructor.statCourses'), format.number(stats.totalCourses)),
         buildStat(t('instructor.statStudents'), format.number(stats.totalStudents)),
-        buildStat(t('instructor.statEnrollments'), format.number(stats.totalEnrollments)),
+        buildStat(t('instructor.statEnrollments'), format.number(stats.totalEnrollments), { tone: 'success' }),
         // Рейтинг показываем только если отзывы есть: «0.0 ⭐» читается как плохая
         // оценка, хотя оценок просто нет.
         buildStat(t('instructor.statRating'),
-            stats.averageRating > 0 ? `${format.rating(stats.averageRating)} ⭐` : '—'),
-        buildStat(t('instructor.statCompletion'), `${format.rating(stats.averageCompletionRate)}%`)
+            stats.averageRating > 0 ? `${format.rating(stats.averageRating)} ⭐` : '—',
+            { tone: stats.averageRating >= 4 ? 'success' : stats.averageRating > 0 ? 'warning' : 'neutral' }),
+        buildStat(t('instructor.statCompletion'), `${format.rating(stats.averageCompletionRate)}%`,
+            { tone: stats.averageCompletionRate >= 50 ? 'success' : 'warning' })
     );
 }
 

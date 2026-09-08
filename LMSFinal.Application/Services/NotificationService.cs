@@ -17,11 +17,16 @@ namespace LMSFinal.Application.Services
     {
         private readonly INotificationRepository _notificationRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly INotificationPublisher _notificationPublisher;
 
-        public NotificationService(INotificationRepository notificationRepository, IUnitOfWork unitOfWork)
+        public NotificationService(
+            INotificationRepository notificationRepository,
+            IUnitOfWork unitOfWork,
+            INotificationPublisher notificationPublisher)
         {
             _notificationRepository = notificationRepository;
             _unitOfWork = unitOfWork;
+            _notificationPublisher = notificationPublisher;
         }
 
         public async Task<IReadOnlyList<NotificationDto>> GetMyNotificationsAsync(Guid userId, CancellationToken cancellationToken = default)
@@ -47,6 +52,25 @@ namespace LMSFinal.Application.Services
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
+        public async Task DeleteAsync(Guid userId, Guid notificationId, CancellationToken cancellationToken = default)
+        {
+            var notification = await _notificationRepository.GetByIdAsync(notificationId, cancellationToken)
+                ?? throw new NotFoundException("Notification", notificationId);
+
+            if (notification.UserId != userId)
+            {
+                throw new ForbiddenAccessException("Вы можете удалять только свои уведомления.");
+            }
+
+            if (!notification.IsRead)
+            {
+                throw new ConflictException("Сначала отметьте уведомление прочитанным, затем можно удалить.");
+            }
+
+            _notificationRepository.Remove(notification);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+        }
+
         public async Task NotifyAsync(Guid userId, string title, string message, NotificationType type, CancellationToken cancellationToken = default)
         {
             var notification = new Notification
@@ -60,6 +84,12 @@ namespace LMSFinal.Application.Services
 
             await _notificationRepository.AddAsync(notification, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            // Живая доставка — после сохранения, чтобы уведомление в любом случае
+            // осталось в БД, даже если у пользователя нет активного SignalR-соединения.
+            var dto = new NotificationDto(notification.Id, notification.Title, notification.Message,
+                notification.Type.ToString(), notification.IsRead, notification.CreatedAt);
+            await _notificationPublisher.PublishAsync(userId, dto, cancellationToken);
         }
     }
 

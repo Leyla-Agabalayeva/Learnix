@@ -19,6 +19,11 @@ namespace LMSFinal.Domain.Entities
         public int Rating { get; set; }
 
         public string? Comment { get; set; }
+
+        /// <summary>Ответ преподавателя курса — один на отзыв, необязательный.</summary>
+        public string? InstructorReply { get; set; }
+
+        public DateTime? InstructorRepliedAt { get; set; }
     }
 
 }

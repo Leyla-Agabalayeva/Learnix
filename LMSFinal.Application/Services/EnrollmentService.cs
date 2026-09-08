@@ -21,17 +21,20 @@ namespace LMSFinal.Application.Services
         private readonly ICourseRepository _courseRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
         public EnrollmentService(
             IEnrollmentRepository enrollmentRepository,
             ICourseRepository courseRepository,
             IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IMapper mapper,
+            INotificationService notificationService)
         {
             _enrollmentRepository = enrollmentRepository;
             _courseRepository = courseRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         public async Task<StudentEnrollmentDto> EnrollAsync(Guid studentId, Guid courseId, CancellationToken cancellationToken = default)
@@ -85,6 +88,16 @@ namespace LMSFinal.Application.Services
             enrollment.Course = course;
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            var courseTitle = TranslationResolver.Resolve(course.Translations, LanguageCode.EN, t => t.LanguageCode)?.Title
+                ?? course.Id.ToString();
+
+            await _notificationService.NotifyAsync(
+                course.InstructorId,
+                "New enrollment",
+                $"A new student enrolled in \"{courseTitle}\".",
+                NotificationType.NewEnrollment,
+                cancellationToken);
 
             return _mapper.Map<StudentEnrollmentDto>(enrollment);
         }

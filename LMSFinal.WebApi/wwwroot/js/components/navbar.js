@@ -19,6 +19,7 @@ import { createLanguageSwitcher } from './language-switcher.js';
 import { createThemeToggle } from './theme-toggle.js';
 import { isAuthenticated, isAdmin, isInstructor, isStudent, getFullName, getInitials, getAvatarUrl, getUser, logout } from '../auth.js';
 import * as cart from './cart.js';
+import { buildNotificationsBell } from './notifications-bell.js';
 
 /** Пункты меню для каждой роли: ключ перевода, адрес и id для подсветки. */
 function getLinks() {
@@ -147,6 +148,10 @@ function build(activeId) {
     const cartLink = buildCartLink(activeId);
     if (cartLink) {
         actions.appendChild(cartLink);
+    }
+
+    if (isAuthenticated()) {
+        actions.appendChild(buildNotificationsBell());
     }
 
     actions.append(createThemeToggle(), createLanguageSwitcher(), ...buildAuthArea());

@@ -11,6 +11,9 @@ namespace LMSFinal.Domain.Enums
         CoursePublished = 0,
         QuizResultAvailable = 1,
         CourseCompleted = 2,
-        CertificateIssued = 3
+        CertificateIssued = 3,
+        NewEnrollment = 4,
+        NewReview = 5,
+        ReviewReply = 6
     }
 }

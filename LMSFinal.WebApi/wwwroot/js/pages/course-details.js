@@ -14,7 +14,7 @@
 
 import { api } from '../api.js';
 import { getApiLanguage, onLanguageChange, t } from '../localization.js';
-import { isAuthenticated, isStudent } from '../auth.js';
+import { isAuthenticated, isStudent, getUser } from '../auth.js';
 import { toast } from '../components/toast.js';
 import { loader } from '../components/loader.js';
 import { emptyState } from '../components/empty-state.js';
@@ -342,6 +342,14 @@ function renderReviews(reviews) {
     overview.innerHTML = '';
     container.innerHTML = '';
 
+    const myUserId = getUser()?.userId;
+    const myReview = isStudent() ? reviews.find((r) => r.studentId === myUserId) : null;
+
+    // Форма для НОВОГО отзыва — только пока своего отзыва ещё нет. Как только
+    // он появится, писать/менять его можно прямо в своей карточке в списке,
+    // как у любого другого комментария — отдельная форма сверху больше не нужна.
+    renderNewReviewPrompt(myReview);
+
     if (!reviews.length) {
         emptyState.render(container, {
             icon: '💬',
@@ -352,7 +360,144 @@ function renderReviews(reviews) {
     }
 
     overview.appendChild(buildRatingOverview(reviews));
-    reviews.forEach((review) => container.appendChild(buildReview(review)));
+    reviews.forEach((review) => container.appendChild(buildReview(review, review === myReview)));
+}
+
+// ---------------------------------------------------------------------------
+// Форма отзыва — доступна только записанным студентам (сервер и так это
+// проверит, но незаписанному кнопка «Отправить» вернула бы 403 без пользы).
+// ---------------------------------------------------------------------------
+
+function renderNewReviewPrompt(myReview) {
+    const container = $('review-form-container');
+    container.innerHTML = '';
+
+    if (myReview || !isStudent() || !course.isEnrolled) {
+        return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'review-form';
+
+    const heading = document.createElement('p');
+    heading.className = 'font-semibold';
+    heading.textContent = t('details.writeReview');
+    wrapper.appendChild(heading);
+
+    wrapper.appendChild(buildReviewEditor(null, {
+        onCancel: null,
+        onSaved: loadReviews
+    }));
+
+    container.appendChild(wrapper);
+}
+
+/**
+ * Звёзды + textarea + кнопки — общий кусок и для формы нового отзыва,
+ * и для инлайн-редактирования уже существующего прямо в его карточке.
+ */
+function buildReviewEditor(review, { onCancel, onSaved }) {
+    const editor = document.createElement('div');
+    editor.className = 'review-editor';
+
+    const ratingLabel = document.createElement('p');
+    ratingLabel.className = 'text-sm text-muted';
+    ratingLabel.textContent = t('details.yourRating');
+    editor.appendChild(ratingLabel);
+
+    let selectedRating = review?.rating ?? 0;
+    const starsRow = document.createElement('div');
+    starsRow.className = 'review-form-stars';
+
+    const starButtons = [1, 2, 3, 4, 5].map((value) => {
+        const star = document.createElement('button');
+        star.type = 'button';
+        star.className = 'review-form-star';
+        star.setAttribute('aria-label', String(value));
+        star.textContent = '★';
+        star.addEventListener('click', () => {
+            selectedRating = value;
+            paintStars();
+        });
+        starsRow.appendChild(star);
+        return star;
+    });
+
+    function paintStars() {
+        starButtons.forEach((star, index) => {
+            star.classList.toggle('is-filled', index < selectedRating);
+        });
+    }
+    paintStars();
+
+    editor.appendChild(starsRow);
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'input mt-2';
+    textarea.rows = 3;
+    textarea.placeholder = t('details.reviewCommentPlaceholder');
+    textarea.value = review?.comment ?? '';
+    editor.appendChild(textarea);
+
+    const actions = document.createElement('div');
+    actions.className = 'review-form-actions mt-2';
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'button';
+    submitButton.className = 'btn btn-primary btn-sm';
+    submitButton.textContent = t('details.submitReview');
+    submitButton.addEventListener('click', async () => {
+        if (!selectedRating) {
+            toast.warning(t('details.reviewNeedsRating'));
+            return;
+        }
+
+        loader.button(submitButton, true);
+
+        try {
+            const payload = { rating: selectedRating, comment: textarea.value.trim() || null };
+
+            if (review) {
+                await api.put(`/reviews/${review.id}`, payload);
+                toast.success(t('details.reviewUpdated'));
+            } else {
+                await api.post(`/courses/${courseId}/reviews`, payload);
+                toast.success(t('details.reviewSubmitted'));
+            }
+
+            await onSaved();
+        } catch (error) {
+            toast.fromApiError(error);
+            loader.button(submitButton, false);
+        }
+    });
+    actions.appendChild(submitButton);
+
+    if (onCancel) {
+        const cancelButton = document.createElement('button');
+        cancelButton.type = 'button';
+        cancelButton.className = 'btn btn-ghost btn-sm';
+        cancelButton.textContent = t('actions.cancel');
+        cancelButton.addEventListener('click', onCancel);
+        actions.appendChild(cancelButton);
+    }
+
+    editor.appendChild(actions);
+    return editor;
+}
+
+async function deleteReview(review) {
+    if (!window.confirm(t('details.deleteReviewConfirm'))) {
+        return;
+    }
+
+    try {
+        await api.delete(`/reviews/${review.id}`);
+        toast.success(t('details.reviewDeleted'));
+        await loadReviews();
+    } catch (error) {
+        toast.fromApiError(error);
+    }
 }
 
 function buildRatingOverview(reviews) {
@@ -382,9 +527,9 @@ function buildRatingOverview(reviews) {
     return box;
 }
 
-function buildReview(review) {
+function buildReview(review, isMine = false) {
     const item = document.createElement('article');
-    item.className = 'review';
+    item.className = isMine ? 'review is-mine' : 'review';
 
     const head = document.createElement('div');
     head.className = 'review-head';
@@ -410,12 +555,74 @@ function buildReview(review) {
     head.append(avatar, info);
     item.appendChild(head);
 
+    const body = document.createElement('div');
+    body.className = 'review-body';
+
     if (review.comment) {
         const text = document.createElement('p');
         text.className = 'review-text';
         // textContent: отзыв пишет пользователь, вставлять его как HTML нельзя.
         text.textContent = review.comment;
-        item.appendChild(text);
+        body.appendChild(text);
+    }
+
+    if (review.instructorReply) {
+        const reply = document.createElement('div');
+        reply.className = 'instructor-reply';
+
+        const label = document.createElement('p');
+        label.className = 'instructor-reply-label';
+        label.textContent = t('details.instructorReply');
+        reply.appendChild(label);
+
+        const text = document.createElement('p');
+        text.className = 'instructor-reply-text';
+        text.textContent = review.instructorReply;
+        reply.appendChild(text);
+
+        body.appendChild(reply);
+    }
+
+    item.appendChild(body);
+
+    // «Изменить»/«Удалить» — только под своей карточкой, как обычные действия
+    // под комментарием, а не отдельная форма где-то ещё на странице.
+    if (isMine) {
+        const actions = document.createElement('div');
+        actions.className = 'review-own-actions';
+
+        const editLink = document.createElement('button');
+        editLink.type = 'button';
+        editLink.className = 'review-own-action';
+        editLink.textContent = t('actions.edit');
+        editLink.addEventListener('click', () => {
+            body.innerHTML = '';
+            actions.classList.add('hidden');
+
+            body.appendChild(buildReviewEditor(review, {
+                onSaved: loadReviews,
+                onCancel: () => {
+                    body.innerHTML = '';
+                    if (review.comment) {
+                        const text = document.createElement('p');
+                        text.className = 'review-text';
+                        text.textContent = review.comment;
+                        body.appendChild(text);
+                    }
+                    actions.classList.remove('hidden');
+                }
+            }));
+        });
+        actions.appendChild(editLink);
+
+        const deleteLink = document.createElement('button');
+        deleteLink.type = 'button';
+        deleteLink.className = 'review-own-action is-danger';
+        deleteLink.textContent = t('actions.delete');
+        deleteLink.addEventListener('click', () => deleteReview(review));
+        actions.appendChild(deleteLink);
+
+        item.appendChild(actions);
     }
 
     return item;

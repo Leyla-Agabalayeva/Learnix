@@ -24,6 +24,9 @@ namespace LMSFinal.Application.Interfaces
         Task<CourseReviewDto> UpdateAsync(Guid studentId, Guid reviewId, UpdateReviewRequest request, CancellationToken cancellationToken = default);
 
         Task DeleteAsync(Guid studentId, Guid reviewId, CancellationToken cancellationToken = default);
+
+        Task<InstructorReviewDto> ReplyAsync(
+            Guid instructorId, Guid reviewId, LanguageCode language, ReplyToReviewRequest request, CancellationToken cancellationToken = default);
     }
 
 }

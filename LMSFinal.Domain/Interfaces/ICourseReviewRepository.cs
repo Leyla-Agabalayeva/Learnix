@@ -16,6 +16,9 @@ namespace LMSFinal.Domain.Interfaces
 
         Task<CourseReview?> GetByStudentAndCourseAsync(Guid studentId, Guid courseId, CancellationToken cancellationToken = default);
 
+        /// <summary>Отзыв с загруженным курсом (переводы + InstructorId) — для проверки владения курсом при ответе преподавателя.</summary>
+        Task<CourseReview?> GetByIdWithCourseAsync(Guid id, CancellationToken cancellationToken = default);
+
         Task<double> GetAverageRatingAsync(Guid courseId, CancellationToken cancellationToken = default);
     }
 }

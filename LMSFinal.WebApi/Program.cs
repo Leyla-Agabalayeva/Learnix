@@ -1,3 +1,4 @@
+using LMSFinal.Application.Interfaces;
 using LMSFinal.Application.Services;
 using LMSFinal.Domain.Entities;
 using LMSFinal.Infrastructure;
@@ -7,6 +8,7 @@ using LMSFinal.Persistence.Data;
 using LMSFinal.Persistence.Seed;
 using LMSFinal.WebApi.Extensions;
 using LMSFinal.WebApi.Filters;
+using LMSFinal.WebApi.Hubs;
 using LMSFinal.WebApi.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +54,10 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
+// --- SignalR: живая доставка уведомлений поверх уже существующего NotificationService ---
+builder.Services.AddSignalR();
+builder.Services.AddScoped<INotificationPublisher, SignalRNotificationPublisher>();
+
 // --- Swagger / OpenAPI  ---
 // Вся настройка — в Extensions/SwaggerExtensions.cs
 builder.Services.AddSwaggerDocumentation();
@@ -84,6 +90,7 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<NotificationsHub>("/hubs/notifications");
 
 await SeedDatabaseAsync(app);
 

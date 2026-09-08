@@ -16,6 +16,7 @@ namespace LMSFinal.Persistence.Configurations
             builder.ToTable("CourseReviews");
 
             builder.Property(r => r.Comment).HasMaxLength(2000);
+            builder.Property(r => r.InstructorReply).HasMaxLength(2000);
 
             // 1 <= Rating <= 5 — проверка на уровне БД, дублирует валидацию в Application-слое.
             builder.ToTable(t => t.HasCheckConstraint("CK_CourseReviews_Rating", "[Rating] >= 1 AND [Rating] <= 5"));

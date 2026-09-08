@@ -1,4 +1,5 @@
 using LMSFinal.Application.Common.Exceptions;
+using LMSFinal.Application.Interfaces;
 using LMSFinal.Application.Services;
 using LMSFinal.Domain.Entities;
 using LMSFinal.Domain.Enums;
@@ -13,11 +14,12 @@ namespace LMSFinal.Tests.Services
         private readonly Mock<IEnrollmentRepository> _enrollments = new();
         private readonly Mock<ICourseRepository> _courses = new();
         private readonly Mock<IUnitOfWork> _unitOfWork = new();
+        private readonly Mock<INotificationService> _notifications = new();
 
         private readonly Guid _studentId = Guid.NewGuid();
 
         private EnrollmentService CreateSut() =>
-            new(_enrollments.Object, _courses.Object, _unitOfWork.Object, TestMapper.Create());
+            new(_enrollments.Object, _courses.Object, _unitOfWork.Object, TestMapper.Create(), _notifications.Object);
 
         private Course GivenCourse(CourseStatus status = CourseStatus.Published)
         {

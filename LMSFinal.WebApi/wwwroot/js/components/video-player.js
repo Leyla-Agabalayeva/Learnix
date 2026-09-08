@@ -120,7 +120,9 @@ function buildEmbed(src, title) {
     frame.src = src;
     frame.title = title || t('lesson.videoTitle');
     frame.loading = 'lazy';
-    frame.allowFullscreen = true;
+    // allow="fullscreen" ниже уже разрешает полноэкранный режим — современный
+    // Permissions Policy заменяет устаревший allowfullscreen, и указывать оба
+    // Chrome считает избыточным (пишет предупреждение в консоль).
     frame.setAttribute('allow', 'accelerometer; encrypted-media; picture-in-picture; fullscreen');
 
     // Чужая страница внутри нашей: без sandbox у неё тот же доступ к верхнему

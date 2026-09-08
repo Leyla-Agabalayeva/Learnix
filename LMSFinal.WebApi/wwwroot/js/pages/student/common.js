@@ -11,6 +11,7 @@ import { onLanguageChange, t } from '../../localization.js';
 import { renderStudentSidebar } from '../../components/student-sidebar.js';
 import { emptyState } from '../../components/empty-state.js';
 import { onReady } from '../../ready.js';
+import { connectNotifications } from '../../notifications.js';
 
 /**
  * Запускает страницу кабинета.
@@ -32,6 +33,7 @@ export function startStudentPage(load, { init, reloadOnLanguageChange = true } =
         }
 
         renderStudentSidebar();
+        connectNotifications();
 
         await load();
         init?.();

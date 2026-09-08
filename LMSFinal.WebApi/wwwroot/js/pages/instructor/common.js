@@ -11,6 +11,7 @@ import { onLanguageChange, t } from '../../localization.js';
 import { renderInstructorSidebar } from '../../components/instructor-sidebar.js';
 import { emptyState } from '../../components/empty-state.js';
 import { onReady } from '../../ready.js';
+import { connectNotifications } from '../../notifications.js';
 
 /**
  * @param {() => Promise<void>} load загрузка данных — повторяется при смене языка
@@ -26,6 +27,7 @@ export function startInstructorPage(load, { init, reloadOnLanguageChange = true 
         }
 
         renderInstructorSidebar();
+        connectNotifications();
 
         await load();
         init?.();

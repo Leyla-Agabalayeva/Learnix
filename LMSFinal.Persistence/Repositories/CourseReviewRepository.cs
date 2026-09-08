@@ -46,6 +46,12 @@ namespace LMSFinal.Persistence.Repositories
                 .Include(r => r.Student)
                 .FirstOrDefaultAsync(r => r.StudentId == studentId && r.CourseId == courseId, cancellationToken);
 
+        public async Task<CourseReview?> GetByIdWithCourseAsync(Guid id, CancellationToken cancellationToken = default) =>
+            await Context.CourseReviews
+                .Include(r => r.Student)
+                .Include(r => r.Course).ThenInclude(c => c.Translations)
+                .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
+
         public async Task<double> GetAverageRatingAsync(Guid courseId, CancellationToken cancellationToken = default)
         {
             var ratings = await Context.CourseReviews

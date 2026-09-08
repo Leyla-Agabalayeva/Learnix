@@ -43,5 +43,21 @@ namespace LMSFinal.WebApi.Controllers
             await _notificationService.MarkAsReadAsync(User.GetUserId(), id, cancellationToken);
             return NoContent();
         }
+
+        /// <param name="id">Идентификатор уведомления.</param>
+        /// <param name="cancellationToken">Токен отмены запроса.</param>
+        /// <response code="204">Уведомление удалено.</response>
+        /// <response code="403">Уведомление принадлежит другому пользователю.</response>
+        /// <response code="404">Уведомление не найдено.</response>
+        /// <response code="409">Уведомление ещё не прочитано.</response>
+        [HttpDelete("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+        {
+            await _notificationService.DeleteAsync(User.GetUserId(), id, cancellationToken);
+            return NoContent();
+        }
     }
 }

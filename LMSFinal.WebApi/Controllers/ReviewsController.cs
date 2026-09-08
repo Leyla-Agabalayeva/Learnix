@@ -91,5 +91,23 @@ namespace LMSFinal.WebApi.Controllers
             await _reviewService.DeleteAsync(User.GetUserId(), id, cancellationToken);
             return NoContent();
         }
+
+        /// <param name="id">Идентификатор отзыва.</param>
+        /// <param name="request">Текст ответа преподавателя.</param>
+        /// <param name="lang">Язык названия курса в ответе.</param>
+        /// <param name="cancellationToken">Токен отмены запроса.</param>
+        /// <response code="200">Ответ сохранён.</response>
+        /// <response code="403">Отзыв относится не к курсу этого преподавателя.</response>
+        /// <response code="404">Отзыв не найден.</response>
+        [HttpPut("reviews/{id:guid}/reply")]
+        [Authorize(Roles = "Instructor")]
+        [ProducesResponseType(typeof(ApiResponse<InstructorReviewDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Reply(
+            Guid id, [FromBody] ReplyToReviewRequest request, [FromQuery] LanguageCode lang = LanguageCode.EN, CancellationToken cancellationToken = default)
+        {
+            var review = await _reviewService.ReplyAsync(User.GetUserId(), id, lang, request, cancellationToken);
+            return Success(review);
+        }
     }
 }

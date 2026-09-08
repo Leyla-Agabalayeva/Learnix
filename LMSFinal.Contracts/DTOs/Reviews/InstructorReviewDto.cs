@@ -10,5 +10,7 @@ namespace LMSFinal.Contracts.DTOs.Reviews
         int Rating,
         string? Comment,
         DateTime CreatedAt,
-        DateTime? UpdatedAt);
+        DateTime? UpdatedAt,
+        string? InstructorReply,
+        DateTime? InstructorRepliedAt);
 }

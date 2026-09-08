@@ -21,17 +21,20 @@ namespace LMSFinal.Application.Services
         private readonly IEnrollmentRepository _enrollmentRepository;
         private readonly ICourseRepository _courseRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly INotificationService _notificationService;
 
         public ReviewService(
             ICourseReviewRepository courseReviewRepository,
             IEnrollmentRepository enrollmentRepository,
             ICourseRepository courseRepository,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            INotificationService notificationService)
         {
             _courseReviewRepository = courseReviewRepository;
             _enrollmentRepository = enrollmentRepository;
             _courseRepository = courseRepository;
             _unitOfWork = unitOfWork;
+            _notificationService = notificationService;
         }
 
         public async Task<IReadOnlyList<CourseReviewDto>> GetByCourseIdAsync(Guid courseId, CancellationToken cancellationToken = default)
@@ -65,7 +68,9 @@ namespace LMSFinal.Application.Services
                     review.Rating,
                     review.Comment,
                     review.CreatedAt,
-                    review.UpdatedAt))
+                    review.UpdatedAt,
+                    review.InstructorReply,
+                    review.InstructorRepliedAt))
                 .ToList();
         }
 
@@ -96,6 +101,21 @@ namespace LMSFinal.Application.Services
 
             var created = await _courseReviewRepository.GetByStudentAndCourseAsync(studentId, courseId, cancellationToken)
                 ?? throw new NotFoundException("Review", review.Id);
+
+            var course = await _courseRepository.GetWithDetailsAsync(courseId, cancellationToken);
+            if (course is not null)
+            {
+                var courseTitle = TranslationResolver.Resolve(course.Translations, LanguageCode.EN, t => t.LanguageCode)?.Title
+                    ?? course.Id.ToString();
+
+                await _notificationService.NotifyAsync(
+                    course.InstructorId,
+                    "New review",
+                    $"{created.Student.FirstName} {created.Student.LastName}".Trim() +
+                        $" left a {request.Rating}-star review on \"{courseTitle}\".",
+                    NotificationType.NewReview,
+                    cancellationToken);
+            }
 
             return MapToDto(created);
         }
@@ -131,6 +151,46 @@ namespace LMSFinal.Application.Services
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
+        public async Task<InstructorReviewDto> ReplyAsync(
+            Guid instructorId, Guid reviewId, LanguageCode language, ReplyToReviewRequest request, CancellationToken cancellationToken = default)
+        {
+            var review = await _courseReviewRepository.GetByIdWithCourseAsync(reviewId, cancellationToken)
+                ?? throw new NotFoundException("Review", reviewId);
+
+            if (review.Course.InstructorId != instructorId)
+            {
+                throw new ForbiddenAccessException("Отвечать можно только на отзывы к своим курсам.");
+            }
+
+            review.InstructorReply = request.Reply;
+            review.InstructorRepliedAt = DateTime.UtcNow;
+
+            _courseReviewRepository.Update(review);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            var courseTitle = TranslationResolver.Resolve(review.Course.Translations, language, t => t.LanguageCode)?.Title ?? "—";
+
+            await _notificationService.NotifyAsync(
+                review.StudentId,
+                "Instructor replied",
+                $"The instructor replied to your review on \"{courseTitle}\".",
+                NotificationType.ReviewReply,
+                cancellationToken);
+
+            return new InstructorReviewDto(
+                review.Id,
+                review.CourseId,
+                courseTitle,
+                review.StudentId,
+                $"{review.Student.FirstName} {review.Student.LastName}".Trim(),
+                review.Rating,
+                review.Comment,
+                review.CreatedAt,
+                review.UpdatedAt,
+                review.InstructorReply,
+                review.InstructorRepliedAt);
+        }
+
         // --- helpers ---
 
         private static void EnsureOwnership(CourseReview review, Guid studentId)
@@ -149,7 +209,9 @@ namespace LMSFinal.Application.Services
             review.Rating,
             review.Comment,
             review.CreatedAt,
-            review.UpdatedAt);
+            review.UpdatedAt,
+            review.InstructorReply,
+            review.InstructorRepliedAt);
     }
 
 }

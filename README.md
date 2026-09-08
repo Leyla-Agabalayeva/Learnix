@@ -61,6 +61,16 @@ the only endpoint in the system that's open without authorization.
   materials, and homepage banners are all uploaded through the browser
   (picked from disk, no URL typing) and stored in MinIO, an S3-compatible
   object store running alongside the app.
+- **Live notifications.** A bell icon in the navbar shows unread notifications
+  (new enrollment, new review, quiz result, certificate issued, instructor
+  reply) and pushes new ones instantly over SignalR — no polling, no page
+  reload. The same event is also persisted, so the history survives a refresh.
+- **Instructors can reply to reviews.** A reply is posted inline under the
+  review, on the same page students see it, and triggers a notification back
+  to the student.
+- **Certificates carry a scannable QR code**, both in the downloaded PDF and
+  on the certificate's own page, linking straight to the public verification
+  page for that certificate number.
 - **Password reset by email.** "Forgot password?" sends a real email through
   Gmail SMTP with a one-time reset link.
 - **Dark theme.** Follows the system preference by default, with a manual
@@ -83,7 +93,9 @@ the only endpoint in the system that's open without authorization.
 | Email | Gmail SMTP (password reset links) |
 | Validation | FluentValidation |
 | Mapping | AutoMapper |
+| Real-time | SignalR (live notifications) |
 | PDF | QuestPDF |
+| QR codes | QRCoder (certificate PDF and page), qrcodejs (frontend, vendored locally) |
 | Charts | Chart.js (admin dashboard only, vendored locally) |
 | Tests | xUnit, Moq |
 | Frontend | Vanilla JS (ES modules), Fetch API, CSS Custom Properties |
@@ -126,6 +138,9 @@ without knowing EF Core exists.
 - **`IFileStorageService`** — a thin abstraction over MinIO, shared by
   avatar upload, course thumbnails, lesson materials, certificate caching,
   and the homepage banner carousel.
+- **`INotificationPublisher`** — a thin abstraction over SignalR, so
+  `NotificationService` can push a live update without `Application` knowing
+  a real-time layer exists at all.
 
 ---
 
@@ -302,7 +317,9 @@ Groups at a glance:
 | `/api/certificates` | my certificates, cached PDF download, **public verification by number** |
 | `/api/hero-slides` | homepage banner carousel (public read) |
 | `/api/admin` | dashboard stats, user management, course moderation, banner upload |
-| `/api/reviews`, `/api/wishlist`, `/api/gradebook`, `/api/analytics` | reviews, wishlist, gradebook, analytics |
+| `/api/reviews`, `/api/wishlist`, `/api/gradebook`, `/api/analytics` | reviews (including instructor replies), wishlist, gradebook, analytics |
+| `/api/notifications` | notification history, mark as read, delete a read notification |
+| `/hubs/notifications` | SignalR hub — live push of new notifications to the signed-in user |
 
 ### How security works
 
@@ -410,6 +427,14 @@ the cart.
 when a course's real rating and review count both clear a threshold —
 there's no `IsBestseller` flag an instructor can just flip on.
 
+**Notification persistence and live delivery are two separate concerns.**
+`NotificationService.NotifyAsync` always writes to the database first — a
+notification exists whether or not the recipient is online. Live delivery
+is a second, optional step behind its own interface, `INotificationPublisher`,
+implemented with SignalR in the WebApi layer. `Application` depends only on
+the interface, so it has no idea SignalR exists — the same pattern already
+used for `IEmailSender` and `IFileStorageService`.
+
 **Explicit `DbSet.Update()` calls were removed from update paths that touch
 translations.** Calling `Update()` on an entity that's already tracked by the
 same `DbContext` walks its whole navigation graph and marks every reachable
@@ -428,9 +453,6 @@ and set `Id = Guid.Empty` on newly created translation rows so EF's own
 
 An honest list — these things are not done in this project:
 
-- **Notifications exist on the server but not in the UI.**
-  `NotificationsController` works, and events like "course completed" and
-  "quiz result" are created, but there's no screen for them.
 - **Certificate numbers are sequential** (`LMS-2026-000001`, `-000002`).
   Verification is public with no rate limiting, so brute-forcing could
   enumerate the list of graduates. Fixable with rate limiting.

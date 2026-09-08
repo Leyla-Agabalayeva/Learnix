@@ -102,14 +102,40 @@ function renderContinue(enrollments) {
     bar.style.width = `${active.progressPercentage}%`;
     progress.appendChild(bar);
 
+    const certificateHint = buildCertificateHint(active);
+
     const action = document.createElement('a');
     action.className = 'btn btn-primary mt-6';
     action.href = `/pages/lesson.html?courseId=${active.course.id}`;
     action.textContent = t('actions.continueLearning');
 
-    body.append(label, title, progressLabel, progress, action);
+    body.append(label, title, progressLabel, progress, ...(certificateHint ? [certificateHint] : []), action);
     card.append(thumb, body);
     container.appendChild(card);
+}
+
+/**
+ * Оценка «сколько уроков осталось» — прикидка по прогрессу и общему числу
+ * уроков курса, без похода на сервер за точным списком пройденных. Реальное
+ * условие выдачи сертификата (100% + все обязательные тесты) считает бэкенд —
+ * здесь только мотивирующая подсказка, не гарантия.
+ */
+function buildCertificateHint(enrollment) {
+    const lessonCount = enrollment.course.lessonCount;
+    if (!lessonCount || enrollment.progressPercentage >= 100) {
+        return null;
+    }
+
+    const remaining = Math.max(1, Math.ceil(lessonCount * (1 - enrollment.progressPercentage / 100)));
+
+    const hint = document.createElement('p');
+    hint.className = 'text-sm mt-2';
+    hint.style.opacity = '0.85';
+    hint.textContent = remaining <= 1
+        ? t('student.almostCertificate')
+        : t('student.lessonsUntilCertificate', { count: format.plural(remaining, 'units.lesson') });
+
+    return hint;
 }
 
 function renderStats(enrollments, gradeBook, certificates) {

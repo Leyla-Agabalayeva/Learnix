@@ -13,6 +13,28 @@
 import { t } from '../localization.js';
 import * as format from '../format.js';
 
+// qrcode.min.js — обычный UMD-скрипт (не ES-модуль), грузим его лениво тегом
+// <script> при первом сертификате на странице, а не заранее на каждой из
+// вообще всех страниц сайта.
+let qrScriptPromise = null;
+function loadQrScript() {
+    if (window.QRCode) {
+        return Promise.resolve();
+    }
+
+    if (!qrScriptPromise) {
+        qrScriptPromise = new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = '/js/vendor/qrcode.min.js';
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error('Не удалось загрузить qrcode.min.js'));
+            document.head.appendChild(script);
+        });
+    }
+
+    return qrScriptPromise;
+}
+
 /**
  * Собирает разметку сертификата.
  *
@@ -98,8 +120,33 @@ function buildFooter(certificate) {
     hint.className = 'certificate-verify-hint';
     hint.textContent = t('certificate.verifyHint');
 
-    footer.append(number, hint);
+    footer.append(number, buildQrCode(certificate), hint);
     return footer;
+}
+
+/**
+ * QR ведёт на ту же страницу проверки, что и ссылка «Скопировать ссылку» —
+ * то же самое, что печатается в PDF (QuestPdfCertificateGenerator), чтобы
+ * скан с экрана и скан с распечатки давали один результат.
+ */
+function buildQrCode(certificate) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'certificate-qr';
+
+    const number = encodeURIComponent(certificate.certificateNumber ?? '');
+    const url = `${window.location.origin}/pages/verify-certificate.html?number=${number}`;
+
+    loadQrScript()
+        .then(() => {
+            // eslint-disable-next-line no-new
+            new window.QRCode(wrapper, { text: url, width: 84, height: 84, correctLevel: window.QRCode.CorrectLevel.M });
+        })
+        .catch(() => {
+            // Без QR сертификат всё равно рабочий: номер и ссылку можно скопировать вручную.
+            wrapper.remove();
+        });
+
+    return wrapper;
 }
 
 // ---------------------------------------------------------------------------

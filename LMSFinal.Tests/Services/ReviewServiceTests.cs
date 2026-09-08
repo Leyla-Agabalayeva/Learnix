@@ -1,4 +1,5 @@
 using LMSFinal.Application.Common.Exceptions;
+using LMSFinal.Application.Interfaces;
 using LMSFinal.Application.Services;
 using LMSFinal.Contracts.DTOs.Reviews;
 using LMSFinal.Domain.Entities;
@@ -15,13 +16,14 @@ namespace LMSFinal.Tests.Services
         private readonly Mock<IEnrollmentRepository> _enrollments = new();
         private readonly Mock<ICourseRepository> _courses = new();
         private readonly Mock<IUnitOfWork> _unitOfWork = new();
+        private readonly Mock<INotificationService> _notifications = new();
 
         private readonly Guid _studentId = Guid.NewGuid();
         private readonly Guid _otherStudentId = Guid.NewGuid();
         private readonly Guid _courseId = Guid.NewGuid();
 
         private ReviewService CreateSut() =>
-            new(_reviews.Object, _enrollments.Object, _courses.Object, _unitOfWork.Object);
+            new(_reviews.Object, _enrollments.Object, _courses.Object, _unitOfWork.Object, _notifications.Object);
 
         private static CreateReviewRequest Request(int rating = 5, string? comment = "Great course") =>
             new() { Rating = rating, Comment = comment };

@@ -170,6 +170,14 @@
     color: var(--color-text-muted);
 }
 
+.certificate-qr {
+    display: grid;
+    place-items: center;
+    padding: 0.25rem;
+    background-color: #fff;
+    border-radius: var(--radius-sm);
+}
+
 /* --- Страница одного сертификата ---------------------------------------- */
 
 .certificate-stage {

@@ -123,6 +123,7 @@
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
     text-decoration: none;
+    white-space: nowrap;
     transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
@@ -195,6 +196,124 @@
     font-weight: var(--weight-bold);
     line-height: 16px;
     text-align: center;
+}
+
+/* --- Колокольчик уведомлений ------------------------------------------------ */
+.navbar-bell {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: none;
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.navbar-bell:hover {
+    background-color: var(--color-surface-alt);
+}
+
+.notifications-dropdown {
+    width: 340px;
+    max-width: 90vw;
+    padding: 0;
+}
+
+.notifications-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+}
+
+.notifications-mark-all {
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--color-accent);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+}
+
+.notifications-list {
+    max-height: 360px;
+    overflow-y: auto;
+    padding: var(--space-2);
+}
+
+.notifications-empty {
+    padding: var(--space-4) var(--space-3);
+    text-align: center;
+}
+
+.notifications-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-1);
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast);
+}
+
+.notifications-item:hover {
+    background-color: var(--color-surface-alt);
+}
+
+.notifications-item.is-unread {
+    background-color: var(--color-accent-subtle);
+}
+
+.notifications-item-body {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-2) var(--space-3);
+    background: none;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+}
+
+.notifications-item-delete {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin: var(--space-2) var(--space-2) 0 0;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: none;
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.notifications-item-delete:hover {
+    background-color: var(--color-danger-subtle, var(--color-surface-alt));
+    color: var(--color-danger);
+}
+
+.notifications-item-title {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+}
+
+.notifications-item-message {
+    margin-top: 2px;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.notifications-item-time {
+    margin-top: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
 }
 
 .navbar-toggle {

@@ -10,6 +10,7 @@ import { api } from '../../api.js';
 import { getApiLanguage, t } from '../../localization.js';
 import { loader } from '../../components/loader.js';
 import { emptyState } from '../../components/empty-state.js';
+import { toast } from '../../components/toast.js';
 import * as format from '../../format.js';
 import { startInstructorPage, showLoadError } from './common.js';
 
@@ -121,7 +122,105 @@ function buildReview(review) {
         item.appendChild(text);
     }
 
+    const replyContainer = document.createElement('div');
+    replyContainer.className = 'instructor-reply-container';
+    item.appendChild(replyContainer);
+    renderReply(replyContainer, review);
+
     return item;
+}
+
+/**
+ * Ответ преподавателя — один на отзыв. Показываем либо уже сохранённый текст
+ * с кнопкой «Изменить», либо кнопку «Ответить», открывающую textarea прямо
+ * на месте (без перехода на отдельную страницу).
+ */
+function renderReply(container, review) {
+    container.innerHTML = '';
+
+    if (review.instructorReply) {
+        const box = document.createElement('div');
+        box.className = 'instructor-reply';
+
+        const label = document.createElement('p');
+        label.className = 'instructor-reply-label';
+        label.textContent = t('instructor.yourReply');
+        box.appendChild(label);
+
+        const text = document.createElement('p');
+        text.className = 'instructor-reply-text';
+        text.textContent = review.instructorReply;
+        box.appendChild(text);
+
+        const editLink = document.createElement('button');
+        editLink.type = 'button';
+        editLink.className = 'instructor-reply-edit';
+        editLink.textContent = t('actions.edit');
+        editLink.addEventListener('click', () => renderReplyEditor(container, review));
+        box.appendChild(editLink);
+
+        container.appendChild(box);
+        return;
+    }
+
+    const replyButton = document.createElement('button');
+    replyButton.type = 'button';
+    replyButton.className = 'btn btn-ghost btn-sm mt-2';
+    replyButton.textContent = t('instructor.writeReply');
+    replyButton.addEventListener('click', () => renderReplyEditor(container, review));
+    container.appendChild(replyButton);
+}
+
+function renderReplyEditor(container, review) {
+    container.innerHTML = '';
+
+    const editor = document.createElement('div');
+    editor.className = 'instructor-reply-editor';
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'input';
+    textarea.rows = 2;
+    textarea.placeholder = t('instructor.replyPlaceholder');
+    textarea.value = review.instructorReply ?? '';
+    editor.appendChild(textarea);
+
+    const actions = document.createElement('div');
+    actions.className = 'review-form-actions mt-2';
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'button';
+    submitButton.className = 'btn btn-primary btn-sm';
+    submitButton.textContent = t('instructor.submitReply');
+    submitButton.addEventListener('click', async () => {
+        const reply = textarea.value.trim();
+        if (!reply) {
+            return;
+        }
+
+        loader.button(submitButton, true);
+
+        try {
+            const updated = await api.put(`/reviews/${review.id}/reply`, { reply }, { query: { lang: getApiLanguage() } });
+            review.instructorReply = updated.instructorReply;
+            review.instructorRepliedAt = updated.instructorRepliedAt;
+            toast.success(t('instructor.replySubmitted'));
+            renderReply(container, review);
+        } catch (error) {
+            toast.fromApiError(error);
+            loader.button(submitButton, false);
+        }
+    });
+    actions.appendChild(submitButton);
+
+    const cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.className = 'btn btn-ghost btn-sm';
+    cancelButton.textContent = t('actions.cancel');
+    cancelButton.addEventListener('click', () => renderReply(container, review));
+    actions.appendChild(cancelButton);
+
+    editor.appendChild(actions);
+    container.appendChild(editor);
 }
 
 startInstructorPage(load);

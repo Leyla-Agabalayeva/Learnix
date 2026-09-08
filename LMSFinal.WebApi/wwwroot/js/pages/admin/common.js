@@ -8,6 +8,7 @@ import { onLanguageChange, t } from '../../localization.js';
 import { renderAdminSidebar } from '../../components/admin-sidebar.js';
 import { emptyState } from '../../components/empty-state.js';
 import { onReady } from '../../ready.js';
+import { connectNotifications } from '../../notifications.js';
 
 export function startAdminPage(load, { init, reloadOnLanguageChange = true } = {}) {
     onReady(async () => {
@@ -16,6 +17,7 @@ export function startAdminPage(load, { init, reloadOnLanguageChange = true } = {
         }
 
         renderAdminSidebar();
+        connectNotifications();
 
         await load();
         init?.();

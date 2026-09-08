@@ -1,5 +1,8 @@
 ﻿using LMSFinal.Application.Interfaces;
 using LMSFinal.Contracts.DTOs.Certificates;
+using LMSFinal.Infrastructure.Email;
+using Microsoft.Extensions.Options;
+using QRCoder;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -14,66 +17,92 @@ namespace LMSFinal.Infrastructure.Pdf
 
     public class QuestPdfCertificateGenerator : ICertificatePdfGenerator
     {
+        private readonly EmailSettings _emailSettings;
+
         static QuestPdfCertificateGenerator()
         {
 
             QuestPDF.Settings.License = LicenseType.Community;
         }
 
+        public QuestPdfCertificateGenerator(IOptions<EmailSettings> emailSettings)
+        {
+            _emailSettings = emailSettings.Value;
+        }
+
         public byte[] Generate(CertificateDto certificate)
         {
+            var verifyUrl = $"{_emailSettings.ClientBaseUrl}/pages/verify-certificate.html?number={Uri.EscapeDataString(certificate.CertificateNumber)}";
+            var qrCodeBytes = GenerateQrCode(verifyUrl);
             var document = Document.Create(container =>
             {
                 container.Page(page =>
                 {
                     page.Size(PageSizes.A4.Landscape());
-                    page.Margin(50);
+                    page.Margin(36);
                     page.DefaultTextStyle(x => x.FontFamily("Arial"));
 
                     page.Content().Column(column =>
                     {
-                        column.Spacing(18);
+                        column.Spacing(10);
 
-                        column.Item().AlignCenter().PaddingTop(20)
+                        column.Item().AlignCenter().PaddingTop(6)
                             .Text("CERTIFICATE OF COMPLETION")
-                            .FontSize(30).Bold().FontColor(Colors.Blue.Darken2);
+                            .FontSize(28).Bold().FontColor(Colors.Blue.Darken2);
 
                         column.Item().AlignCenter()
                             .Text("This certifies that")
-                            .FontSize(14).FontColor(Colors.Grey.Darken1);
+                            .FontSize(13).FontColor(Colors.Grey.Darken1);
 
                         column.Item().AlignCenter()
                             .Text(certificate.StudentName)
-                            .FontSize(26).Bold();
+                            .FontSize(24).Bold();
 
                         column.Item().AlignCenter()
                             .Text("has successfully completed the course")
-                            .FontSize(14).FontColor(Colors.Grey.Darken1);
+                            .FontSize(13).FontColor(Colors.Grey.Darken1);
 
                         column.Item().AlignCenter()
                             .Text(certificate.CourseTitle)
-                            .FontSize(22).Bold().FontColor(Colors.Blue.Darken2);
+                            .FontSize(20).Bold().FontColor(Colors.Blue.Darken2);
 
                         column.Item().AlignCenter()
                             .Text($"Instructor: {certificate.InstructorName}")
-                            .FontSize(12).FontColor(Colors.Grey.Darken1);
+                            .FontSize(11).FontColor(Colors.Grey.Darken1);
 
                         column.Item().AlignCenter()
                             .Text(certificate.CompletionDate.ToString("MMMM d, yyyy"))
-                            .FontSize(12);
+                            .FontSize(11);
 
-                        column.Item().PaddingTop(40).AlignCenter()
+                        column.Item().PaddingTop(12).AlignCenter()
                             .Text($"Certificate ID: {certificate.CertificateNumber}")
-                            .FontSize(11).FontColor(Colors.Grey.Darken2);
+                            .FontSize(10).FontColor(Colors.Grey.Darken2);
+
+                        // QR ведёт прямо на страницу верификации с уже подставленным номером —
+                        // тому, кто проверяет сертификат (например, работодателю), не нужно
+                        // вручную набирать длинный номер на другом устройстве.
+                        column.Item().AlignCenter().Width(70).Image(qrCodeBytes);
 
                         column.Item().AlignCenter()
-                            .Text("Verify at lmsfinal.example.com/certificates/verify")
-                            .FontSize(9).FontColor(Colors.Grey.Medium);
+                            .Text("Scan to verify, or visit the link below")
+                            .FontSize(8).FontColor(Colors.Grey.Medium);
+
+                        column.Item().AlignCenter()
+                            .Text(verifyUrl)
+                            .FontSize(8).FontColor(Colors.Grey.Medium);
                     });
                 });
             });
 
             return document.GeneratePdf();
+        }
+
+        private static byte[] GenerateQrCode(string content)
+        {
+            using var generator = new QRCodeGenerator();
+            using var data = generator.CreateQrCode(content, QRCodeGenerator.ECCLevel.M);
+            var pngQrCode = new PngByteQRCode(data);
+            return pngQrCode.GetGraphic(20);
         }
     }
 

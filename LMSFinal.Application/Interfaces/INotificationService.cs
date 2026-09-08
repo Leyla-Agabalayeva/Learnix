@@ -14,6 +14,7 @@ namespace LMSFinal.Application.Interfaces
 
         Task MarkAsReadAsync(Guid userId, Guid notificationId, CancellationToken cancellationToken = default);
 
+        Task DeleteAsync(Guid userId, Guid notificationId, CancellationToken cancellationToken = default);
 
         Task NotifyAsync(Guid userId, string title, string message, NotificationType type, CancellationToken cancellationToken = default);
     }

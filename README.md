@@ -43,7 +43,9 @@ Creates courses with an uploaded cover image, builds the curriculum from
 modules and lessons via drag-and-drop, fills in content in all three
 languages at once (courses, modules, lessons, quizzes), attaches PDF
 materials to lessons, publishes, and sees analytics for their courses, the
-student list, and reviews.
+student list, and reviews. Can also generate a quiz draft from a lesson's
+content with one click — a trilingual (AZ/EN/RU) set of questions from an
+LLM, always editable before saving, never auto-published.
 
 ### Admin
 A dedicated panel (own layout, own navigation) for platform-wide
@@ -71,6 +73,10 @@ the only endpoint in the system that's open without authorization.
 - **Certificates carry a scannable QR code**, both in the downloaded PDF and
   on the certificate's own page, linking straight to the public verification
   page for that certificate number.
+- **AI-assisted quiz drafting.** An instructor can generate a set of
+  multiple-choice questions from a lesson's actual content in one click —
+  translated into all three languages at once. It's a starting point, not
+  an autopilot: nothing saves until the instructor reviews and edits it.
 - **Password reset by email.** "Forgot password?" sends a real email through
   Gmail SMTP with a one-time reset link.
 - **Dark theme.** Follows the system preference by default, with a manual
@@ -94,6 +100,7 @@ the only endpoint in the system that's open without authorization.
 | Validation | FluentValidation |
 | Mapping | AutoMapper |
 | Real-time | SignalR (live notifications) |
+| AI | DeepSeek API (trilingual quiz drafting for instructors) |
 | PDF | QuestPDF |
 | QR codes | QRCoder (certificate PDF and page), qrcodejs (frontend, vendored locally) |
 | Charts | Chart.js (admin dashboard only, vendored locally) |
@@ -141,6 +148,9 @@ without knowing EF Core exists.
 - **`INotificationPublisher`** — a thin abstraction over SignalR, so
   `NotificationService` can push a live update without `Application` knowing
   a real-time layer exists at all.
+- **`IQuizGenerationService`** — a thin abstraction over the DeepSeek API,
+  same pattern: `Application` asks for a set of questions and gets one back,
+  with no idea which LLM (or that an LLM at all) produced it.
 
 ---
 
@@ -313,7 +323,7 @@ Groups at a glance:
 | `/api/modules`, `/api/lessons` | course curriculum, reordering, PDF material upload |
 | `/api/enrollments` | enrolling, "my courses" |
 | `/api/progress` | marking a lesson done, completion percentage, "continue" |
-| `/api/quizzes` | quizzes and **server-side** answer checking, multilingual editor payload |
+| `/api/quizzes` | quizzes and **server-side** answer checking, multilingual editor payload, AI-generated draft questions |
 | `/api/certificates` | my certificates, cached PDF download, **public verification by number** |
 | `/api/hero-slides` | homepage banner carousel (public read) |
 | `/api/admin` | dashboard stats, user management, course moderation, banner upload |
@@ -434,6 +444,12 @@ is a second, optional step behind its own interface, `INotificationPublisher`,
 implemented with SignalR in the WebApi layer. `Application` depends only on
 the interface, so it has no idea SignalR exists — the same pattern already
 used for `IEmailSender` and `IFileStorageService`.
+
+**AI-generated quiz questions never save themselves.** `POST /api/quizzes/generate`
+returns a draft — the same `QuestionInput` shape the manual quiz builder
+already produces — and the instructor still has to hit "Save" after
+reviewing it. There's no path from a lesson's content straight into a
+published quiz without a human in between.
 
 **Explicit `DbSet.Update()` calls were removed from update paths that touch
 translations.** Calling `Update()` on an entity that's already tracked by the

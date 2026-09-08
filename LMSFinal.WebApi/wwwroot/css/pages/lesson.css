@@ -140,7 +140,7 @@
 .lesson-body {
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
-    color: var(--color-slate-800);
+    color: var(--color-text);
 }
 
     /* Содержимое урока приходит как HTML от инструктора: селекторы по тегам,
@@ -168,7 +168,7 @@
         padding: 0.15em 0.4em;
         font-family: var(--font-mono);
         font-size: 0.9em;
-        background-color: var(--color-slate-100);
+        background-color: var(--color-surface-alt);
         border-radius: var(--radius-sm);
     }
 

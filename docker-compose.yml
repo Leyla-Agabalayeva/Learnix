@@ -76,6 +76,8 @@ services:
       Storage__SecretKey: "${MINIO_ROOT_PASSWORD}"
       Storage__UseSsl: "false"
       Storage__PublicBaseUrl: "http://localhost:9000"
+      DeepSeek__ApiKey: "${DEEPSEEK_API_KEY}"
+      DeepSeek__Model: "deepseek-chat"
     ports:
       - "5204:8080"
 

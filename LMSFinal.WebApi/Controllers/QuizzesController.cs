@@ -15,10 +15,25 @@ namespace LMSFinal.WebApi.Controllers
     public class QuizzesController : ApiControllerBase
     {
         private readonly IQuizService _quizService;
+        private readonly IQuizGenerationService _quizGenerationService;
 
-        public QuizzesController(IQuizService quizService)
+        public QuizzesController(IQuizService quizService, IQuizGenerationService quizGenerationService)
         {
             _quizService = quizService;
+            _quizGenerationService = quizGenerationService;
+        }
+
+        /// <param name="request">Текст урока и количество вопросов.</param>
+        /// <param name="cancellationToken">Токен отмены запроса.</param>
+        /// <response code="200">Черновик вопросов на AZ/EN/RU, сгенерированный AI — ещё не сохранён.</response>
+        [HttpPost("generate")]
+        [Authorize(Roles = "Instructor")]
+        [ProducesResponseType(typeof(ApiResponse<IReadOnlyList<QuestionInput>>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Generate([FromBody] GenerateQuizRequest request, CancellationToken cancellationToken)
+        {
+            var questions = await _quizGenerationService.GenerateAsync(
+                request.LessonContent, request.QuestionCount, cancellationToken);
+            return Success(questions);
         }
 
         /// <param name="request">Тест, вопросы и варианты ответов.</param>

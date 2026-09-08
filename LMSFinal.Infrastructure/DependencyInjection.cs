@@ -1,4 +1,5 @@
 ﻿using LMSFinal.Application.Interfaces;
+using LMSFinal.Infrastructure.AI;
 using LMSFinal.Infrastructure.Email;
 using LMSFinal.Infrastructure.Identity;
 using LMSFinal.Infrastructure.Pdf;
@@ -54,6 +55,9 @@ namespace LMSFinal.Infrastructure
                 .Build());
 
             services.AddScoped<IFileStorageService, MinioFileStorageService>();
+
+            services.Configure<DeepSeekSettings>(configuration.GetSection("DeepSeek"));
+            services.AddHttpClient<IQuizGenerationService, DeepSeekQuizGenerationService>();
 
             services.AddAuthentication(options =>
             {

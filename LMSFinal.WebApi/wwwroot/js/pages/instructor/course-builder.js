@@ -535,6 +535,42 @@ async function openQuizForm(module, lesson) {
     addQuestionButton.addEventListener('click', () => addQuestionEntry(null));
 
     container.appendChild(addQuestionButton);
+    const generateButton = document.createElement('button');
+    generateButton.type = 'button';
+    generateButton.className = 'btn btn-secondary mt-2';
+    generateButton.textContent = t('builder.generateWithAi');
+    generateButton.addEventListener('click', async () => {
+        generateButton.disabled = true;
+        generateButton.textContent = '...';
+
+        try {
+            // lesson.title не существует — заголовок и текст урока лежат в
+            // lesson.translations (см. pickText чуть ниже в этом файле).
+            // Без реального содержания урока DeepSeek не «отказывается»
+            // отвечать, а выдумывает случайную тему — это опаснее пустого
+            // результата, поэтому content обязателен, а не опционален.
+            const lessonTitle = pickText(lesson.translations, 'title');
+            const lessonBody = pickText(lesson.translations, 'content')
+                .replace(/<[^>]+>/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            // Бэкенд сам возвращает переводы на AZ/EN/RU для каждого вопроса —
+            // язык интерфейса тут ни при чём, конструктор тестов всегда трёхъязычный.
+            const result = await api.post('/quizzes/generate', {
+                lessonContent: lessonBody ? `${lessonTitle}\n\n${lessonBody}` : lessonTitle,
+                questionCount: 5
+            });
+            result.forEach((q) => addQuestionEntry(q));
+        } catch (error) {
+            toast.fromApiError(error);
+        } finally {
+            generateButton.disabled = false;
+            generateButton.textContent = t('builder.generateWithAi');
+        }
+    });
+
+    container.appendChild(generateButton);
 
     function addAnswerEntry(question, answerData) {
         const answerRoot = document.createElement('div');

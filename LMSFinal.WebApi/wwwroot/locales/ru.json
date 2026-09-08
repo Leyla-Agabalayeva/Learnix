@@ -499,6 +499,7 @@
     "points": "Баллы за вопрос",
     "question": "Вопрос",
     "addQuestion": "Добавить вопрос",
+    "generateWithAi": "Сгенерировать через AI",
     "removeQuestion": "Удалить вопрос",
     "addAnswer": "Добавить вариант",
     "removeAnswer": "Удалить вариант",

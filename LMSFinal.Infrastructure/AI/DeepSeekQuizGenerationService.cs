@@ -1,4 +1,5 @@
-﻿using LMSFinal.Application.Interfaces;
+﻿using LMSFinal.Application.Common.Exceptions;
+using LMSFinal.Application.Interfaces;
 using LMSFinal.Contracts.DTOs.Quizzes;
 using LMSFinal.Domain.Enums;
 using Microsoft.Extensions.Options;
@@ -27,8 +28,36 @@ namespace LMSFinal.Infrastructure.AI
             _settings = settings.Value;
         }
 
+        // DeepSeek изредка отдаёт структурно битый JSON (лишняя/пропущенная скобка
+        // где-то в середине) — не из-за нехватки токенов, а просто самой модели
+        // иногда "не везёт" на конкретной генерации. Повторный запрос почти всегда
+        // проходит с первого раза, так что один автоматический retry прячет эту
+        // нестабильность от преподавателя вместо того, чтобы показывать ему ошибку
+        // и заставлять жать кнопку самому.
+        private const int MaxAttempts = 2;
+
         public async Task<IReadOnlyList<QuestionInput>> GenerateAsync(
             string lessonContent, int questionCount, CancellationToken cancellationToken = default)
+        {
+            AiGenerationException? lastFailure = null;
+
+            for (var attempt = 1; attempt <= MaxAttempts; attempt++)
+            {
+                try
+                {
+                    return await GenerateOnceAsync(lessonContent, questionCount, cancellationToken);
+                }
+                catch (AiGenerationException ex)
+                {
+                    lastFailure = ex;
+                }
+            }
+
+            throw lastFailure!;
+        }
+
+        private async Task<IReadOnlyList<QuestionInput>> GenerateOnceAsync(
+            string lessonContent, int questionCount, CancellationToken cancellationToken)
         {
             var prompt = BuildPrompt(lessonContent, questionCount);
 
@@ -43,20 +72,43 @@ namespace LMSFinal.Infrastructure.AI
                     new { role = "system", content = "You generate quiz questions and reply with JSON only, no markdown." },
                     new { role = "user", content = prompt }
                 },
-                response_format = new { type = "json_object" }
+                response_format = new { type = "json_object" },
+                // 5 вопросов × 3 языка × 4 варианта ответа — это ощутимо больше текста, чем
+                // модель кладёт в дефолтный бюджет токенов. Без явного max_tokens DeepSeek
+                // изредка обрывал JSON на середине, и он падал на парсинге ниже.
+                max_tokens = 4096
             };
 
             request.Content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.SendAsync(request, cancellationToken);
-            response.EnsureSuccessStatusCode();
+            HttpResponseMessage response;
+            try
+            {
+                response = await _httpClient.SendAsync(request, cancellationToken);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new AiGenerationException("Не удалось связаться с AI-сервисом. Попробуйте ещё раз.", ex);
+            }
 
             var json = await response.Content.ReadFromJsonAsync<JsonElement>(cancellationToken: cancellationToken);
             var text = json.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString()
                 ?? "{\"questions\":[]}";
 
-            var wrapper = JsonSerializer.Deserialize<GeneratedWrapper>(text,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new GeneratedWrapper(new List<GeneratedQuestion>());
+            GeneratedWrapper wrapper;
+            try
+            {
+                wrapper = JsonSerializer.Deserialize<GeneratedWrapper>(text,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new GeneratedWrapper(new List<GeneratedQuestion>());
+            }
+            catch (JsonException ex)
+            {
+                // Сюда попадаем, когда сам ответ AI не распарсился — это внешний сбой,
+                // а не то, что студент/преподаватель прислал кривые данные. Дальше эта
+                // ошибка идёт как AiGenerationException, а не «проверьте форму».
+                throw new AiGenerationException("AI вернул некорректный ответ. Попробуйте сгенерировать ещё раз.", ex);
+            }
 
             return wrapper.Questions.Select(q => new QuestionInput(
                 ToTranslations(q.Translations, (lang, value) => new QuestionTranslationInput(lang, value)),

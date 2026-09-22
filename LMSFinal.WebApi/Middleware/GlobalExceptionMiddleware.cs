@@ -58,6 +58,14 @@ namespace LMSFinal.WebApi.Middleware
        StatusCodes.Status409Conflict,
        ApiResponse.Fail("Данные были изменены другим запросом. Обновите страницу и повторите.")),
 
+                // Отдельно от JsonException ниже: это НЕ "клиент прислал кривой JSON",
+                // а "внешний AI-сервис ответил, но результат нельзя разобрать" — DeepSeek
+                // изредка обрезает ответ по лимиту токенов. 502, а не 400: проблема на
+                // стороне апстрима, форма клиента тут ни при чём.
+                AiGenerationException ex => (
+                    StatusCodes.Status502BadGateway,
+                    ApiResponse.Fail(ex.Message)),
+
                 System.Text.Json.JsonException => (
                     StatusCodes.Status400BadRequest,
                     ApiResponse.Fail("Проверьте правильность заполнения полей формы.")),
@@ -69,6 +77,12 @@ namespace LMSFinal.WebApi.Middleware
             if (statusCode == StatusCodes.Status500InternalServerError)
             {
                 _logger.LogError(exception, "Unhandled exception on {Path}", context.Request.Path);
+            }
+            else if (exception is AiGenerationException)
+            {
+                // Не "unhandled" — но по-тихому такое лучше не проглатывать: без этого
+                // прошлый раз пришлось лезть в код, чтобы понять, что вообще случилось.
+                _logger.LogWarning(exception, "AI generation failed on {Path}", context.Request.Path);
             }
 
             context.Response.ContentType = "application/json";

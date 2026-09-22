@@ -311,6 +311,8 @@
     "continueLearning": "Continue learning",
     "continueEmpty": "You have not started any course yet",
     "continueEmptyHint": "Browse the catalogue and enrol in your first course.",
+    "allCoursesCompleted": "All your courses are completed",
+    "allCoursesCompletedHint": "Great work! Enrol in a new course to keep learning.",
     "lessonsUntilCertificate": "{count} left until your certificate",
     "almostCertificate": "One more step — finish the course to unlock your certificate",
     "inProgress": "In progress",

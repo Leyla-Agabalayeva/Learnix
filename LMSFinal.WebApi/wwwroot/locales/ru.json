@@ -327,6 +327,8 @@
     "continueLearning": "Продолжить обучение",
     "continueEmpty": "Вы ещё не начали ни одного курса",
     "continueEmptyHint": "Откройте каталог и запишитесь на первый курс.",
+    "allCoursesCompleted": "Все ваши курсы завершены",
+    "allCoursesCompletedHint": "Отличная работа! Запишитесь на новый курс, чтобы продолжить учиться.",
     "lessonsUntilCertificate": "{count} до сертификата",
     "almostCertificate": "Ещё немного — заверши курс, чтобы получить сертификат",
     "inProgress": "В процессе",

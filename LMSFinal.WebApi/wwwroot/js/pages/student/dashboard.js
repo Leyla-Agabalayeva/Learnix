@@ -55,10 +55,15 @@ function renderContinue(enrollments) {
         .sort((a, b) => b.progressPercentage - a.progressPercentage)[0];
 
     if (!active) {
+        // Пустое состояние — не одно и то же в двух случаях: студент никогда
+        // ничего не начинал (нейтральный призыв) или уже прошёл все свои курсы
+        // (это достижение, а не «начни уже что-нибудь» — текст должен это признавать).
+        const hasAnyEnrollment = enrollments.length > 0;
+
         emptyState.render(container, {
-            icon: '🚀',
-            title: t('student.continueEmpty'),
-            text: t('student.continueEmptyHint'),
+            icon: hasAnyEnrollment ? '🎉' : '🚀',
+            title: t(hasAnyEnrollment ? 'student.allCoursesCompleted' : 'student.continueEmpty'),
+            text: t(hasAnyEnrollment ? 'student.allCoursesCompletedHint' : 'student.continueEmptyHint'),
             action: { label: t('actions.explore'), href: '/pages/courses.html' }
         });
         return;

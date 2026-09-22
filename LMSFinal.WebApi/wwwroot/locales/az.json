@@ -311,6 +311,8 @@
     "continueLearning": "Öyrənməyə davam et",
     "continueEmpty": "Hələ heç bir kursa başlamamısınız",
     "continueEmptyHint": "Kataloqu açın və ilk kursunuza qoşulun.",
+    "allCoursesCompleted": "Bütün kurslarınız tamamlanıb",
+    "allCoursesCompletedHint": "Əla iş! Öyrənməyə davam etmək üçün yeni kursa qoşulun.",
     "lessonsUntilCertificate": "Sertifikata qədər {count}",
     "almostCertificate": "Bir addım qaldı — sertifikat üçün kursu bitirin",
     "inProgress": "Davam edir",

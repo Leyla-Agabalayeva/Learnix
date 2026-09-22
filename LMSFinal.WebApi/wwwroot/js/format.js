@@ -81,14 +81,29 @@ export function plural(count, key) {
     return `${number(value)} ${word}`;
 }
 
+// В браузерах со «small-icu» сборкой Intl нет полных данных для az-AZ, и
+// { month: 'long' } вместо названия месяца отдаёт «M07» и подобное — это
+// ограничение самого движка, а не наш формат. Проще прописать азербайджанские
+// названия месяцев вручную, чем тащить полифилл Intl ради одной локали.
+const AZ_MONTHS = [
+    'yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun',
+    'iyul', 'avqust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr'
+];
+
 export function date(value) {
     if (!value) {
         return '';
     }
 
+    const parsed = new Date(value);
+
+    if (getLanguage() === 'az') {
+        return `${parsed.getDate()} ${AZ_MONTHS[parsed.getMonth()]} ${parsed.getFullYear()}`;
+    }
+
     return new Intl.DateTimeFormat(locale(), {
         day: 'numeric', month: 'long', year: 'numeric'
-    }).format(new Date(value));
+    }).format(parsed);
 }
 
 /** Рейтинг с одним знаком: 5 → «5.0». */

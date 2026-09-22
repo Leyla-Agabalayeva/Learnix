@@ -221,9 +221,11 @@ namespace LMSFinal.Infrastructure.Identity
 
             if (!result.Succeeded)
             {
-
-                var errors = string.Join(" ", result.Errors.Select(e => e.Description));
-                return Result.Failure(errors);
+                // IdentityError.Description всегда на английском ("Invalid token." и т.п.) —
+                // это сообщения ASP.NET Identity, а не наши, и локализации не подлежат. Показываем
+                // единое сообщение в стиле остальных веток этого метода вместо английского текста
+                // посреди русского интерфейса.
+                return Result.Failure("Ссылка для сброса пароля недействительна или устарела.");
             }
 
             return Result.Success();

@@ -6,7 +6,7 @@
  */
 
 import { api } from '../../api.js';
-import { t } from '../../localization.js';
+import { t, getApiLanguage } from '../../localization.js';
 import { toast } from '../../components/toast.js';
 import { loader } from '../../components/loader.js';
 import { modal } from '../../components/modal.js';
@@ -99,7 +99,12 @@ function buildRow(category) {
 
 function pickName(translations) {
     const list = translations ?? [];
-    const match = list.find((item) => (item.languageCode ?? '').toUpperCase() === 'AZ') ?? list[0];
+    const current = getApiLanguage();
+
+    const match = list.find((item) => (item.languageCode ?? '').toUpperCase() === current)
+        ?? list.find((item) => (item.languageCode ?? '').toUpperCase() === 'AZ')
+        ?? list[0];
+
     return match?.name || '—';
 }
 

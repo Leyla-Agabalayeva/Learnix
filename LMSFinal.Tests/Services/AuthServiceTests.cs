@@ -237,7 +237,9 @@ namespace LMSFinal.Tests.Services
             });
 
             Assert.False(result.IsSuccess);
-            Assert.Contains("Invalid token.", result.Error);
+            // IdentityError.Description всегда на английском и не подлежит локализации —
+            // наружу должно уйти наше сообщение в едином стиле, а не "Invalid token." как есть.
+            Assert.Contains("Ссылка для сброса пароля недействительна", result.Error);
         }
 
         [Fact]

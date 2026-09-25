@@ -34,7 +34,18 @@ function render() {
     $('firstName').value = profile.firstName ?? '';
     $('lastName').value = profile.lastName ?? '';
     $('bio').value = profile.bio ?? '';
+    $('professionalTitle').value = profile.professionalTitle ?? '';
+    $('specialization').value = profile.specialization ?? '';
+    $('yearsOfExperience').value = profile.yearsOfExperience ?? '';
+    $('educationLevel').value = profile.educationLevel ?? '';
+    $('organization').value = profile.organization ?? '';
+    $('profileUrl').value = profile.profileUrl ?? '';
     $('email').value = profile.email ?? '';
+}
+
+/** Пустое поле уходит как null: сервер хранит «не указано», а не пустую строку. */
+function textOrNull(id) {
+    return $(id).value.trim() || null;
 }
 
 function renderAvatar() {
@@ -91,7 +102,13 @@ function bindForm() {
                 firstName: $('firstName').value.trim(),
                 lastName: $('lastName').value.trim(),
                 bio: $('bio').value.trim(),
-                avatarUrl: profile.avatarUrl
+                avatarUrl: profile.avatarUrl,
+                professionalTitle: textOrNull('professionalTitle'),
+                specialization: textOrNull('specialization'),
+                yearsOfExperience: $('yearsOfExperience').value === '' ? null : Number($('yearsOfExperience').value),
+                educationLevel: textOrNull('educationLevel'),
+                organization: textOrNull('organization'),
+                profileUrl: textOrNull('profileUrl')
             });
 
             // Имя в навбаре берётся из сохранённой сессии, а не из ответа /auth/me,
@@ -272,4 +289,4 @@ async function uploadAvatar(file) {
 
 // bindForm — в init: иначе после двух переключений языка форма
 // отправлялась бы трижды.
-startInstructorPage(load, { init: () => { bindForm(); bindAvatarClick(); } });
+startInstructorPage(load, { init: () => { bindForm(); bindAvatarClick(); } }); 

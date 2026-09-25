@@ -15,5 +15,11 @@ namespace LMSFinal.Contracts.DTOs.Auth
      IReadOnlyList<string> Roles,
      string? Bio,
      string? AvatarUrl,
-     DateTime CreatedAt);
+     DateTime CreatedAt,
+     string? ProfessionalTitle = null,
+     string? Specialization = null,
+     int? YearsOfExperience = null,
+     string? EducationLevel = null,
+     string? Organization = null,
+     string? ProfileUrl = null);
 }

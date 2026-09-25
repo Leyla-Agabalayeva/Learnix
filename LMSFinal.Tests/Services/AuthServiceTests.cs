@@ -59,6 +59,64 @@ namespace LMSFinal.Tests.Services
         }
 
         [Fact]
+        public async Task RegisterAsync_Instructor_SavesProfessionalProfile()
+        {
+            ApplicationUser? created = null;
+
+            _userManager.Setup(m => m.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync((ApplicationUser?)null);
+            _userManager
+                .Setup(m => m.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+                .Callback<ApplicationUser, string>((user, _) => created = user)
+                .ReturnsAsync(IdentityResult.Success);
+            _userManager.Setup(m => m.AddToRoleAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+
+            var request = RegisterRequest(UserRole.Instructor) with
+            {
+                ProfessionalTitle = "  Senior .NET Developer  ",
+                Specialization = "Backend",
+                YearsOfExperience = 7,
+                EducationLevel = "Master",
+                Organization = "   ",
+                Bio = "Seven years of building APIs."
+            };
+
+            var result = await CreateSut().RegisterAsync(request);
+
+            Assert.True(result.IsSuccess);
+            Assert.NotNull(created);
+            Assert.Equal("Senior .NET Developer", created!.ProfessionalTitle);
+            Assert.Equal("Backend", created.Specialization);
+            Assert.Equal(7, created.YearsOfExperience);
+            Assert.Equal("Master", created.EducationLevel);
+            Assert.Null(created.Organization);
+        }
+
+        [Fact]
+        public async Task RegisterAsync_Student_IgnoresProfessionalProfileFields()
+        {
+            ApplicationUser? created = null;
+
+            _userManager.Setup(m => m.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync((ApplicationUser?)null);
+            _userManager
+                .Setup(m => m.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+                .Callback<ApplicationUser, string>((user, _) => created = user)
+                .ReturnsAsync(IdentityResult.Success);
+            _userManager.Setup(m => m.AddToRoleAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+
+            var request = RegisterRequest(UserRole.Student) with
+            {
+                ProfessionalTitle = "Should be ignored",
+                YearsOfExperience = 10
+            };
+
+            await CreateSut().RegisterAsync(request);
+
+            Assert.NotNull(created);
+            Assert.Null(created!.ProfessionalTitle);
+            Assert.Null(created.YearsOfExperience);
+        }
+
+        [Fact]
         public async Task RegisterAsync_AdminRole_IsRejected()
         {
             var result = await CreateSut().RegisterAsync(RegisterRequest(UserRole.Admin));

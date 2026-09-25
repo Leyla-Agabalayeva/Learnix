@@ -157,6 +157,59 @@
     color: var(--color-text-muted);
 }
 
+/* --- Профессиональный профиль преподавателя ---------------------------------
+   Раскрывается при выборе роли «Преподаватель». Форме нужно больше места, чем
+   обычной, поэтому колонка расширяется вместе с блоком.                    */
+
+.auth-box {
+    transition: max-width var(--transition-fast);
+}
+
+.auth-box.is-wide {
+    max-width: 540px;
+}
+
+.auth-section {
+    min-width: 0;
+    margin: var(--space-6) 0 var(--space-4);
+    padding: var(--space-5);
+    background-color: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    animation: auth-section-in 0.25s ease-out;
+}
+
+.auth-section-title {
+    padding: 0 var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.auth-section-hint {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.field-optional {
+    font-weight: 400;
+    color: var(--color-text-muted);
+}
+
+@keyframes auth-section-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* --- Демо-аккаунты ----------------------------------------------------------
    Нужны на защите: подставляют логин и пароль в один клик, чтобы не набирать
    их руками перед комиссией.                                              */

@@ -18,6 +18,26 @@ namespace LMSFinal.Domain.Entities
         /// <summary>Краткая биография — заполняется в основном инструкторами.</summary>
         public string? Bio { get; set; }
 
+        // Профессиональный профиль — заполняется только преподавателями при регистрации.
+        // У студентов остаётся null: эти данные им не нужны и не запрашиваются.
+
+        /// <summary>Должность или профессиональный заголовок, например «Senior .NET Developer».</summary>
+        public string? ProfessionalTitle { get; set; }
+
+        /// <summary>Основная область экспертизы, о которой преподаватель будет вести курсы.</summary>
+        public string? Specialization { get; set; }
+
+        public int? YearsOfExperience { get; set; }
+
+        /// <summary>Уровень образования: Bachelor, Master, Doctorate и т.д.</summary>
+        public string? EducationLevel { get; set; }
+
+        /// <summary>Текущее место работы (необязательно).</summary>
+        public string? Organization { get; set; }
+
+        /// <summary>Ссылка на LinkedIn, GitHub или личный сайт (необязательно).</summary>
+        public string? ProfileUrl { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Навигационные свойства

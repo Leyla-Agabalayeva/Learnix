@@ -53,6 +53,19 @@ namespace LMSFinal.Infrastructure.Identity
                 LastName = request.LastName
             };
 
+            // Профессиональный профиль есть только у преподавателя; у студента поля остаются null,
+            // даже если клиент прислал лишнее.
+            if (request.Role == UserRole.Instructor)
+            {
+                user.Bio = Clean(request.Bio);
+                user.ProfessionalTitle = Clean(request.ProfessionalTitle);
+                user.Specialization = Clean(request.Specialization);
+                user.YearsOfExperience = request.YearsOfExperience;
+                user.EducationLevel = Clean(request.EducationLevel);
+                user.Organization = Clean(request.Organization);
+                user.ProfileUrl = Clean(request.ProfileUrl);
+            }
+
             var createResult = await _userManager.CreateAsync(user, request.Password);
             if (!createResult.Succeeded)
             {
@@ -129,8 +142,19 @@ namespace LMSFinal.Infrastructure.Identity
             user.FirstName = request.FirstName.Trim();
             user.LastName = request.LastName.Trim();
 
-            user.Bio = string.IsNullOrWhiteSpace(request.Bio) ? null : request.Bio.Trim();
-            user.AvatarUrl = string.IsNullOrWhiteSpace(request.AvatarUrl) ? null : request.AvatarUrl.Trim();
+            user.Bio = Clean(request.Bio);
+            user.AvatarUrl = Clean(request.AvatarUrl);
+
+            // Данные преподавателя обновляем только у преподавателя.
+            if (await _userManager.IsInRoleAsync(user, UserRole.Instructor.ToString()))
+            {
+                user.ProfessionalTitle = Clean(request.ProfessionalTitle);
+                user.Specialization = Clean(request.Specialization);
+                user.YearsOfExperience = request.YearsOfExperience;
+                user.EducationLevel = Clean(request.EducationLevel);
+                user.Organization = Clean(request.Organization);
+                user.ProfileUrl = Clean(request.ProfileUrl);
+            }
 
             var result = await _userManager.UpdateAsync(user);
 
@@ -250,9 +274,14 @@ namespace LMSFinal.Infrastructure.Identity
             return Encoding.UTF8.GetString(Convert.FromBase64String(base64));
         }
 
+        private static string? Clean(string? value) =>
+            string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+
         private static CurrentUserResponse MapProfile(ApplicationUser user, IEnumerable<string> roles) =>
             new(user.Id, user.Email!, user.FirstName, user.LastName, roles.ToList(),
-                user.Bio, user.AvatarUrl, user.CreatedAt);
+                user.Bio, user.AvatarUrl, user.CreatedAt,
+                user.ProfessionalTitle, user.Specialization, user.YearsOfExperience,
+                user.EducationLevel, user.Organization, user.ProfileUrl);
     }
 
 }

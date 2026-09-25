@@ -80,6 +80,83 @@
                         <p class="field-error hidden" id="password-error"></p>
                     </div>
 
+                    <!-- Профессиональный профиль: показывается только преподавателю.
+                         Имена полей совпадают с ключами ответа API (camelCase), чтобы
+                         form-errors.js мог разложить серверные ошибки по полям. -->
+                    <fieldset class="auth-section hidden" id="instructor-fields" disabled>
+                        <legend class="auth-section-title" data-i18n="auth.instructor.sectionTitle">Peşəkar profil</legend>
+                        <p class="auth-section-hint" data-i18n="auth.instructor.sectionHint"></p>
+
+                        <div class="flex gap-3">
+                            <div class="field w-full">
+                                <label class="field-label" for="professionalTitle" data-i18n="auth.instructor.title">Vəzifə</label>
+                                <input class="input" id="professionalTitle" name="professionalTitle" type="text" maxlength="150"
+                                       autocomplete="organization-title" aria-describedby="professionalTitle-error"
+                                       data-i18n-placeholder="auth.instructor.titlePlaceholder">
+                                <p class="field-error hidden" id="professionalTitle-error"></p>
+                            </div>
+
+                            <div class="field w-full">
+                                <label class="field-label" for="specialization" data-i18n="auth.instructor.specialization">İxtisas</label>
+                                <input class="input" id="specialization" name="specialization" type="text" maxlength="150"
+                                       aria-describedby="specialization-error"
+                                       data-i18n-placeholder="auth.instructor.specializationPlaceholder">
+                                <p class="field-error hidden" id="specialization-error"></p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <div class="field w-full">
+                                <label class="field-label" for="yearsOfExperience" data-i18n="auth.instructor.experience">İş stajı (il)</label>
+                                <input class="input" id="yearsOfExperience" name="yearsOfExperience" type="number"
+                                       min="0" max="60" inputmode="numeric" aria-describedby="yearsOfExperience-error">
+                                <p class="field-error hidden" id="yearsOfExperience-error"></p>
+                            </div>
+
+                            <div class="field w-full">
+                                <label class="field-label" for="educationLevel" data-i18n="auth.instructor.education">Təhsil</label>
+                                <select class="select" id="educationLevel" name="educationLevel" aria-describedby="educationLevel-error">
+                                    <option value="" data-i18n="auth.instructor.educationNone">Seçin</option>
+                                    <option value="HighSchool" data-i18n="auth.instructor.eduHighSchool">Orta təhsil</option>
+                                    <option value="Bachelor" data-i18n="auth.instructor.eduBachelor">Bakalavr</option>
+                                    <option value="Master" data-i18n="auth.instructor.eduMaster">Magistr</option>
+                                    <option value="Doctorate" data-i18n="auth.instructor.eduDoctorate">Doktorantura</option>
+                                    <option value="Other" data-i18n="auth.instructor.eduOther">Digər</option>
+                                </select>
+                                <p class="field-error hidden" id="educationLevel-error"></p>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="field-label" for="organization">
+                                <span data-i18n="auth.instructor.organization">İş yeri</span>
+                                <span class="field-optional" data-i18n="auth.instructor.optional">(könüllü)</span>
+                            </label>
+                            <input class="input" id="organization" name="organization" type="text" maxlength="150"
+                                   autocomplete="organization" aria-describedby="organization-error">
+                            <p class="field-error hidden" id="organization-error"></p>
+                        </div>
+
+                        <div class="field">
+                            <label class="field-label" for="bio" data-i18n="auth.instructor.bio">Özünüz haqqında</label>
+                            <textarea class="textarea" id="bio" name="bio" rows="4" maxlength="1000"
+                                      aria-describedby="bio-hint bio-error"
+                                      data-i18n-placeholder="auth.instructor.bioPlaceholder"></textarea>
+                            <p class="field-hint" id="bio-hint"><span id="bio-count">0</span> / 1000 · <span data-i18n="auth.instructor.bioHint"></span></p>
+                            <p class="field-error hidden" id="bio-error"></p>
+                        </div>
+
+                        <div class="field">
+                            <label class="field-label" for="profileUrl">
+                                <span data-i18n="auth.instructor.profileUrl">LinkedIn və ya sayt</span>
+                                <span class="field-optional" data-i18n="auth.instructor.optional">(könüllü)</span>
+                            </label>
+                            <input class="input" id="profileUrl" name="profileUrl" type="url" maxlength="500"
+                                   placeholder="https://" aria-describedby="profileUrl-error">
+                            <p class="field-error hidden" id="profileUrl-error"></p>
+                        </div>
+                    </fieldset>
+
                     <button class="btn btn-primary btn-block btn-lg mt-2" type="submit" id="submit"
                             data-i18n="actions.createAccount">Hesab yarat</button>
                 </form>

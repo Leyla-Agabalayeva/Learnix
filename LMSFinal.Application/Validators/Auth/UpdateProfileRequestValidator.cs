@@ -24,6 +24,23 @@ namespace LMSFinal.Application.Validators.Auth
 
                 .Must(BeAValidUrl).When(request => !string.IsNullOrWhiteSpace(request.AvatarUrl))
                 .WithMessage("Укажите корректную ссылку на изображение.");
+
+            // Поля преподавателя необязательны при редактировании (студент их не присылает),
+            // но если заполнены — проверяются так же, как при регистрации.
+            RuleFor(request => request.YearsOfExperience)
+                .InclusiveBetween(0, InstructorProfileRules.MaxYearsOfExperience)
+                .When(request => request.YearsOfExperience.HasValue)
+                .WithMessage($"Стаж должен быть от 0 до {InstructorProfileRules.MaxYearsOfExperience} лет.");
+
+            RuleFor(request => request.EducationLevel)
+                .Must(level => InstructorProfileRules.EducationLevels.Contains(level!))
+                .When(request => !string.IsNullOrWhiteSpace(request.EducationLevel))
+                .WithMessage("Некорректный уровень образования.");
+
+            RuleFor(request => request.ProfileUrl)
+                .Must(InstructorProfileRules.BeAValidWebUrl)
+                .When(request => !string.IsNullOrWhiteSpace(request.ProfileUrl))
+                .WithMessage("Укажите корректную ссылку (http:// или https://).");
         }
 
         private static bool BeAValidUrl(string? value) =>

@@ -24,6 +24,29 @@ namespace LMSFinal.Contracts.DTOs.Auth
 
         [Required]
         public UserRole Role { get; init; }
+
+        // Профессиональный профиль. Обязателен только при Role == Instructor
+        // (правила — в RegisterRequestValidator); студенты эти поля не присылают.
+
+        [MaxLength(1000)]
+        public string? Bio { get; init; }
+
+        [MaxLength(150)]
+        public string? ProfessionalTitle { get; init; }
+
+        [MaxLength(150)]
+        public string? Specialization { get; init; }
+
+        public int? YearsOfExperience { get; init; }
+
+        [MaxLength(50)]
+        public string? EducationLevel { get; init; }
+
+        [MaxLength(150)]
+        public string? Organization { get; init; }
+
+        [MaxLength(500)]
+        public string? ProfileUrl { get; init; }
     }
 
 }

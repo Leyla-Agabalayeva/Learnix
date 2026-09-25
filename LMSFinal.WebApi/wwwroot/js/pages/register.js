@@ -26,7 +26,59 @@ async function bootstrap() {
     prefillRoleFromQuery();
     renderLanguageSwitcher(document.getElementById('language-switcher'));
 
+    bindRoleToggle();
+    bindBioCounter();
     bindForm();
+}
+
+const currentRole = () => form().querySelector('input[name="role"]:checked').value;
+
+/**
+ * Поля профессионального профиля нужны только преподавателю. Скрытый fieldset
+ * ещё и disabled: браузер не проверяет и не отправляет то, что недоступно,
+ * поэтому студент не упирается в обязательные поля, которых не видит.
+ */
+function syncInstructorFields() {
+    const isInstructor = currentRole() === 'Instructor';
+    const section = document.getElementById('instructor-fields');
+
+    section.classList.toggle('hidden', !isInstructor);
+    section.disabled = !isInstructor;
+    document.querySelector('.auth-box').classList.toggle('is-wide', isInstructor);
+}
+
+function bindRoleToggle() {
+    form().querySelectorAll('input[name="role"]').forEach((radio) => {
+        radio.addEventListener('change', syncInstructorFields);
+    });
+
+    // Роль могла прийти из ?role=Instructor — подстраиваем форму под неё сразу.
+    syncInstructorFields();
+}
+
+function bindBioCounter() {
+    const bio = document.getElementById('bio');
+    const counter = document.getElementById('bio-count');
+
+    bio.addEventListener('input', () => {
+        counter.textContent = String(bio.value.length);
+    });
+}
+
+/** Значения полей преподавателя; пустые необязательные уходят как null, а не как пустая строка. */
+function readInstructorFields() {
+    const text = (id) => document.getElementById(id).value.trim() || null;
+    const years = document.getElementById('yearsOfExperience').value;
+
+    return {
+        professionalTitle: text('professionalTitle'),
+        specialization: text('specialization'),
+        yearsOfExperience: years === '' ? null : Number(years),
+        educationLevel: text('educationLevel'),
+        organization: text('organization'),
+        bio: text('bio'),
+        profileUrl: text('profileUrl')
+    };
 }
 
 /**
@@ -55,7 +107,8 @@ function bindForm() {
             lastName: document.getElementById('lastName').value.trim(),
             email: document.getElementById('email').value.trim(),
             password: document.getElementById('password').value,
-            role: form().querySelector('input[name="role"]:checked').value
+            role: currentRole(),
+            ...(currentRole() === 'Instructor' ? readInstructorFields() : {})
         };
 
         clearFormErrors(form());

@@ -16,5 +16,24 @@ namespace LMSFinal.Contracts.DTOs.Auth
 
         [MaxLength(500)]
         public string? AvatarUrl { get; init; }
+
+        // Профессиональные данные преподавателя; для студента игнорируются.
+
+        [MaxLength(150)]
+        public string? ProfessionalTitle { get; init; }
+
+        [MaxLength(150)]
+        public string? Specialization { get; init; }
+
+        public int? YearsOfExperience { get; init; }
+
+        [MaxLength(50)]
+        public string? EducationLevel { get; init; }
+
+        [MaxLength(150)]
+        public string? Organization { get; init; }
+
+        [MaxLength(500)]
+        public string? ProfileUrl { get; init; }
     }
 }

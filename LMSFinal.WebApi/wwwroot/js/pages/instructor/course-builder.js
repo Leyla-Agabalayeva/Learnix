@@ -725,14 +725,48 @@ async function openQuizForm(module, lesson) {
 
     cancelButton.addEventListener('click', () => dialog.close());
 
-    saveButton.addEventListener('click', async () => {
-        const questionsValid = questionEntries.length > 0 && questionEntries.every((question) =>
-            question.tabs.validate() &&
-            question.answers.length >= 2 &&
-            question.answers.every((answer) => answer.tabs.validate()));
+    /**
+     * Первая найденная проблема формы — с конкретным сообщением. Раньше любая ошибка
+     * (нет вопросов, пустой текст вопроса, мало вариантов) выдавала одну и ту же фразу
+     * про название теста, и преподаватель не понимал, что именно исправлять.
+     */
+    function findQuizProblem() {
+        if (!quizTabs.validate()) {
+            return t('builder.atLeastOneLanguage');
+        }
 
-        if (!quizTabs.validate() || !questionsValid) {
-            toast.warning(t('builder.atLeastOneLanguage'));
+        if (questionEntries.length === 0) {
+            return t('builder.quizNeedsQuestion');
+        }
+
+        for (const [index, question] of questionEntries.entries()) {
+            const number = index + 1;
+
+            if (!question.tabs.validate()) {
+                return t('builder.questionTextRequired', { number });
+            }
+
+            if (question.answers.length < 2) {
+                return t('builder.questionNeedsAnswers', { number });
+            }
+
+            if (!question.answers.every((answer) => answer.tabs.validate())) {
+                return t('builder.answerTextRequired', { number });
+            }
+
+            if (!question.answers.some((answer) => answer.correctInput.checked)) {
+                return t('builder.questionNeedsCorrect', { number });
+            }
+        }
+
+        return null;
+    }
+
+    saveButton.addEventListener('click', async () => {
+        const problem = findQuizProblem();
+
+        if (problem) {
+            toast.warning(problem);
             return;
         }
 

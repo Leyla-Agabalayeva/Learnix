@@ -306,6 +306,7 @@ Swagger — на `/swagger`. Эндпоинты сгруппированы по 
 |---|---|
 | ![Панель преподавателя](docs/screenshots/09-instructor-dashboard.png) **Панель преподавателя** | ![Аналитика](docs/screenshots/11-analytics.png) **Аналитика по курсам** |
 | ![Конструктор](docs/screenshots/10-course-builder.png) **Конструктор курса** | ![Проверка](docs/screenshots/08-verify.png) **Публичная проверка сертификата** |
+| ![Регистрация преподавателя](docs/screenshots/15-instructor-register.png) **Регистрация преподавателя с профессиональным профилем** | ![AI-тест](docs/screenshots/16-ai-quiz.png) **Трёхъязычный черновик теста, созданный AI** |
 
 ### Мобильная версия
 

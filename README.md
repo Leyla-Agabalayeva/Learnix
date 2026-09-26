@@ -39,7 +39,10 @@ materials, takes quizzes (fully translated into all three languages),
 tracks progress, and earns a certificate with a verifiable number.
 
 ### Instructor
-Creates courses with an uploaded cover image, builds the curriculum from
+Registers with a professional profile (job title, specialization, years of
+experience, bio, and optionally education, workplace and a LinkedIn/website
+link) that is validated on the server and editable later. Creates courses
+with an uploaded cover image, builds the curriculum from
 modules and lessons via drag-and-drop, fills in content in all three
 languages at once (courses, modules, lessons, quizzes), attaches PDF
 materials to lessons, publishes, and sees analytics for their courses, the
@@ -394,7 +397,7 @@ themselves, tap targets are 44px.
 dotnet test
 ```
 
-102 tests, xUnit + Moq. They cover business rules, not getters:
+115 tests, xUnit + Moq. They cover business rules, not getters:
 
 | What's covered | Tests |
 |---|---|
@@ -406,6 +409,7 @@ dotnet test
 | Registration and login | 8 |
 | Enrollment and re-enrollment | 8 |
 | Forgot/reset password: email sent only for known accounts, tokens validated, malformed tokens rejected | 5 |
+| Instructor registration: required professional profile, experience range, education level, URL format; ignored for students | 13 |
 
 ---
 

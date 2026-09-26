@@ -612,6 +612,13 @@ async function openQuizForm(module, lesson) {
         return entry;
     }
 
+    /** Номера вопросов идут подряд: после удаления «Вопрос 3» не должен оставаться на втором месте. */
+    function renumberQuestions() {
+        questionEntries.forEach((entry, index) => {
+            entry.heading.textContent = `${t('builder.question')} ${index + 1}`;
+        });
+    }
+
     function addQuestionEntry(questionData) {
         const root = document.createElement('div');
         root.className = 'card mt-4';
@@ -631,6 +638,7 @@ async function openQuizForm(module, lesson) {
                 questionEntries.splice(index, 1);
             }
             root.remove();
+            renumberQuestions();
         });
 
         header.append(heading, removeQuestionButton);
@@ -684,7 +692,8 @@ async function openQuizForm(module, lesson) {
             pointsInput: pointsField.querySelector('input'),
             tabs: questionTabs,
             answers: [],
-            answersHost
+            answersHost,
+            heading
         };
 
         body.append(header, fieldsRow, questionTabsHost, answersHost, addAnswerButton);
